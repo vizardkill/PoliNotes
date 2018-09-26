@@ -79,8 +79,8 @@ public class Ingreso extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json;charset=UTF-8");
         HttpSession session = request.getSession(true);
-        
         Usuario user = new Usuario();
         user.setNICK_USER(request.getParameter("NICK_USER"));
         user.setPASSWORD_USER(request.getParameter("PASSWORD_USER"));

@@ -4,10 +4,10 @@ var options = { speed: 1000, easing: 'easeOutQuint' };
 scroll.animateScroll(options);
 
 jQuery.validator.setDefaults({
-    errorElement: 'div',
+    errorElement: 'p',
     errorPlacement: function (error, element) {
-        error.addClass('ml-5 invalid-feedback');
-        element.closest('.form-group').append(error);
+        error.addClass('invalid-feedback');
+        element.closest('.md-form').append(error);
     },
     highlight: function (element, errorClass, validClass, error) {
         $(element).addClass('invalid');
@@ -18,14 +18,74 @@ jQuery.validator.setDefaults({
 });
 
 $(document).ready(function () {
+    $('#Login').validate({
+        rules: {
+            NICK_USER: { required: true },
+            PASSWORD_USER: { required: true }
+
+        },
+        messages: {
+            NICK_USER: {
+                required: 'Por favor coloca tu usuario'
+            },
+            PASSWORD_USER: { required: 'Por favor suministra tu contraseña' }
+        },
+
+        submitHandler: function () {
+            $('#load').removeClass('d-none').addClass('d-block');
+            $('#ingreso').removeClass('d-block').addClass('d-none');
+           
+            axios({
+                method: $('#Login').attr('method'),
+                url: $('#Login').attr('action'),
+                data: $('#Login').serialize(),
+                config: { headers: { 'Content-Type': 'multipart/form-data' } }
+            })
+                .then(function (result) {
+                    $('#load').removeClass('d-block').addClass('d-none');
+                    $('#ingreso').removeClass('d-none').addClass('d-block');
+
+                    //handle success
+                    console.log(result);
+                    if (!result.data.HTTP[0].response) {
+                        $('#errorLogin').slideDown('slow').removeClass('d-none');
+                        function error() {
+                            $('#errorLogin').slideUp('slow');
+                        } setTimeout(error, 4000);
+                    }
+
+                    else {
+                        alert('usuario correcto');
+                    };
+                })
+                .catch(function (result) {
+                    $('#load').removeClass('d-block').addClass('d-none');
+                    $('#ingreso').removeClass('d-none').addClass('d-block');
+
+                    alert('Existen problemas con el servidor');
+                    console.log(response);
+                });
+
+        }
+    });
+
+
     $('#Form_Registro').validate({
         rules: {
-            NOMBRE_USER: { required: true }
+            NOMBRE_USER: { required: true, minlength: 3, maxlength: 20 },
+            APELLIDOS_USER: { required: true, minlength: 5, maxlength: 20 }
         },
         messages: {
             NOMBRE_USER: {
-                required: 'El campo es requerido'
-            }     
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 3 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 20 caracteres'
+            },
+            APELLIDOS_USER: {
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 3 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 20 caracteres'
+            }
         },
 
         submitHandler: function (form) {
@@ -47,7 +107,7 @@ $(document).ready(function () {
 });
 
 /** Function de Login */
-Login = new Vue({
+/*Login = new Vue({
     el: "#Inicio",
     methods: {
         sendForm: function () {
@@ -87,4 +147,7 @@ Login = new Vue({
                 });
         }
     }
-});
+});*/
+
+
+

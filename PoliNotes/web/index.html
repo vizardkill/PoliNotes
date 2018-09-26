@@ -66,7 +66,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content rounded ">
 
-					<form id="Login" name="Login" @submit.prevent="sendForm" method="POST" action="Ingreso">
+					<form id="Login" name="Login" method="POST" action="Ingreso">
 						<div class="form-group">
 
 							<!--Header-->
@@ -87,13 +87,13 @@
 								<div class="md-form mb-5">
 									<i class="fa fa-user prefix grey-text"></i>
 									<input type="text" id="NICK_USER" name="NICK_USER" class="form-control validate" aria-describedby="NICK_USER">
-									<label data-error="" data-success="" for="NICK_USER">Usuario</label>
+									<label  data-success="" for="NICK_USER">Usuario</label>
 								</div>
 
 								<div class="md-form mb-4">
 									<i class="fa fa-lock prefix grey-text"></i>
 									<input type="password" id="PASSWORD_USER" name="PASSWORD_USER" class="form-control validate">
-									<label data-error="" data-success="" for="PASSWORD_USER">Contraseña</label>
+									<label data-success="" for="PASSWORD_USER">Contraseña</label>
 								</div>
 
 								<div class="justify-content-center align-items-center">
@@ -154,17 +154,16 @@
 								<div class="container">
 									<div class="row">
 										<div class="col-4">
-											<div class="md-form form-group">
+											<div class="md-form">
 												<i class="fa fa-user-circle prefix grey-text"></i>
 												<input type="text" id="NOMBRE_USER" name="NOMBRE_USER" class="form-control validate" aria-describedby="NOMBRE_USER">
-												<label class="error" name="l_name" id="l_name" data-success="" for="NOMBRE_USER">Nombres</label>
+												<label class="error" data-success="" for="NOMBRE_USER">Nombres</label>
 											</div>
 										</div>
 										<div class="col-4">
 											<div class="md-form">
-												<i class="fa fa-user-circle prefix grey-text"></i>
 												<input type="text" id="APELLIDOS_USER" name="APELLIDOS_USER" class="form-control validate" aria-describedby="APELLIDOS_USER">
-												<label data-error="" data-success="" for="APELLIDOS_USER">Apellidos</label>
+												<label data-success="" for="APELLIDOS_USER">Apellidos</label>
 											</div>
 										</div>
 										<div class="col-4">
@@ -656,6 +655,7 @@
 	<!-- SCRIPTS -->
 	<!-- JQuery -->
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<!--JQuery Validation-->
 	<script type="text/javascript" src="js/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/additional-methods.js"></script>
 	<!-- Bootstrap tooltips -->
@@ -664,11 +664,12 @@
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="js/mdb.min.js"></script>
-	<!--Vue JS-->
-	<script type="text/javascript" src="js/vue.min.js"></script>
+	<!--Axios HTTP-->
 	<script type="text/javascript" src="js/axios.min.js"></script>
 	<!--SmoothScroll-->
 	<script type="text/javascript" src="js/modules/smooth-scroll.polyfills.js"></script>
+        <!--Vuej JS-->
+        <script type="text/javascript" src="js/vue.min.js"></script>
 	<!--Script del index-->
 	<script type="text/javascript" src="js/index.js"></script>
 </body>
