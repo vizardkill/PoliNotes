@@ -20,25 +20,24 @@ public class Json_Datos {
     public Json_Datos() {
     }
 
-    public String Json_Login(Usuario user, HttpSession session) {
+    public String Json_Login(Usuario user) {
         com.google.gson.JsonObject json = new JsonObject();
         controller_Usuario cuser = new controller_Usuario();
+
         boolean aux = cuser.P_Login(user);
-        
-        JsonArray array = new JsonArray();
-        JsonObject item = new JsonObject();
-        
-    
-        item.addProperty("response", aux);
-        item.addProperty("nombre", user.getNOMBRE_USER());
-        item.addProperty("apellidos", user.getAPELLIDOS_USER());
-        item.addProperty("documento", user.getDOC_USER());
+        if (aux) {
+            JsonArray array = new JsonArray();
+            JsonObject item = new JsonObject();
 
-        
-        array.add(item);
-        
-        json.add("HTTP", array);
-        return json.toString();
+            item.addProperty("resulset", aux);
+            item.addProperty("nombre", user.getNOMBRE_USER());
+            item.addProperty("apellidos", user.getAPELLIDOS_USER());
+            item.addProperty("documento", user.getDOC_USER());
+            array.add(item);
+            json.add("data", array);
+            return json.toString();
 
+        }
+        return "false";
     }
 }

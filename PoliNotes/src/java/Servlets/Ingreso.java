@@ -10,6 +10,7 @@ import Metodos.Json_Datos;
 import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ public class Ingreso extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Ingreso</title>");            
+            out.println("<title>Servlet Ingreso</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Ingreso at " + request.getContextPath() + "</h1>");
@@ -60,12 +61,24 @@ public class Ingreso extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
-        
-        
-        
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(true);
+        Usuario user = new Usuario();
+        user.setNICK_USER(request.getParameter("NICK_USER"));
+        user.setPASSWORD_USER(request.getParameter("PASSWORD_USER"));
+
+        Json_Datos login = new Json_Datos();
+        if (login.Json_Login(user).equals("false")) {
+            response.getWriter().write("false");
+        } else {
+            session.setAttribute("nombre", user.getNOMBRE_USER());
+            session.setAttribute("apellidos", user.getAPELLIDOS_USER());
+            session.setAttribute("documento", user.getDOC_USER());
+            //response.sendRedirect("http://localhost:7001/PoliNotes/JSP/Inicio.jsp");
+            request.getRequestDispatcher("JSP/Inicio.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -79,16 +92,7 @@ public class Ingreso extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
-        HttpSession session = request.getSession(true);
-        Usuario user = new Usuario();
-        user.setNICK_USER(request.getParameter("NICK_USER"));
-        user.setPASSWORD_USER(request.getParameter("PASSWORD_USER"));
-        
-        
-        Json_Datos login = new Json_Datos();
-        response.getWriter().write(login.Json_Login(user, session));
-        
+
     }
 
     /**
