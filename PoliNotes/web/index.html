@@ -14,6 +14,7 @@
 	<link href="css/mdb.min.css" rel="stylesheet">
 	<!-- Your custom styles (optional) -->
 	<link href="css/style.css" rel="stylesheet">
+	<link href="css/select.css" rel="stylesheet">
 </head>
 
 <body data-spy="scroll" data-target=".navbar">
@@ -66,7 +67,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content rounded ">
 
-					<form id="Login" name="Login" method="GET" action="Ingreso">
+					<form id="Login" name="Login" method="POST" action="Ingreso">
 						<div class="form-group">
 
 							<!--Header-->
@@ -87,7 +88,7 @@
 								<div class="md-form mb-5">
 									<i class="fa fa-user prefix grey-text"></i>
 									<input type="text" id="NICK_USER" name="NICK_USER" class="form-control validate" aria-describedby="NICK_USER">
-									<label  data-success="" for="NICK_USER">Usuario</label>
+									<label data-success="" for="NICK_USER">Usuario</label>
 								</div>
 
 								<div class="md-form mb-4">
@@ -137,7 +138,7 @@
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content rounded ">
 
-					<form id="Form_Registro" name="Form_Registro" method="POST" action="Ingreso">
+					<form id="Form_Registro" name="Form_Registro" method="POST" action="Registro?Peticion=RegistroUser">
 						<div class="form-group">
 
 							<!--Header-->
@@ -153,11 +154,36 @@
 							<div class="modal-body mx-3">
 								<div class="container">
 									<div class="row">
+										<div class="col justify-content-center align-items-center">
+											<div id="Sucess" class="alert alert-success d-none" role="alert">
+												<h6 class="h6 text-center">Usuario registrado con exito</h6>
+											</div>
+											<div class="md-form">
+												<div class="select">
+													<select id="ID_PERFIL_USER" name="ID_PERFIL_USER" class="select-text" required>
+														<option value="" disabled selected></option>
+														<option value="1">Administrador</option>
+														<option value="2">Profesor</option>
+														<option value="3">Alumno</option>
+													</select>
+													<span class="select-highlight"></span>
+													<span class="select-bar"></span>
+													<label class="select-label">Seleccione el Tipo de Usuario</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col d-flex justify-content-center">
+											<h4 class="h1" class="text-center" style="font-family: P_cursive">Informacion de Contacto</h4>
+										</div>
+									</div>
+									<div class="row">
 										<div class="col-4">
 											<div class="md-form">
 												<i class="fa fa-user-circle prefix grey-text"></i>
 												<input type="text" id="NOMBRE_USER" name="NOMBRE_USER" class="form-control validate" aria-describedby="NOMBRE_USER">
-												<label class="error" data-success="" for="NOMBRE_USER">Nombres</label>
+												<label data-success="" for="NOMBRE_USER">Nombres</label>
 											</div>
 										</div>
 										<div class="col-4">
@@ -170,16 +196,16 @@
 											<div class="md-form">
 												<i class="fa fa-drivers-license prefix grey-text"></i>
 												<input type="text" id="DOC_USER" name="DOC_USER" class="form-control validate" aria-describedby="DOC_USER">
-												<label data-error="" data-success="" for="DOC_USER">Documento</label>
+												<label data-success="" for="DOC_USER">Documento</label>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-6">
-											<div class="md-form form-group">
+											<div class="md-form">
 												<i class="fa fa-envelope-o prefix grey-text"></i>
 												<input type="text" id="CORREO_USER" name="CORREO_USER" class="form-control validate" aria-describedby="CORREO_USER">
-												<label data-error="wrong" data-success="exito" for="CORREO_USER" class="mt-2">Correo Electronico</label>
+												<label data-success="" for="CORREO_USER" class="mt-2">Correo Electronico</label>
 
 											</div>
 										</div>
@@ -187,7 +213,7 @@
 											<div class="md-form mb-5">
 												<i class="fa fa-user prefix grey-text"></i>
 												<input type="text" id="R_NICK_USER" name="R_NICK_USER" class="form-control validate" aria-describedby="R_NICK_USER">
-												<label data-error="" data-success="" for="R_NICK_USER">Usuario</label>
+												<label data-success="" for="R_NICK_USER">Usuario</label>
 											</div>
 										</div>
 									</div>
@@ -196,7 +222,7 @@
 											<div class="md-form mb-4">
 												<i class="fa fa-lock prefix grey-text"></i>
 												<input type="password" id="R_PASSWORD_USER" name="R_PASSWORD_USER" class="form-control validate">
-												<label data-error="" data-success="" for="R_PASSWORD_USER">Contraseña</label>
+												<label data-success="" for="R_PASSWORD_USER">Contraseña</label>
 
 											</div>
 										</div>
@@ -204,7 +230,7 @@
 											<div class="md-form mb-4">
 												<i class="fa fa-lock prefix grey-text"></i>
 												<input type="password" id="pwd" name="pwd" class="form-control validate">
-												<label data-error="" data-success="" for="pwd">Confirmar Contraseña</label>
+												<label data-success="" for="pwd">Confirmar Contraseña</label>
 											</div>
 										</div>
 									</div>
@@ -664,12 +690,8 @@
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="js/mdb.min.js"></script>
-	<!--Axios HTTP-->
-	<script type="text/javascript" src="js/axios.min.js"></script>
 	<!--SmoothScroll-->
 	<script type="text/javascript" src="js/modules/smooth-scroll.polyfills.js"></script>
-        <!--Vuej JS-->
-        <script type="text/javascript" src="js/vue.min.js"></script>
 	<!--Script del index-->
 	<script type="text/javascript" src="js/index.js"></script>
 </body>

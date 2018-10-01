@@ -22,6 +22,14 @@ public interface IUsuario {
     public boolean deleteUser(Usuario user);
     
     //Procedimientos Almacenados
-    public boolean Login(Usuario user);
+    public boolean P_Login(Usuario user);
+    
+    public boolean P_ValidUser(Usuario user);
+    
+    public boolean P_ValidEmail(Usuario user);
+    
+    public boolean P_ValidDoc(Usuario user);
+    
+    
 
 }

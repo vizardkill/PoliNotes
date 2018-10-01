@@ -1,3 +1,4 @@
+--Procedimiento almacenado, para la validacion de usuario y contraseña--
 create or replace PROCEDURE LoginUsuario
 (
     --VARIABLES DE ENTRADA--
@@ -50,3 +51,51 @@ BEGIN
     EXCEPTION WHEN NO_DATA_FOUND THEN
     L_aux := 0;
 END;
+--/Procedimiento almacenado, para la validacion de usuario y contraseña--
+
+
+--Procedimiento para validar si ya esta en uso un nick de usuario--
+create or replace PROCEDURE ValidarNick (
+    V_nick USUARIO.NICK_USER%TYPE,
+    V_aux OUT INTEGER
+) AS
+
+BEGIN
+   SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE NICK_USER = V_nick;
+
+   EXCEPTION WHEN NO_DATA_FOUND THEN
+   V_aux := 0;
+END;
+--/Procedimiento para validar si ya esta en uso un nick de usuario--
+
+
+--Procedimiento para validar si ya esta en uso un email de usuario--
+create or replace PROCEDURE ValidarEmail (
+    V_email USUARIO.CORREO_USER%TYPE,
+    V_aux OUT INTEGER
+) AS
+
+BEGIN
+   SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE CORREO_USER = V_email;
+
+   EXCEPTION WHEN NO_DATA_FOUND THEN
+   V_aux := 0;
+END;
+--/Procedimiento para validar si ya esta en uso un email de usuario--
+
+
+--Procedimiento para validar si ya esta en uso un email de usuario--
+create or replace PROCEDURE ValidarDoc (
+    V_doc USUARIO.DOC_USER%TYPE,
+    V_aux OUT INTEGER
+) AS
+
+BEGIN
+   SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE DOC_USER = V_doc;
+
+   EXCEPTION WHEN NO_DATA_FOUND THEN
+   V_aux := 0;
+END;
+--/Procedimiento para validar si ya esta en uso un email de usuario--
+
+CALL ValidarDoc(102045454, int aux)

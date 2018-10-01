@@ -47,8 +47,32 @@ public class controller_Usuario {
     
     //**********************************PROCEDIMIENTOS ALMACENADOS**************************************
     public boolean P_Login(Usuario user) {
+        SecurityPass md5 = new SecurityPass();
+        String hash = md5.getMD5(user.getPASSWORD_USER());
+        user.setPASSWORD_USER(hash);
+        
         IUsuario udao = new DAO_Usuario();
-        boolean aux = udao.Login(user);
-        return aux;
+        boolean result = udao.P_Login(user);
+        return result;
     }
+    
+    public boolean P_ValidUser(Usuario user) {
+        IUsuario udao = new DAO_Usuario();
+        boolean result = udao.P_ValidUser(user);
+        return result;
+    }
+    
+    public boolean P_ValidEmail(Usuario user) {
+        IUsuario udao = new DAO_Usuario();
+        boolean result = udao.P_ValidEmail(user);
+        return result;
+    }
+    
+    public boolean P_ValidDoc(Usuario user) {
+        IUsuario udao = new DAO_Usuario();
+        boolean result = udao.P_ValidDoc(user);
+        return result;
+    }
+    
+    
 }

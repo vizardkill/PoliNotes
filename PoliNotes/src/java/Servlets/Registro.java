@@ -6,22 +6,19 @@
 package Servlets;
 
 import Controlador.controller_Usuario;
-import Metodos.Json_Datos;
 import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author clan-
  */
-public class Ingreso extends HttpServlet {
+public class Registro extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class Ingreso extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Ingreso</title>");
+            out.println("<title>Servlet Registro</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Ingreso at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Registro at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,43 +58,7 @@ public class Ingreso extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String Peticion = request.getParameter("Peticion");
-
-        if (Peticion.equals("ValidarNick")) {
-            Usuario user = new Usuario();
-            user.setNICK_USER(request.getParameter("R_NICK_USER"));
-            controller_Usuario cuser = new controller_Usuario();
-            boolean result = cuser.P_ValidUser(user);
-            if (result) {
-                response.getWriter().write("false");
-            } else {
-                response.getWriter().write("true");
-            }
-        }
-
-        if (Peticion.equals("ValidarEmail")) {
-            Usuario user = new Usuario();
-            user.setCORREO_USER(request.getParameter("CORREO_USER"));
-            controller_Usuario cuser = new controller_Usuario();
-            boolean result = cuser.P_ValidEmail(user);
-            if (result) {
-                response.getWriter().write("false");
-            } else {
-                response.getWriter().write("true");
-            }
-        }
-
-        if (Peticion.equals("ValidarDoc")) {
-            Usuario user = new Usuario();
-            user.setDOC_USER(request.getParameter("DOC_USER"));
-            controller_Usuario cuser = new controller_Usuario();
-            boolean result = cuser.P_ValidDoc(user);
-            if (result) {
-                response.getWriter().write("false");
-            } else {
-                response.getWriter().write("true");
-            }
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -111,23 +72,28 @@ public class Ingreso extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        String Peticion = request.getParameter("Peticion");
 
-        HttpSession session = request.getSession(true);
-        Usuario user = new Usuario();
-        user.setNICK_USER(request.getParameter("NICK_USER"));
-        user.setPASSWORD_USER(request.getParameter("PASSWORD_USER"));
+        if (Peticion.equals("RegistroUser")) {
+            Usuario user = new Usuario();
+            controller_Usuario cuser = new controller_Usuario();
+            
+            user.setID_PERFIL_USER(Integer.valueOf(request.getParameter("ID_PERFIL_USER")));
+            user.setESTADO_USER(1);
+            user.setNOMBRE_USER(request.getParameter("NOMBRE_USER"));
+            user.setAPELLIDOS_USER(request.getParameter("APELLIDOS_USER"));
+            user.setDOC_USER(request.getParameter("DOC_USER"));
+            user.setCORREO_USER(request.getParameter("CORREO_USER"));
+            user.setNICK_USER(request.getParameter("R_NICK_USER"));
+            user.setPASSWORD_USER(request.getParameter("R_PASSWORD_USER"));
 
-        Json_Datos login = new Json_Datos();
-        if (login.Json_Login(user).equals("false")) {
-            response.getWriter().write("false");
-        } else {
-            session.setAttribute("nombre", user.getNOMBRE_USER());
-            session.setAttribute("apellidos", user.getAPELLIDOS_USER());
-            session.setAttribute("documento", user.getDOC_USER());
-            request.getRequestDispatcher("JSP/Inicio.jsp").forward(request, response);
+            boolean result = cuser.setUser(user);
+            if (result) {
+                response.getWriter().write("true");
+            } else {
+                response.getWriter().write("false");
+            }
         }
-
     }
 
     /**

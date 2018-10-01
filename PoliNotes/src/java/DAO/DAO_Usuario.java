@@ -152,28 +152,26 @@ public class DAO_Usuario implements IUsuario {
 
     //**************************************************Procedimientos Almacenados******************************************************
     @Override
-    public boolean Login(Usuario user) {
+    public boolean P_Login(Usuario user) {
         Connection con;
-        boolean Aux;
         con = Conexion.getConexion();
         int valor;
         try (CallableStatement cst = con.prepareCall("{call LoginUsuario (?,?,?,?,?,?,?,?,?,?)}")) {
-            
+
             cst.setString(1, user.getNICK_USER());
             cst.setString(2, user.getPASSWORD_USER());
 
-            cst.registerOutParameter(3, java.sql.Types.INTEGER); 
-            cst.registerOutParameter(4, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(5, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(6, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(7, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(8, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(9, java.sql.Types.INTEGER); 
-            cst.registerOutParameter(10, java.sql.Types.INTEGER); 
-            
-            
+            cst.registerOutParameter(3, java.sql.Types.INTEGER);
+            cst.registerOutParameter(4, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(5, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(6, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(7, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(8, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(9, java.sql.Types.INTEGER);
+            cst.registerOutParameter(10, java.sql.Types.INTEGER);
+
             cst.execute();
-            
+
             valor = cst.getInt(3);
             user.setDOC_USER(cst.getString(4));
             user.setNOMBRE_USER(cst.getString(5));
@@ -181,17 +179,100 @@ public class DAO_Usuario implements IUsuario {
             user.setCORREO_USER(cst.getString(7));
             user.setCELULAR_USER(cst.getString(8));
             user.setID_PERFIL_USER(cst.getInt(9));
-            user.setESTADO_USER(cst.getInt(10));   
-            
-            
+            user.setESTADO_USER(cst.getInt(10));
+
             cst.close();
-            
+
         } catch (SQLException ex) {
             System.out.println("Error: Procedimiento Almacenado, método Login: " + ex);
             return false;
         }
 
-        Aux = valor == 1;
-        return Aux;
-    }  
+        if (valor == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean P_ValidUser(Usuario user) {
+        Connection con;
+        con = Conexion.getConexion();
+        int valor;
+        try (CallableStatement cst = con.prepareCall("{call ValidarNick (?,?)}")) {
+
+            cst.setString(1, user.getNICK_USER());
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+
+            cst.execute();
+
+            valor = cst.getInt(2);
+
+            cst.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Error: Procedimiento Almacenado, método P_ValidUser: " + ex);
+            return false;
+        }
+
+        if (valor == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean P_ValidEmail(Usuario user) {
+        Connection con;
+        con = Conexion.getConexion();
+        int valor;
+        try (CallableStatement cst = con.prepareCall("{call ValidarEmail (?,?)}")) {
+
+            cst.setString(1, user.getCORREO_USER());
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+
+            cst.execute();
+
+            valor = cst.getInt(2);
+
+            cst.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Error: Procedimiento Almacenado, método P_ValidarEmail: " + ex);
+            return false;
+        }
+
+        if (valor == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean P_ValidDoc(Usuario user) {
+       Connection con;
+        con = Conexion.getConexion();
+        int valor;
+        try (CallableStatement cst = con.prepareCall("{call ValidarDoc (?,?)}")) {
+
+            cst.setString(1, user.getDOC_USER());
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+
+            cst.execute();
+
+            valor = cst.getInt(2);
+
+            cst.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Error: Procedimiento Almacenado, método P_ValidDoc: " + ex);
+            return false;
+        }
+
+        if (valor == 1) {
+            return true;
+        }
+        return false;
+    }
+
 }

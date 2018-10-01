@@ -36,7 +36,6 @@ public class Json_Datos {
             array.add(item);
             json.add("data", array);
             return json.toString();
-
         }
         return "false";
     }
