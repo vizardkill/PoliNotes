@@ -122,13 +122,15 @@ public class Ingreso extends HttpServlet {
         if (login.Json_Login(user).equals("false")) {
             response.getWriter().write("false");
         } else {
-            session.setAttribute("nombre", user.getNOMBRE_USER());
-            session.setAttribute("apellidos", user.getAPELLIDOS_USER());
-            session.setAttribute("documento", user.getDOC_USER());
+            session.setAttribute("NICK_USER", user.getNICK_USER());
+            session.setAttribute("NOMBRE_USER", user.getNOMBRE_USER());
+            session.setAttribute("APELLIDOS_USER", user.getAPELLIDOS_USER());
+            session.setAttribute("DOC_USER", user.getDOC_USER());
             request.getRequestDispatcher("JSP/Inicio.jsp").forward(request, response);
         }
 
     }
+
 
     /**
      * Returns a short description of the servlet.

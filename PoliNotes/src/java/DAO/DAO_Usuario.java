@@ -250,11 +250,11 @@ public class DAO_Usuario implements IUsuario {
 
     @Override
     public boolean P_ValidDoc(Usuario user) {
-       Connection con;
+        Connection con;
         con = Conexion.getConexion();
         int valor;
         try (CallableStatement cst = con.prepareCall("{call ValidarDoc (?,?)}")) {
-
+ 
             cst.setString(1, user.getDOC_USER());
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
 
