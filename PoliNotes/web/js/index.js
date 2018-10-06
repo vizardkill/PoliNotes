@@ -65,7 +65,7 @@ $(document).ready(function () {
                             $('#errorLogin').slideUp('slow');
                         } setTimeout(error, 4000);
                     } else {
-                        window.location.href = "JSP/Inicio.jsp";
+                        window.location.href = "JSP/Administrador/Inicio.jsp";
                     }
                 },
                 error: function (response) {

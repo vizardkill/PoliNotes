@@ -59,3 +59,26 @@ jQuery(function ($) {
 
     }
 });
+//Buscador
+jQuery(document).ready(function ($) {
+
+    $('.sidebar-search-list li').each(function () {
+        $(this).attr('data-search-term', $(this).text().toLowerCase());
+    });
+
+    $('.sidebar-search-box').on('keyup', function () {
+
+        var searchTerm = $(this).val().toLowerCase();
+
+        $('.sidebar-search-list li').each(function () {
+
+            if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+
+        });
+
+    });
+});

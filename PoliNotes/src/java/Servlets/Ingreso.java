@@ -126,7 +126,7 @@ public class Ingreso extends HttpServlet {
             session.setAttribute("NOMBRE_USER", user.getNOMBRE_USER());
             session.setAttribute("APELLIDOS_USER", user.getAPELLIDOS_USER());
             session.setAttribute("DOC_USER", user.getDOC_USER());
-            request.getRequestDispatcher("JSP/Inicio.jsp").forward(request, response);
+            request.getRequestDispatcher("JSP/Administrador/Inicio.jsp").forward(request, response);
         }
 
     }
