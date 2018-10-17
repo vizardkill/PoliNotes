@@ -5,10 +5,13 @@
  */
 package Metodos;
 
+import Controlador.controller_Logs;
 import Controlador.controller_Usuario;
+import Modelos.Logs;
 import Modelos.Usuario;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -38,5 +41,26 @@ public class Json_Datos {
             return json.toString();
         }
         return "false";
+    }
+    
+    public String Json_Logs(Logs log) {
+        com.google.gson.JsonObject json = new JsonObject();
+        controller_Logs c_logs = new controller_Logs();
+        List<Logs> listaLogs = c_logs.getLogs();
+        
+        JsonArray array = new JsonArray();
+        for (Logs x : listaLogs) {
+            JsonObject item = new JsonObject();
+            
+            item.addProperty("NOMBRE_USER", x.getNOMBRE_USER());
+            item.addProperty("NOMBRE_TIPO_PERFIL",x.getNOMBRE_TIPO_PERFIL());
+            item.addProperty("ACCCION_LOGS", x.getACCION_LOGS());
+            item.addProperty("DESCRIPCION_LOGS", x.getDESCRIPCION_LOGS());
+            item.addProperty("FECHA_LOGS", x.getFECHA_LOGS());
+            array.add(item);
+            
+        }
+        json.add("Logs", array);
+        return json.toString();   
     }
 }

@@ -26,18 +26,7 @@ public class DAO_Usuario implements IUsuario {
     @Override
     public boolean setUser(Usuario user) {
         Connection con;
-        String sql = "INSERT INTO USUARIO"
-                + "("
-                + "DOC_USER,"
-                + "NICK_USER,"
-                + "PASSWORD_USER,"
-                + "NOMBRE_USER,"
-                + "APELLIDOS_USER,"
-                + "CELULAR_USER,"
-                + "CORREO_USER,"
-                + "ID_PERFIL_USER,"
-                + "ESTADO_USER"
-                + ") VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO USUARIO VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             con = Conexion.getConexion();
             try (PreparedStatement ps = con.prepareStatement(sql)) {
