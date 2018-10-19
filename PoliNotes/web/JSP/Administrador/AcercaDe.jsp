@@ -99,27 +99,30 @@
                             </li>
 
                             <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span>Universidad</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Materias</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Profesores</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Estudiantes</a>
-                                    </li>
-                                    <li>
-                                        <a href="AcercaDe.jsp">Acerca de</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                                <a href="#">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Universidad</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        <li>
+                                            <a href="Facultades.jsp">Facultades</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Materias</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Profesores</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Estudiantes</a>
+                                        </li>
+                                        <li>
+                                            <a href="AcercaDe.jsp">Acerca de</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
 
 
 
@@ -177,7 +180,8 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="Inicio.jsp">Inicio</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Universidad</li>
+                                <li class="breadcrumb-item" aria-current="page">Universidad</li>
+                                <li class="breadcrumb-item active" aria-current="page">Acerca de</li>
                             </ol>
                         </nav>
 
@@ -226,7 +230,8 @@
                                     educación continuada y educación no formal.</p>
                             </div>
                             <div class="card-body">
-                                <a href="https://es.wikipedia.org/wiki/Polit%C3%A9cnico_Colombiano_Jaime_Isaza_Cadavid" class="card-link"><span>Mas informacion</span></a>
+                                <a href="https://es.wikipedia.org/wiki/Polit%C3%A9cnico_Colombiano_Jaime_Isaza_Cadavid"
+                                    class="card-link"><span>Mas informacion</span></a>
                             </div>
                         </div>
                     </div>
@@ -261,7 +266,7 @@
                 <a href="http://www.politecnicojic.edu.co/"> Politecnico Colombiano Jaime Isaza Cadavid</a>
             </div>
             <!-- Copyright -->
-    
+
         </footer>
 
     </div>
