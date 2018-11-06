@@ -97,5 +97,3 @@ BEGIN
    V_aux := 0;
 END;
 --/Procedimiento para validar si ya esta en uso un email de usuario--
-
-CALL ValidarDoc(102045454, int aux)

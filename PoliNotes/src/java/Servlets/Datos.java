@@ -60,12 +60,19 @@ public class Datos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
-        Logs log = new Logs();
         String Peticion = request.getParameter("Peticion");
         Json_Datos data = new Json_Datos();
         
         if(Peticion.equals("data_logs")) {
-               response.getWriter().write(data.Json_Logs(log));
+               response.getWriter().write(data.Json_Logs());
+        }
+        
+        if (Peticion.equals("data_facultad")) {
+            response.getWriter().write(data.Json_Facultad());    
+        }
+        
+        if (Peticion.equals("data_Decanos")) {
+            response.getWriter().write(data.Json_Decanos());
         }
     }
 

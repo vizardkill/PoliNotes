@@ -40,39 +40,44 @@ public class controller_Usuario {
 
     public List<Usuario> getUsers() {
         IUsuario udao = new DAO_Usuario();
-        List<Usuario> users = udao.getUser();
-        return users;
+        List<Usuario> listaUsers = udao.getUser();
+        return listaUsers;
     }
-    
-    
+
+    //****************************************VISTAS****************************************************
+    public List<Usuario> getUserDecano() {
+        IUsuario udao = new DAO_Usuario();
+        List<Usuario> listaDecanos = udao.getUserDecano();
+        return listaDecanos;
+    }
+
     //**********************************PROCEDIMIENTOS ALMACENADOS**************************************
     public boolean P_Login(Usuario user) {
         SecurityPass md5 = new SecurityPass();
         String hash = md5.getMD5(user.getPASSWORD_USER());
         user.setPASSWORD_USER(hash);
-        
+
         IUsuario udao = new DAO_Usuario();
         boolean result = udao.P_Login(user);
         return result;
     }
-    
+
     public boolean P_ValidUser(Usuario user) {
         IUsuario udao = new DAO_Usuario();
         boolean result = udao.P_ValidUser(user);
         return result;
     }
-    
+
     public boolean P_ValidEmail(Usuario user) {
         IUsuario udao = new DAO_Usuario();
         boolean result = udao.P_ValidEmail(user);
         return result;
     }
-    
+
     public boolean P_ValidDoc(Usuario user) {
         IUsuario udao = new DAO_Usuario();
         boolean result = udao.P_ValidDoc(user);
         return result;
     }
-    
-    
+
 }

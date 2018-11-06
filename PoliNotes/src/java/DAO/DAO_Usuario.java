@@ -139,6 +139,37 @@ public class DAO_Usuario implements IUsuario {
         return true;
     }
 
+    //**************************************************Vistas******************************************************
+    @Override
+    public List<Usuario> getUserDecano() {
+        Connection con;
+        Statement stm;
+        ResultSet rs;
+
+        String sql = "SELECT * FROM v_Decanos ORDER BY NOMBRE_USER";
+
+        List<Usuario> listaUsuario = new ArrayList<>();
+
+        try {
+            con = Conexion.getConexion();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setDOC_USER(rs.getString("DOC_USER"));
+                u.setNOMBRE_USER(rs.getString("NOMBRE_USER"));
+                u.setAPELLIDOS_USER(rs.getString("APELLIDOS_USER"));
+                listaUsuario.add(u);
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error: Clase DAO_USUARIO, método obtener");
+        }
+        return listaUsuario;
+    }
+
     //**************************************************Procedimientos Almacenados******************************************************
     @Override
     public boolean P_Login(Usuario user) {
@@ -243,7 +274,7 @@ public class DAO_Usuario implements IUsuario {
         con = Conexion.getConexion();
         int valor;
         try (CallableStatement cst = con.prepareCall("{call ValidarDoc (?,?)}")) {
- 
+
             cst.setString(1, user.getDOC_USER());
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
 
@@ -263,5 +294,4 @@ public class DAO_Usuario implements IUsuario {
         }
         return false;
     }
-
 }

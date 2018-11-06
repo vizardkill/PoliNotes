@@ -21,6 +21,9 @@ public interface IUsuario {
 
     public boolean deleteUser(Usuario user);
     
+    //Vistas
+    public List<Usuario> getUserDecano();
+    
     //Procedimientos Almacenados
     public boolean P_Login(Usuario user);
     

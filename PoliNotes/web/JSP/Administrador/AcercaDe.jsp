@@ -6,27 +6,7 @@
 %>
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>PoliNotes</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../css/font-awesome-5.css">
-    <!-- Bootstrap core CSS -->
-    <link href="../../css/bootstrap.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="../../css/mdb.min.css" rel="stylesheet">
-    <!-- Estilos personalizados -->
-    <link href="../../css/select.css" rel="stylesheet">
-    <link href="../../css/jqueryScrollBar.min.css" rel="stylesheet">
-    <!-- Sidebar -->
-    <link href="../../css/sidebar.css" rel="stylesheet">
-    <link href="../../css/sidebar-themes.css" rel="stylesheet">
-    <!-- DataTable -->
-    <link rel="stylesheet" href="../../addons/DataTables/datatables.min.css">
-</head>
+<%@include file="Head.jsp" %>
 
 <body>
     <!--Bloque necesario para El efecto Sidebar-->
@@ -272,28 +252,7 @@
     </div>
     <!--/Bloque necesario para El efecto Sidebar-->
 
-
-    <!--JQuery-->
-    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-    <!--JQuery Validation-->
-    <script type="text/javascript" src="../../js/jquery.validate.js"></script>
-    <script type="text/javascript" src="../../js/additional-methods.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../../js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../../js/bootstrap.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../../js/mdb.min.js"></script>
-    <!--SmoothScroll-->
-    <script type="text/javascript" src="../../js/modules/smooth-scroll.polyfills.js"></script>
-    <!--Sidebar-->
-    <script type="text/javascript" src="../../js/jqueryScrollBar.min.js"></script>
-    <script type="text/javascript" src="../../js/sidebar.js"></script>
-    <script type="text/javascript" src="../../js/inicio.js"></script>
-    <!--DataTable-->
-    <script type="text/javascript" src="../../addons/DataTables/datatables.min.js"></script>
-    <script type="text/javascript" src="../../js/DataTables.js"></script>
-
+    <%@include file="Scripts.jsp" %>
 </body>
 
 </html>
