@@ -74,7 +74,7 @@ public class Registro extends HttpServlet {
             throws ServletException, IOException {
         String Peticion = request.getParameter("Peticion");
 
-        if (Peticion.equals("RegistroUser")) {
+        if (Peticion.equals("Registro_Usuario")) {
             Usuario user = new Usuario();
             controller_Usuario cuser = new controller_Usuario();
             

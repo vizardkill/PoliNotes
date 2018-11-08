@@ -239,20 +239,10 @@
             </div>
         </main>
         <!-- /Contenido" -->
-        <footer class="page-footer font-small unique-color-dark">
-
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2018 Copyright:
-                <a href="http://www.politecnicojic.edu.co/"> Politecnico Colombiano Jaime Isaza Cadavid</a>
-            </div>
-            <!-- Copyright -->
-
-        </footer>
-
     </div>
     <!--/Bloque necesario para El efecto Sidebar-->
 
-    <%@include file="Scripts.jsp" %>
+    <%@include file="Footer.jsp" %>
 </body>
 
 </html>
