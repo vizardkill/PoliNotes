@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded ">
 
-            <form id="Reg_Facultad" name="Reg_Facultad" method="POST" action="../../Registro?Peticion=Registro_Facultad">
+            <form id="Form_Registro_Facultad" name="Form_Registro_Facultad" method="POST" action="../../Registro?Peticion=Registro_Facultad">
 
                 <!--Header-->
                 <div class="modal-header bg-dark d-block flex-center">

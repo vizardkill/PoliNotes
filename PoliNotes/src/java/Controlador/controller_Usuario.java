@@ -79,5 +79,11 @@ public class controller_Usuario {
         boolean result = udao.P_ValidDoc(user);
         return result;
     }
+    
+    public boolean P_ValidDecano(Usuario user) {
+        IUsuario udao = new DAO_Usuario();
+        boolean result = udao.P_ValidDecano(user);
+        return result;
+    }
 
 }

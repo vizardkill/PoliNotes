@@ -5,7 +5,9 @@
  */
 package Servlets;
 
+import Controlador.controller_Facultad;
 import Controlador.controller_Usuario;
+import Modelos.Facultad;
 import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -93,6 +95,22 @@ public class Registro extends HttpServlet {
             } else {
                 response.getWriter().write("false");
             }
+        }
+        
+        if (Peticion.equals("Registro_Facultad")) {
+            Facultad fac = new Facultad();
+            controller_Facultad cfac = new controller_Facultad();
+            
+            fac.setCODIGO_FACULTAD(request.getParameter("CODIGO_FACULTAD"));
+            fac.setDECANO_FACULTAD(request.getParameter("DECANO_FACULTAD"));
+            fac.setNOMBRE_FACULTAD(request.getParameter("NOMBRE_FACULTAD"));
+            
+            boolean result = cfac.setFacultad(fac);
+            if (result) {
+                response.getWriter().write("true");
+            } else {
+                response.getWriter().write("false");
+            }     
         }
     }
 

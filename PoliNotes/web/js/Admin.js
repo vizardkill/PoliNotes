@@ -4,6 +4,7 @@ jQuery.validator.setDefaults({
     errorPlacement: function (error, element) {
         error.addClass('invalid-feedback');
         element.closest('.md-form').append(error);
+        element.closest('.form-group').append(error);
     },
     highlight: function (element, errorClass, validClass, error) {
         $(element).addClass('invalid');
@@ -25,6 +26,10 @@ $.validator.addMethod("mayuscula", function (value) {
 $.validator.addMethod("digito", function (value) {
     return /[0-9]/.test(value)
 });
+$.validator.addMethod("letras", function (value) {
+    return /^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$/.test(value)
+});
+
 
 
 $(document).ready(function () {
@@ -101,7 +106,7 @@ $(document).ready(function () {
                         }
                     })
                 };
-            }  
+            }
         }
     });
 
@@ -152,7 +157,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            R_PASSWORD_USER: { required: true, minlength: 8, maxlength: 20, especial: true, minuscula: true, mayuscula: true },
+            R_PASSWORD_USER: { required: true, minlength: 8, maxlength: 20, especial: true, minuscula: true, mayuscula: true, digito: true },
             pwd: { required: true, equalTo: '#R_PASSWORD_USER' }
         },
         messages: {
@@ -225,6 +230,76 @@ $(document).ready(function () {
                 complete: function () {
                     $('#icon_load_usuario').removeClass('d-block').addClass('d-none');
                     $('#btn_registro_usuario').removeClass('d-none').addClass('d-block');
+                }
+            });
+        }
+    });
+
+    //Validacion de Formulario (Registro de Facultad) mediante JQuery
+    $('#Form_Registro_Facultad').validate({
+        ignore: [],
+        rules: {
+            DECANO_FACULTAD: {
+                required: true,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarDecano",
+                    type: "GET",
+                    data: {
+                        DECANO_FACULTAD: function () {
+                            return $("#DECANO_FACULTAD").val()
+                        }
+                    }
+                }
+            },
+            CODIGO_FACULTAD: { required: true, maxlength: 15, minlength: 5},
+            NOMBRE_FACULTAD: { required: true, minlength: 5, maxlength: 20, letras: true }
+        },
+        messages: {
+            DECANO_FACULTAD: {
+                required: 'El campo es requerido',
+                remote: 'Este decano ya esta asignado a otra facultad'
+            },
+            CODIGO_FACULTAD: {
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 5 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 5 caracteres'
+            },
+            NOMBRE_FACULTAD: {
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 5 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 20 caracteres',
+                letras: 'El campo no puede contener caracteres especiales ni numeros'
+            }
+        },
+
+        submitHandler: function () {
+            $.ajax({
+                type: $('#Form_Registro_Facultad').attr('method'),
+                url: $('#Form_Registro_Facultad').attr('action'),
+                data: $("#Form_Registro_Facultad").serialize(),
+                dataType: "text",
+
+                beforeSend: function () {
+                    $('#icon_load_facultad').removeClass('d-none').addClass('d-block');
+                    $('#btn_registro_facultad').removeClass('d-block').addClass('d-none');
+                },
+                success: function (response) {
+                    if (response == 'true') {
+                        $('#msg_SucessRegistro_facultad').slideDown('slow').removeClass('d-none');
+                        function ShowSucess() {
+                            $('#msg_SucessRegistro_facultad').slideUp('slow');
+                        } setTimeout(ShowSucess, 4000);
+                        $("#Form_Registro_Facultad")[0].reset();
+                        $('#Table_Facultad').DataTable().ajax.reload();
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                    alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
+                },
+                complete: function () {
+                    $('#icon_load_facultad').removeClass('d-block').addClass('d-none');
+                    $('#btn_registro_facultad').removeClass('d-none').addClass('d-block');
                 }
             });
         }

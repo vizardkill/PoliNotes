@@ -294,4 +294,31 @@ public class DAO_Usuario implements IUsuario {
         }
         return false;
     }
+
+    @Override
+    public boolean P_ValidDecano(Usuario user) {
+       Connection con;
+        con = Conexion.getConexion();
+        int valor;
+        try (CallableStatement cst = con.prepareCall("{call ValidarDecano (?,?)}")) {
+
+            cst.setString(1, user.getDOC_USER());
+            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+
+            cst.execute();
+
+            valor = cst.getInt(2);
+
+            cst.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Error: Procedimiento Almacenado, método P_ValidDecano: " + ex);
+            return false;
+        }
+
+        if (valor == 1) {
+            return true;
+        }
+        return false;
+    }
 }

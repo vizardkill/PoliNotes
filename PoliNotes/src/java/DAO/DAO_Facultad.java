@@ -58,9 +58,7 @@ public class DAO_Facultad implements IFacultad{
 
         String sql = "SELECT * FROM v_Facultad ORDER BY NOMBRE_FACULTAD";
 
-        List<Facultad> listaFacultad = new ArrayList<>();
-        List<Usuario> listaUsuario = new ArrayList<>();
-        List<Object> result = new ArrayList<Object>();
+        List<Object> result = new ArrayList<>();
 
         try {
             con = Conexion.getConexion();
@@ -74,16 +72,14 @@ public class DAO_Facultad implements IFacultad{
                 fac.setCODIGO_FACULTAD(rs.getString("CODIGO_FACULTAD"));
                 fac.setNOMBRE_FACULTAD(rs.getString("NOMBRE_FACULTAD"));
                 fac.setDECANO_FACULTAD(rs.getString("DECANO_FACULTAD"));
-                listaFacultad.add(fac);
+                result.add(fac);
                 
                 user.setNOMBRE_USER(rs.getString("NOMBRE_USER"));
                 user.setAPELLIDOS_USER(rs.getString("APELLIDOS_USER"));
                 user.setCORREO_USER(rs.getString("CORREO_USER"));
                 user.setCELULAR_USER(rs.getString("CELULAR_USER"));
-                listaUsuario.add(user);    
+                result.add(user);
             }
-            result.addAll(listaFacultad);
-            result.addAll(listaUsuario);
             
             stm.close();
             rs.close();

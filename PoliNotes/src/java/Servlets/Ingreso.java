@@ -98,6 +98,18 @@ public class Ingreso extends HttpServlet {
                 response.getWriter().write("true");
             }
         }
+        
+        if (Peticion.equals("ValidarDecano")) {
+            Usuario user = new Usuario();
+            user.setDOC_USER(request.getParameter("DOC_USER"));
+            controller_Usuario cuser = new controller_Usuario();
+            boolean result = cuser.P_ValidDecano(user);
+            if (result) {
+                response.getWriter().write("false");
+            } else {
+                response.getWriter().write("true");
+            }
+        }
     }
 
     /**
