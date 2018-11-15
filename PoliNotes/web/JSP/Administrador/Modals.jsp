@@ -23,19 +23,19 @@
                     </div>
 
                     <!--Simple Select with Search-->
-                    <div class="form-group w-100">
+                    <div class="form-group error-group w-100">
                         <label>Decano de la Facultad</label>
                         <select id="DECANO_FACULTAD" name="DECANO_FACULTAD">
                             <option></option>
                         </select>
                     </div>
 
-                    <div class="md-form">
+                    <div class="md-form error-group">
                         <input type="text" id="CODIGO_FACULTAD" name="CODIGO_FACULTAD" class="form-control validate">
                         <label data-success="" for="CODIGO_FACULTAD">Codigo de la Facultad</label>
                     </div>
 
-                    <div class="md-form">
+                    <div class="md-form error-group">
                         <input type="text" id="NOMBRE_FACULTAD" name="NOMBRE_FACULTAD" class="form-control validate">
                         <label data-success="" for="NOMBRE_FACULTAD">Nombre de la Facultad</label>
                     </div>
@@ -68,10 +68,8 @@
         <div class="modal-content rounded ">
 
             <form id="Form_Registro_Usuario" name="Form_Registro_Usuario" method="POST" action="../../Registro?Peticion=Registro_Usuario">
-                <div class="form-group">
-
                     <!--Header-->
-                    <div class="modal-header bg-dark d-block flex-center">
+                    <div class="modal-header bg-dark d-block flex-center" >
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -79,7 +77,6 @@
                                 Usuario</strong></h2>
                     </div>
                     <!--/Header-->
-
                     <!--Body-->
                     <div class="modal-body mx-3">
                         <div class="container">
@@ -186,10 +183,74 @@
                     </div>
                     <!--/Footer-->
 
-                </div>
+              
             </form>
 
         </div>
     </div>
 </div>
 <!--/Modal de Registro de Usuario-->
+
+
+<!--Modal Registro de Facultad-->
+<div class="modal fade" id="Mod_Elim_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Elim_Facultad"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded ">
+
+            <form id="Form_Registro_Facultad" name="Form_Registro_Facultad" method="POST" action="../../Registro?Peticion=Registro_Facultad">
+
+                <!--Header-->
+                <div class="modal-header bg-dark d-block flex-center">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 class="text-center text-white" style="font-family: cursive"><strong>Eliminar Facultad</strong></h2>
+                </div>
+                <!--/Header-->
+
+                <!--Body-->
+                <div class="modal-body mx-3">
+                    <div id="msg_SucessRegistro_facultad" class="alert alert-success d-none" role="alert">
+                        <h6 class="h6 text-center">Facultad registrada con ex&#237to</h6>
+                    </div>
+
+                    <!--Simple Select with Search-->
+                    <div class="form-group error-group w-100">
+                        <label>Decano de la Facultad</label>
+                        <select id="DECANO_FACULTAD" name="DECANO_FACULTAD">
+                            <option></option>
+                        </select>
+                    </div>
+
+                    <div class="md-form error-group">
+                        <input type="text" id="CODIGO_FACULTAD" name="CODIGO_FACULTAD" class="form-control validate">
+                        <label data-success="" for="CODIGO_FACULTAD">Codigo de la Facultad</label>
+                    </div>
+
+                    <div class="md-form error-group">
+                        <input type="text" id="NOMBRE_FACULTAD" name="NOMBRE_FACULTAD" class="form-control validate">
+                        <label data-success="" for="NOMBRE_FACULTAD">Nombre de la Facultad</label>
+                    </div>
+                    <!--/Body-->
+
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col d-flex flex-center mx-auto">
+                                    <button id="btn_registro_facultad" class="btn btn-secondary" type="submit">Registrar</button>
+                                    <i id="icon_load_facultad" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/Footer-->
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--/Modal Registro de Facultad-->

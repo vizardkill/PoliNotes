@@ -15,6 +15,7 @@
     <div class="page-wrapper chiller-theme sidebar-bg bg3 toggled">
 
         <header>
+            <%@include file="Modals.jsp" %>
             <!--Sidebar Menu-->
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
@@ -153,7 +154,7 @@
             <!--/Sidebar Menu-->
         </header>
 
-        <%@include file="Modals.jsp" %>
+        
         <!-- Contenido  -->
         <main class="page-content">
             <div class="container-fluid">
@@ -197,6 +198,7 @@
                                         <th><i class="fas fa-user"></i> Decano</th>
                                         <th>Código</th>
                                         <th>Facultad</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tfoot class="thead-dark">
@@ -205,6 +207,7 @@
                                         <th><i class="fas fa-user"></i> Decano</th>
                                         <th>Código</th>
                                         <th>Facultad</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>

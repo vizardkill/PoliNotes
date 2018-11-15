@@ -251,7 +251,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            CODIGO_FACULTAD: { required: true, maxlength: 15, minlength: 5},
+            CODIGO_FACULTAD: { required: true, maxlength: 15, minlength: 5 },
             NOMBRE_FACULTAD: { required: true, minlength: 5, maxlength: 20, letras: true }
         },
         messages: {
@@ -407,7 +407,18 @@ $(document).ready(function () {
             },
             { data: "NOMBRE_APELLIDOS_USER" },
             { data: "CODIGO_FACULTAD" },
-            { data: "NOMBRE_FACULTAD" }
+            { data: "NOMBRE_FACULTAD" },
+            {
+                orderable: false,
+                data: null,
+                defaultContent: '',
+                render: function () {
+                    return '<div class="btn-group btn-group-sm" role="group" aria-label="Botones de Accion"> ' +
+                            '<button type="button" class="btn btn-sm danger-color" title="Eliminar"><i class="fas fa-trash"></i></button>' +
+                            '<button type="button" class="btn btn-sm success-color" title="Modificar"><i class="fas fa-marker"></i></button>' +
+                        '</div>';
+                }
+            }
         ],
         order: [[1, 'asc']],
         dom: 'Bfrtip',
@@ -455,7 +466,7 @@ $(document).ready(function () {
 
     function Table_Facultad_Format(d) {
         // `d` is the original data object for the row
-        return '<table>' +
+        return '<table class="w-100">' +
             '<tr>' +
             '<td><b>Documento del Decano:</b></td>' +
             '<td>' + d.DECANO_FACULTAD + '</td>' +
@@ -469,6 +480,10 @@ $(document).ready(function () {
             '</tr>' +
             '</table>';
     }
+
+    $(document).on('click', '.danger-color', function () {
+
+    });
     //--Fin
 });
 

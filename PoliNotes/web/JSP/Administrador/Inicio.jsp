@@ -150,7 +150,6 @@
             </nav>
             <!--/Sidebar Menu-->
         </header>
-
         <!-- Contenido  -->
         <main class="page-content">
             <div class="container-fluid">
@@ -303,10 +302,7 @@
             </div>
         </main>
     </div>
-
     <!--/Bloque necesario para El efecto Sidebar-->
-
-
     <%@include file="Footer.jsp" %>
 </body>
 
