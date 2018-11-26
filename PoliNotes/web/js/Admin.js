@@ -482,8 +482,42 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.danger-color', function () {
-
+        var data = Table_Facultad.row($(this).parents('tr')).data()
+        $('#Mod_Elim_Facultad').modal('show');
+        $('#Facultad_Eliminar').text('¿Estas seguro de eliminar la facultad de ' + data.NOMBRE_FACULTAD + '?');
+        $('#ID_FACULTAD').val(data.ID_FACULTAD);
     });
+
+    $("#Form_Eliminar_Facultad").submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            type: $('#Form_Eliminar_Facultad').attr('method'),
+            url: $('#Form_Eliminar_Facultad').attr('action'),
+            data: $('#Form_Eliminar_Facultad').serialize(),
+            dataType: "text",
+
+            beforeSend: function() {
+                $('#icon_loadEliminar_facultad').removeClass('d-none').addClass('d-block');
+                $('#btn_eliminar_facultad').removeClass('d-block').addClass('d-none');
+                $('#btn_cancelarEliminar_facultad').removeClass('d-block').addClass('d-none');
+            },
+            success: function (response) {
+                if (response == 'true') {
+                    $('#Table_Facultad').DataTable().ajax.reload();
+                }
+            },
+            error: function (response) {
+                console.log(response);
+                alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
+            },
+            complete: function () {
+                $('#icon_loadEliminar_facultad').removeClass('d-block').addClass('d-none');
+                $('#btn_eliminar_facultad').removeClass('d-none').addClass('d-block');
+                $('#btn_cancelarEliminar_facultad').removeClass('d-none').addClass('d-block');
+            }
+        });
+    });
+
     //--Fin
 });
 

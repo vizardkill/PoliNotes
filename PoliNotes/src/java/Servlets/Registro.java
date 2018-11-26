@@ -79,7 +79,7 @@ public class Registro extends HttpServlet {
         if (Peticion.equals("Registro_Usuario")) {
             Usuario user = new Usuario();
             controller_Usuario cuser = new controller_Usuario();
-            
+
             user.setID_PERFIL_USER(Integer.valueOf(request.getParameter("ID_PERFIL_USER")));
             user.setESTADO_USER(1);
             user.setNOMBRE_USER(request.getParameter("NOMBRE_USER"));
@@ -96,21 +96,35 @@ public class Registro extends HttpServlet {
                 response.getWriter().write("false");
             }
         }
-        
+
         if (Peticion.equals("Registro_Facultad")) {
             Facultad fac = new Facultad();
             controller_Facultad cfac = new controller_Facultad();
-            
+
             fac.setCODIGO_FACULTAD(request.getParameter("CODIGO_FACULTAD"));
             fac.setDECANO_FACULTAD(request.getParameter("DECANO_FACULTAD"));
             fac.setNOMBRE_FACULTAD(request.getParameter("NOMBRE_FACULTAD"));
-            
+
             boolean result = cfac.setFacultad(fac);
             if (result) {
                 response.getWriter().write("true");
             } else {
                 response.getWriter().write("false");
-            }     
+            }
+        }
+
+        if (Peticion.equals("Eliminar_Facultad")) {
+            Facultad fac = new Facultad();
+            controller_Facultad cfac = new controller_Facultad();
+
+            fac.setID_FACULTAD(Integer.valueOf(request.getParameter("ID_FACULTAD")));
+
+            boolean result = cfac.deleteFacultad(fac);
+            if (result) {
+                response.getWriter().write("true");
+            } else {
+                response.getWriter().write("false");
+            }
         }
     }
 
