@@ -154,24 +154,25 @@
             <!--/Sidebar Menu-->
         </header>
 
-        
         <!-- Contenido  -->
         <main class="page-content">
             <div class="container-fluid">
 
-                <div class="row">
-                    <div class="col">
-                        <h1 class="h1"><i class="fas fa-graduation-cap"></i><strong> Facultades</strong> </h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="Inicio.jsp">Inicio</a></li>
-                                <li class="breadcrumb-item ">Universidad</li>
-                                <li class="breadcrumb-item active" aria-current="page">Facultades</li>
-                            </ol>
-                        </nav>
+                <section>
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="h1"><i class="fas fa-graduation-cap"></i><strong> Facultades</strong> </h1>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="Inicio.jsp">Inicio</a></li>
+                                    <li class="breadcrumb-item ">Universidad</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Facultades</li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
-                </div>
-
+                </section>
+                
                 <hr class="hr blue-grey">
 
                 <section>
@@ -217,11 +218,11 @@
                     </div>
                 </section>
 
-
             </div>
         </main>
         <!-- /Contenido" -->
     </div>
+    <!--/Bloque necesario para El efecto Sidebar-->
     <%@include file="Footer.jsp" %>
 </body>
 

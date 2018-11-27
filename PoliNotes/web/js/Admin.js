@@ -503,6 +503,8 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response == 'true') {
+                    $('#Mod_Elim_Facultad').modal('hide');
+                    $('#Mod_Sucess_Elim_Decano').modal('show');
                     $('#Table_Facultad').DataTable().ajax.reload();
                 }
             },

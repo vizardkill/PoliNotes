@@ -7,9 +7,11 @@ package Metodos;
 
 import Controlador.controller_Facultad;
 import Controlador.controller_Logs;
+import Controlador.controller_Tipo_Perfil;
 import Controlador.controller_Usuario;
 import Modelos.Facultad;
 import Modelos.Logs;
+import Modelos.Tipo_Perfil;
 import Modelos.Usuario;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -26,7 +28,7 @@ public class Json_Datos {
     }
 
     public String Json_Login(Usuario user) {
-        com.google.gson.JsonObject json = new JsonObject();
+        JsonObject json = new JsonObject();
         controller_Usuario cuser = new controller_Usuario();
 
         boolean aux = cuser.P_Login(user);
@@ -46,7 +48,7 @@ public class Json_Datos {
     }
 
     public String Json_Logs() {
-        com.google.gson.JsonObject json = new JsonObject();
+        JsonObject json = new JsonObject();
         controller_Logs c_logs = new controller_Logs();
         List<Logs> listaLogs = c_logs.getLogs();
 
@@ -67,7 +69,7 @@ public class Json_Datos {
     }
 
     public String Json_Facultad() {
-        com.google.gson.JsonObject json = new JsonObject();
+        JsonObject json = new JsonObject();
         controller_Facultad c_Fac = new controller_Facultad();
         List<Object> listaFacultad = c_Fac.getFacultad();
 
@@ -123,6 +125,23 @@ public class Json_Datos {
             array.add(item);
         }
         json.add("Decanos", array);
+        return json.toString();
+    }
+
+    public String Json_Perfiles() {
+        JsonObject json = new JsonObject();
+        controller_Tipo_Perfil cperfil = new controller_Tipo_Perfil();
+        List<Tipo_Perfil> listaPerfil = cperfil.getPerfil();
+        
+        JsonArray array = new JsonArray();
+        for(Tipo_Perfil x : listaPerfil) {
+            JsonObject item = new JsonObject();
+            
+            item.addProperty("ID_TIPO_PERFIL", x.getID_TIPO_PERFIL());
+            item.addProperty("NOMBRE_TIPO_PERFIL", x.getNOMBRE_TIPO_PERFIL());
+            array.add(item);
+        }
+        json.add("Perfiles", array);
         return json.toString();
     }
 

@@ -13,7 +13,6 @@ create or replace PROCEDURE LoginUsuario
     L_celular OUT USUARIO.CELULAR_USER%TYPE,
     L_PerfilUsuario OUT USUARIO.ID_PERFIL_USER%TYPE,
     L_Estado OUT USUARIO.ESTADO_USER%TYPE
-    
 ) AS
 BEGIN
         SELECT count(*) as Contador, 
@@ -48,7 +47,7 @@ BEGIN
     L_aux := 0;
 END;
 /
---/Procedimiento almacenado, para la validacion de usuario y contraseña--
+--/
 
 
 --Procedimiento para validar si ya esta en uso un nick de usuario--
@@ -62,7 +61,7 @@ BEGIN
    V_aux := 0;
 END;
 /
---/Procedimiento para validar si ya esta en uso un nick de usuario--
+--/
 
 
 --Procedimiento para validar si ya esta en uso un email de usuario--
@@ -76,7 +75,7 @@ BEGIN
    V_aux := 0;
 END;
 /
---/Procedimiento para validar si ya esta en uso un email de usuario--
+--/
 
 
 --Procedimiento para validar si ya esta en uso un email de usuario--
@@ -90,6 +89,7 @@ BEGIN
    V_aux := 0;
 END;
 /
+--/
 
 --/Procedimiento para validar si ya existe un decano matriculado en alguna facultad--
 create or replace PROCEDURE ValidarDecano (
@@ -102,3 +102,4 @@ BEGIN
    V_aux := 0;
 END;
 /
+--/

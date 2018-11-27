@@ -6,10 +6,12 @@
  */
 package Servlets;
 
+import Controlador.controller_Tipo_Perfil;
 import Metodos.Json_Datos;
-import Modelos.Logs;
+import Modelos.Tipo_Perfil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +40,7 @@ public class Datos extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Datos</title>");            
+            out.println("<title>Servlet Datos</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Datos at " + request.getContextPath() + "</h1>");
@@ -62,17 +64,21 @@ public class Datos extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         String Peticion = request.getParameter("Peticion");
         Json_Datos data = new Json_Datos();
-        
-        if(Peticion.equals("data_logs")) {
-               response.getWriter().write(data.Json_Logs());
+
+        if (Peticion.equals("data_logs")) {
+            response.getWriter().write(data.Json_Logs());
         }
-        
+
         if (Peticion.equals("data_facultad")) {
-            response.getWriter().write(data.Json_Facultad());    
+            response.getWriter().write(data.Json_Facultad());
         }
-        
+
         if (Peticion.equals("data_Decanos")) {
             response.getWriter().write(data.Json_Decanos());
+        }
+        
+        if (Peticion.equals("data_perfiles")) {
+            response.getWriter().write(data.Json_Perfiles());         
         }
     }
 

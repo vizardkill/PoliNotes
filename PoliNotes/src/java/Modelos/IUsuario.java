@@ -33,7 +33,5 @@ public interface IUsuario {
     
     public boolean P_ValidDoc(Usuario user);
     
-    public boolean P_ValidDecano(Usuario user);
-    
-
+    public boolean P_ValidDecano(Usuario user);   
 }

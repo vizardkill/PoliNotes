@@ -1,71 +1,3 @@
-<!--Modal Registro de Facultad-->
-<div class="modal fade" id="Mod_Reg_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Facultad"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content rounded ">
-
-            <form id="Form_Registro_Facultad" name="Form_Registro_Facultad" method="POST" action="../../Registro?Peticion=Registro_Facultad">
-
-                <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h2 class="text-center text-white" style="font-family: cursive"><strong>Registro de
-                            Facultad</strong></h2>
-                </div>
-                <!--/Header-->
-
-                <!--Body-->
-                <div class="modal-body mx-3">
-                    <div id="msg_SucessRegistro_facultad" class="alert alert-success d-none" role="alert">
-                        <h6 class="h6 text-center">Facultad registrada con ex&#237to</h6>
-                    </div>
-
-                    <!--Simple Select with Search-->
-                    <div class="form-group error-group w-100">
-                        <label>Decano de la Facultad</label>
-                        <select id="DECANO_FACULTAD" name="DECANO_FACULTAD">
-                            <option></option>
-                        </select>
-                    </div>
-
-                    <div class="md-form error-group">
-                        <input type="text" id="CODIGO_FACULTAD" name="CODIGO_FACULTAD" class="form-control validate">
-                        <label data-success="" for="CODIGO_FACULTAD">Codigo de la Facultad</label>
-                    </div>
-
-                    <div class="md-form error-group">
-                        <input type="text" id="NOMBRE_FACULTAD" name="NOMBRE_FACULTAD" class="form-control validate">
-                        <label data-success="" for="NOMBRE_FACULTAD">Nombre de la Facultad</label>
-                    </div>
-
-                    <p class="text-mute">*Nota: Solo se mostrar&#225n los decanos que aun no han sido asignados a
-                        alguna facultad</p>
-
-                </div>
-                <!--/Body-->
-                <!--Footer-->
-                <div class="modal-footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col d-flex flex-center mx-auto">
-                                <button id="btn_registro_facultad" class="btn btn-secondary" type="submit">Registrar</button>
-                                <i id="icon_load_facultad" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--/Footer-->
-
-
-            </form>
-
-        </div>
-    </div>
-</div>
-<!--/Modal Registro de Facultad-->
-
 <!--Modal de Registro de Usuario-->
 <div class="modal fade" id="Mod_Reg_Usuario" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Usuario" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -92,10 +24,7 @@
                                 <div class="md-form">
                                     <div class="select">
                                         <select id="ID_PERFIL_USER" name="ID_PERFIL_USER" class="select-text" required>
-                                            <option value="" disabled selected></option>
-                                            <option value="2">Alumno</option>
-                                            <option value="3">Profesor</option>
-                                            <option value="4">Decano</option>
+                                            
                                         </select>
                                         <span class="select-highlight"></span>
                                         <span class="select-bar"></span>
@@ -194,6 +123,73 @@
 </div>
 <!--/Modal de Registro de Usuario-->
 
+<!--Modal Registro de Facultad-->
+<div class="modal fade" id="Mod_Reg_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Facultad"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded ">
+
+            <form id="Form_Registro_Facultad" name="Form_Registro_Facultad" method="POST" action="../../Registro?Peticion=Registro_Facultad">
+
+                <!--Header-->
+                <div class="modal-header bg-dark d-block flex-center">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 class="text-center text-white" style="font-family: cursive"><strong>Registro de
+                            Facultad</strong></h2>
+                </div>
+                <!--/Header-->
+
+                <!--Body-->
+                <div class="modal-body mx-3">
+                    <div id="msg_SucessRegistro_facultad" class="alert alert-success d-none" role="alert">
+                        <h6 class="h6 text-center">Facultad registrada con ex&#237to</h6>
+                    </div>
+
+                    <!--Simple Select with Search-->
+                    <div class="form-group error-group w-100">
+                        <label>Decano de la Facultad</label>
+                        <select id="DECANO_FACULTAD" name="DECANO_FACULTAD">
+                            <option></option>
+                        </select>
+                    </div>
+
+                    <div class="md-form error-group">
+                        <input type="text" id="CODIGO_FACULTAD" name="CODIGO_FACULTAD" class="form-control validate">
+                        <label data-success="" for="CODIGO_FACULTAD">Codigo de la Facultad</label>
+                    </div>
+
+                    <div class="md-form error-group">
+                        <input type="text" id="NOMBRE_FACULTAD" name="NOMBRE_FACULTAD" class="form-control validate">
+                        <label data-success="" for="NOMBRE_FACULTAD">Nombre de la Facultad</label>
+                    </div>
+
+                    <p class="text-mute">*Nota: Solo se mostrar&#225n los decanos que aun no han sido asignados a
+                        alguna facultad</p>
+
+                </div>
+                <!--/Body-->
+                <!--Footer-->
+                <div class="modal-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex flex-center mx-auto">
+                                <button id="btn_registro_facultad" class="btn btn-secondary" type="submit">Registrar</button>
+                                <i id="icon_load_facultad" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/Footer-->
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--/Modal Registro de Facultad-->
 
 <!--Modal Eliminar Facultad-->
 <div class="modal fade" id="Mod_Elim_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Elim_Facultad"
@@ -238,3 +234,32 @@
     </div>
 </div>
 <!--/Modal Eliminar Facultad-->
+
+<!--Modal Eliminar Decano de Facultad-->
+<div class="modal fade right" id="Mod_Sucess_Elim_Decano" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess_Elim_Decano"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success" role="document">
+
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Decano eliminado con &#233xito <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i></p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal Eliminar Decano de Facultad-->

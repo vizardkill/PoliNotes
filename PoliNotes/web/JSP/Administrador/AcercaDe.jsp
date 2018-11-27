@@ -239,10 +239,9 @@
             </div>
         </main>
         <!-- /Contenido" -->
+        <%@include file="Footer.jsp" %>
     </div>
     <!--/Bloque necesario para El efecto Sidebar-->
-
-    <%@include file="Footer.jsp" %>
 </body>
 
 </html>

@@ -27,9 +27,10 @@ public class controller_Usuario {
         return result;
     }
 
-    public void updateUser(Usuario user) {
+    public boolean updateUser(Usuario user) {
         IUsuario udao = new DAO_Usuario();
-        udao.updateUser(user);
+        boolean result = udao.updateUser(user);
+        return result;
     }
 
     public boolean deleteUser(Usuario user) {

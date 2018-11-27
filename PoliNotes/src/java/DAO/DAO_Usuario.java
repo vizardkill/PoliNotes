@@ -131,9 +131,10 @@ public class DAO_Usuario implements IUsuario {
             try (PreparedStatement ps = con.prepareStatement(sql)) {
                 ps.setString(1, user.getDOC_USER());
                 ps.executeUpdate();
+                ps.close();
             }
         } catch (SQLException e) {
-            System.out.println("Error: Clase ClienteDaoImple, método eliminar: " + e);
+            System.out.println("Error: Clase DAO_Usuario, método eliminar: " + e);
             return false;
         }
         return true;
