@@ -144,5 +144,4 @@ public class Json_Datos {
         json.add("Perfiles", array);
         return json.toString();
     }
-
 }

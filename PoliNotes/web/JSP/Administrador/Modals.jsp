@@ -233,33 +233,23 @@
 
     </div>
 </div>
-<!--/Modal Eliminar Facultad-->
-
-<!--Modal Eliminar Decano de Facultad-->
-<div class="modal fade right" id="Mod_Sucess_Elim_Decano" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess_Elim_Decano"
-  aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-success" role="document">
+<!--Sucess-->
+<div class="modal fade right" id="Mod_Sucess_Elim_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess_Elim_Facultad"
+  aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
 
     <!--Content-->
     <div class="modal-content">
       <!--Header-->
-      <div class="modal-header">
-        <p class="heading lead">Decano eliminado con &#233xito <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i></p>
-
+      <div class="modal-header d-block flex-center">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" class="white-text">&times;</span>
         </button>
-      </div>
-
-      <!--Body-->
-      <div class="modal-body">
-      </div>
-
-      <!--Footer-->
-      <div class="modal-footer justify-content-center">
+        <p class="heading lead text-left">Decano eliminado con &#233xito <i class="fas fa-check animated rotateIn"></i></p>
       </div>
     </div>
     <!--/.Content-->
   </div>
 </div>
-<!--Modal Eliminar Decano de Facultad-->
+<!--/Modal Eliminar Facultad-->
+

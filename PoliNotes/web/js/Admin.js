@@ -1,4 +1,4 @@
-//Configuraciones de JQuery Validator
+//################################## Configuraciones de JQuery Validator
 jQuery.validator.setDefaults({
     errorElement: 'p',
     errorPlacement: function (error, element) {
@@ -14,6 +14,7 @@ jQuery.validator.setDefaults({
     }
 });
 
+//################################## Metodos Adicionales para JQuery Validator
 $.validator.addMethod("especial", function (value) {
     return /[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(value)
 });
@@ -29,8 +30,6 @@ $.validator.addMethod("digito", function (value) {
 $.validator.addMethod("letras", function (value) {
     return /^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$/.test(value)
 });
-
-
 
 $(document).ready(function () {
     //Iniciar mensajes Tooltip de Bootstrap 
@@ -110,7 +109,23 @@ $(document).ready(function () {
         }
     });
 
-    //Validacion de Formulario (Registro de Usuario) mediante JQuery
+    //################################## Validacion de Formulario (Registro de Usuario) mediante JQuery
+
+    //Carga los perfiles en el elemento Select del Formulario de Creación de Usuario
+    $.ajax({
+        type: "GET",
+        url: "../../Datos?Peticion=data_perfiles",
+        dataType: "json",
+        success: function (Data) {
+            $.each(Data.Perfiles, function (i, item) {
+                $("#ID_PERFIL_USER").append('<option value=' + item.ID_TIPO_PERFIL + '>' + item.NOMBRE_TIPO_PERFIL + '</option>');
+            });
+        },
+        error: function (response) {
+            alert('Error interno con el servidor, intentalo de nuevo más tarde')
+            console.log(response);
+        }
+    });
     $('#Form_Registro_Usuario').validate({
         rules: {
             ID_PERFIL_USER: { required: true },
@@ -235,7 +250,7 @@ $(document).ready(function () {
         }
     });
 
-    //Validacion de Formulario (Registro de Facultad) mediante JQuery
+    //################################## Validacion de Formulario (Registro de Facultad) mediante JQuery
     $('#Form_Registro_Facultad').validate({
         ignore: [],
         rules: {
@@ -304,8 +319,43 @@ $(document).ready(function () {
             });
         }
     });
+    //################################## Funcion para Eliminar (Facultad)
+    $("#Form_Eliminar_Facultad").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: $('#Form_Eliminar_Facultad').attr('method'),
+            url: $('#Form_Eliminar_Facultad').attr('action'),
+            data: $('#Form_Eliminar_Facultad').serialize(),
+            dataType: "text",
 
-    //DataTable de Logs
+            beforeSend: function () {
+                $('#icon_loadEliminar_facultad').removeClass('d-none').addClass('d-block');
+                $('#btn_eliminar_facultad').removeClass('d-block').addClass('d-none');
+                $('#btn_cancelarEliminar_facultad').removeClass('d-block').addClass('d-none');
+            },
+            success: function (response) {
+                if (response == 'true') {
+                    $('#Mod_Elim_Facultad').modal('hide');
+                    $('#Table_Facultad').DataTable().ajax.reload();
+                    $('#Mod_Sucess_Elim_Facultad').modal('show');
+                    function ShowSucess() {
+                        $('#Mod_Sucess_Elim_Facultad').modal('hide');
+                    } setTimeout(ShowSucess, 4000);
+                }
+            },
+            error: function (response) {
+                console.log(response);
+                alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
+            },
+            complete: function () {
+                $('#icon_loadEliminar_facultad').removeClass('d-block').addClass('d-none');
+                $('#btn_eliminar_facultad').removeClass('d-none').addClass('d-block');
+                $('#btn_cancelarEliminar_facultad').removeClass('d-none').addClass('d-block');
+            }
+        });
+    });
+
+    //################################## DataTable de Logs
     var Table_Logs = $('#Table_Logs').DataTable({
         language: {
             sProcessing: "Procesando...",
@@ -360,9 +410,8 @@ $(document).ready(function () {
             }
         ]
     });
-    //--Fin
 
-    //DataTable de Facultad
+    //################################## DataTable de Facultad
     var Table_Facultad = $('#Table_Facultad').DataTable({
         language: {
             sProcessing: "Procesando...",
@@ -414,8 +463,8 @@ $(document).ready(function () {
                 defaultContent: '',
                 render: function () {
                     return '<div class="btn-group btn-group-sm" role="group" aria-label="Botones de Accion"> ' +
-                            '<button type="button" class="btn btn-sm danger-color" title="Eliminar"><i class="fas fa-trash"></i></button>' +
-                            '<button type="button" class="btn btn-sm success-color" title="Modificar"><i class="fas fa-marker"></i></button>' +
+                        '<button type="button" class="btn btn-sm danger-color" title="Eliminar"><i class="fas fa-trash"></i></button>' +
+                        '<button type="button" class="btn btn-sm success-color" title="Modificar"><i class="fas fa-marker"></i></button>' +
                         '</div>';
                 }
             }
@@ -488,39 +537,6 @@ $(document).ready(function () {
         $('#ID_FACULTAD').val(data.ID_FACULTAD);
     });
 
-    $("#Form_Eliminar_Facultad").submit(function(e){
-        e.preventDefault();
-        $.ajax({
-            type: $('#Form_Eliminar_Facultad').attr('method'),
-            url: $('#Form_Eliminar_Facultad').attr('action'),
-            data: $('#Form_Eliminar_Facultad').serialize(),
-            dataType: "text",
-
-            beforeSend: function() {
-                $('#icon_loadEliminar_facultad').removeClass('d-none').addClass('d-block');
-                $('#btn_eliminar_facultad').removeClass('d-block').addClass('d-none');
-                $('#btn_cancelarEliminar_facultad').removeClass('d-block').addClass('d-none');
-            },
-            success: function (response) {
-                if (response == 'true') {
-                    $('#Mod_Elim_Facultad').modal('hide');
-                    $('#Mod_Sucess_Elim_Decano').modal('show');
-                    $('#Table_Facultad').DataTable().ajax.reload();
-                }
-            },
-            error: function (response) {
-                console.log(response);
-                alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
-            },
-            complete: function () {
-                $('#icon_loadEliminar_facultad').removeClass('d-block').addClass('d-none');
-                $('#btn_eliminar_facultad').removeClass('d-none').addClass('d-block');
-                $('#btn_cancelarEliminar_facultad').removeClass('d-none').addClass('d-block');
-            }
-        });
-    });
-
-    //--Fin
 });
 
 
