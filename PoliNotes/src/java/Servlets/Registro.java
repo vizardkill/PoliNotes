@@ -126,6 +126,22 @@ public class Registro extends HttpServlet {
                 response.getWriter().write("false");
             }
         }
+        
+        if (Peticion.equals("Modificar_Facultad")) {
+            Facultad fac = new Facultad();
+            controller_Facultad cfac = new controller_Facultad();
+
+            fac.setID_FACULTAD(Integer.valueOf(request.getParameter("MOD_ID_FACULTAD")));
+            fac.setCODIGO_FACULTAD(request.getParameter("MOD_CODIGO_FACULTAD"));
+            fac.setNOMBRE_FACULTAD(request.getParameter("MOD_NOMBRE_FACULTAD"));
+            
+            boolean result = cfac.updateFacultad(fac);
+            if (result) {
+                response.getWriter().write("true");
+            } else {
+                response.getWriter().write("false");
+            }
+        }
     }
 
     /**

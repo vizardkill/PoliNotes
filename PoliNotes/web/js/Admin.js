@@ -32,10 +32,10 @@ $.validator.addMethod("letras", function (value) {
 });
 
 $(document).ready(function () {
-    //Iniciar mensajes Tooltip de Bootstrap 
+    //################################## Iniciar mensajes Tooltip de Bootstrap 
     $('[data-toggle="tooltip"]').tooltip();
 
-    //Select del Formulario de Registro de Facultad (Busca los Decanos existentes dentro de la universidad)
+    //################################## Select del Formulario de Registro de Facultad (Busca los Decanos existentes dentro de la universidad)
     $('#DECANO_FACULTAD').select2({
         language: {
             errorLoading: function () {
@@ -109,7 +109,81 @@ $(document).ready(function () {
         }
     });
 
-    //################################## Validacion de Formulario (Registro de Usuario) mediante JQuery
+    //################################## Select del Formulario de Modificación de Facultad (Busca los Decanos existentes dentro de la universidad)
+    $('#MOD_DECANO_FACULTAD').select2({
+        language: {
+            errorLoading: function () {
+                return 'No se pudieron cargar los resultados';
+            },
+            inputTooLong: function (args) {
+                var remainingChars = args.input.length - args.maximum;
+
+                var message = 'Por favor, elimine ' + remainingChars + ' car';
+
+                if (remainingChars == 1) {
+                    message += 'ácter';
+                } else {
+                    message += 'acteres';
+                }
+
+                return message;
+            },
+            inputTooShort: function (args) {
+                var remainingChars = args.minimum - args.input.length;
+
+                var message = 'Por favor, introduzca ' + remainingChars + ' car';
+
+                if (remainingChars == 1) {
+                    message += 'ácter';
+                } else {
+                    message += 'acteres';
+                }
+
+                return message;
+            },
+            loadingMore: function () {
+                return 'Cargando más resultados…';
+            },
+            maximumSelected: function (args) {
+                var message = 'Sólo puede seleccionar ' + args.maximum + ' elemento';
+
+                if (args.maximum != 1) {
+                    message += 's';
+                }
+
+                return message;
+            },
+            noResults: function () {
+                return 'No se encontraron resultados';
+            },
+            searching: function () {
+                return 'Buscando…';
+            },
+            removeAllItems: function () {
+                return 'Eliminar todos los elementos';
+            }
+        },
+        dropdownParent: $('#Mod_Modi_Facultad'),
+        theme: "bootstrap",
+
+        ajax: {
+            type: "GET",
+            url: "../../Datos?Peticion=data_Decanos",
+            dataType: "json",
+            processResults: function (data) {
+                return {
+                    results: $.map(data.Decanos, function (Decanos) {
+                        return {
+                            text: Decanos.NOMBRE_USER + ' ' + Decanos.APELLIDOS_USER,
+                            id: Decanos.DOC_USER
+                        }
+                    })
+                };
+            }
+        }
+    });
+
+    //################################## Esta Seccion establece la validacion de los diferentes Formularios del Sistema a travez de JQuery Validator
 
     //Carga los perfiles en el elemento Select del Formulario de Creación de Usuario
     $.ajax({
@@ -126,6 +200,7 @@ $(document).ready(function () {
             console.log(response);
         }
     });
+    //Validacion del Formulario para el registro de un usuario
     $('#Form_Registro_Usuario').validate({
         rules: {
             ID_PERFIL_USER: { required: true },
@@ -250,7 +325,7 @@ $(document).ready(function () {
         }
     });
 
-    //################################## Validacion de Formulario (Registro de Facultad) mediante JQuery
+    //Validacion del Formulario para el registro de una Facultad
     $('#Form_Registro_Facultad').validate({
         ignore: [],
         rules: {
@@ -319,7 +394,7 @@ $(document).ready(function () {
             });
         }
     });
-    //################################## Funcion para Eliminar (Facultad)
+    //Validacion del Formulario para la eliminacion de una Facultad
     $("#Form_Eliminar_Facultad").submit(function (e) {
         e.preventDefault();
         $.ajax({
@@ -337,10 +412,11 @@ $(document).ready(function () {
                 if (response == 'true') {
                     $('#Mod_Elim_Facultad').modal('hide');
                     $('#Table_Facultad').DataTable().ajax.reload();
-                    $('#Mod_Sucess_Elim_Facultad').modal('show');
+                    $('#Mod_Sucess').modal('show');
+                    $('#Text_Sucess').text('Facultad eliminada con éxito');
                     function ShowSucess() {
-                        $('#Mod_Sucess_Elim_Facultad').modal('hide');
-                    } setTimeout(ShowSucess, 4000);
+                        $('#Mod_Sucess').modal('hide');
+                    } setTimeout(ShowSucess, 3000);
                 }
             },
             error: function (response) {
@@ -355,7 +431,9 @@ $(document).ready(function () {
         });
     });
 
-    //################################## DataTable de Logs
+    //################################## Esta seccion establece las configuraciones para los diferentes Tables del sisterma a travez del Framework DataTable de JQuery
+
+    //Tabla de Logs
     var Table_Logs = $('#Table_Logs').DataTable({
         language: {
             sProcessing: "Procesando...",
@@ -411,7 +489,9 @@ $(document).ready(function () {
         ]
     });
 
-    //################################## DataTable de Facultad
+    //################################## Seccion extendida para adicionar configuracion a la Tabla de Facultad
+
+    //Tabla de Facultad
     var Table_Facultad = $('#Table_Facultad').DataTable({
         language: {
             sProcessing: "Procesando...",
@@ -485,7 +565,7 @@ $(document).ready(function () {
             }
         ]
     });
-
+    //Script para ampliar la informacion de la tabla Facultad
     $('#Table_Facultad tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var tdi = tr.find('i.fa');
@@ -506,13 +586,11 @@ $(document).ready(function () {
             tdi.first().addClass('fa-minus-square');
         }
     });
-
     Table_Facultad.on('user-select', function (e, dt, type, cell, originalEvent) {
         if ($(cell.node()).hasClass('details-control')) {
             e.preventDefault();
         }
     });
-
     function Table_Facultad_Format(d) {
         // `d` is the original data object for the row
         return '<table class="w-100">' +
@@ -529,14 +607,24 @@ $(document).ready(function () {
             '</tr>' +
             '</table>';
     }
-
+    //Fin del Script
+    
+    //Script para ejecutar la eliminacion y modificacion de los registros en la Tabla Facultad
     $(document).on('click', '.danger-color', function () {
-        var data = Table_Facultad.row($(this).parents('tr')).data()
+        var data = Table_Facultad.row($(this).parents('tr')).data();
         $('#Mod_Elim_Facultad').modal('show');
         $('#Facultad_Eliminar').text('¿Estas seguro de eliminar la facultad de ' + data.NOMBRE_FACULTAD + '?');
         $('#ID_FACULTAD').val(data.ID_FACULTAD);
     });
-
+    $(document).on('click', '.success-color', function () {
+        var data = Table_Facultad.row($(this).parents('tr')).data();
+        $('#Mod_Modi_Facultad').modal('show');
+        $('#Decano_Actual').text('Decano Actual: ' + data.NOMBRE_APELLIDOS_USER);
+        $('#Codigo_Actual').text('Código Actual: ' + data.CODIGO_FACULTAD);
+        $('#Facultad_Actual').text('Nombre Actual: ' + data.NOMBRE_FACULTAD);
+        $('#MOD_ID_FACULTAD').val(data.ID_FACULTAD);
+    });
+    //Fin del Script
 });
 
 

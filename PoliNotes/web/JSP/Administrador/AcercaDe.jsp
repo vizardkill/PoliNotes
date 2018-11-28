@@ -11,8 +11,10 @@
 <body>
     <!--Bloque necesario para El efecto Sidebar-->
     <div class="page-wrapper chiller-theme sidebar-bg bg3 toggled">
+
+        <!--Sidebar Menu-->
         <header>
-            <!--Sidebar Menu-->
+
             <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
                 <i class="fas fa-bars"></i>
             </a>
@@ -147,8 +149,9 @@
 
 
             </nav>
-            <!--/Sidebar Menu-->
+
         </header>
+        <!--/Sidebar Menu-->
 
         <!-- Contenido  -->
         <main class="page-content">
@@ -239,9 +242,11 @@
             </div>
         </main>
         <!-- /Contenido" -->
-        <%@include file="Footer.jsp" %>
+
     </div>
     <!--/Bloque necesario para El efecto Sidebar-->
 </body>
+
+<%@include file="Footer.jsp" %>
 
 </html>

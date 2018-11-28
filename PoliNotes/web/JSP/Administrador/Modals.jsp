@@ -1,16 +1,34 @@
+<!--Modal Sucess-->
+<div class="modal fade right" id="Mod_Sucess" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess"
+  aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
+
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header d-block flex-center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+        <p class="heading lead text-left" id="Text_Sucess"><i class="fas fa-check animated rotateIn"></i></p>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
 <!--Modal de Registro de Usuario-->
 <div class="modal fade" id="Mod_Reg_Usuario" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Usuario" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content rounded ">
-
             <form id="Form_Registro_Usuario" name="Form_Registro_Usuario" method="POST" action="../../Registro?Peticion=Registro_Usuario">
                 <!--Header-->
                 <div class="modal-header bg-dark d-block flex-center">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h2 class="text-center text-white" style="font-family: cursive"><strong>Registro de
-                            Usuario</strong></h2>
+                    <h4 class="text-center text-white"><strong>Registro de
+                            Usuario</strong></h4>
                 </div>
                 <!--/Header-->
                 <!--Body-->
@@ -136,8 +154,8 @@
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h2 class="text-center text-white" style="font-family: cursive"><strong>Registro de
-                            Facultad</strong></h2>
+                    <h4 class="text-center text-white"><strong>Registro de
+                            Facultad</strong></h4>
                 </div>
                 <!--/Header-->
 
@@ -148,19 +166,19 @@
                     </div>
 
                     <!--Simple Select with Search-->
-                    <div class="form-group error-group w-100">
+                    <div class="form-group w-100">
                         <label>Decano de la Facultad</label>
                         <select id="DECANO_FACULTAD" name="DECANO_FACULTAD">
                             <option></option>
                         </select>
                     </div>
 
-                    <div class="md-form error-group">
+                    <div class="md-form">
                         <input type="text" id="CODIGO_FACULTAD" name="CODIGO_FACULTAD" class="form-control validate">
                         <label data-success="" for="CODIGO_FACULTAD">Codigo de la Facultad</label>
                     </div>
 
-                    <div class="md-form error-group">
+                    <div class="md-form">
                         <input type="text" id="NOMBRE_FACULTAD" name="NOMBRE_FACULTAD" class="form-control validate">
                         <label data-success="" for="NOMBRE_FACULTAD">Nombre de la Facultad</label>
                     </div>
@@ -191,20 +209,83 @@
 </div>
 <!--/Modal Registro de Facultad-->
 
+<!--Modal Moficiar Facultad-->
+<div class="modal fade" id="Mod_Modi_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Modi_Facultad"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded ">
+
+            <form id="Form_Modificar_Facultad" name="Form_Modificar_Facultad" method="POST" action="../../Registro?Peticion=Modificar_Facultad">
+
+                <!--Header-->
+                <div class="modal-header bg-dark d-block flex-center">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="text-center text-white"><strong>Modificar
+                            Facultad</strong></h4>
+                </div>
+                <!--/Header-->
+
+                <!--Body-->
+                <div class="modal-body mx-3">
+                    <!--Simple Select with Search-->
+                    <div class="form-group w-100">
+                        <label>Decano de la Facultad</label>
+                        <select id="MOD_DECANO_FACULTAD" name="DECANO_FACULTAD">
+                            <option></option>
+                        </select>
+                        <p class="text-success" id="Decano_Actual"></p>
+                    </div>
+                  
+                    <div class="md-form">
+                        <input type="text" id="MOD_CODIGO_FACULTAD" name="MOD_CODIGO_FACULTAD" class="form-control validate">
+                        <label data-success="" for="MOD_CODIGO_FACULTAD">Codigo de la Facultad</label>  
+                    </div>
+                    <p class="text-success" id="Codigo_Actual"></p>
+                    
+                    <div class="md-form">
+                        <input type="text" id="MOD_NOMBRE_FACULTAD" name="MOD_NOMBRE_FACULTAD" class="form-control validate">
+                        <label data-success="" for="MOD_NOMBRE_FACULTAD">Nombre de la Facultad</label>
+                    </div>
+                    <p class="text-success" id="Facultad_Actual"></p>
+
+                    <p class="text-mute">*Nota: Solo se mostrar&#225n los decanos que aun no han sido asignados a
+                        alguna facultad</p>
+                </div>
+                <!--/Body-->
+                <!--Footer-->
+                <div class="modal-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex flex-center mx-auto">
+                                <button id="btn_modificar_facultad" class="btn btn-secondary" type="submit">Modificar</button>
+                                <i id="icon_modificar_load_facultad" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
+                                <input id="MOD_ID_FACULTAD" name="MOD_ID_FACULTAD" type="hidden">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/Footer-->
+            </form>
+        </div>
+    </div>
+</div>
+<!--/Modal Moficiar Facultad-->
+
 <!--Modal Eliminar Facultad-->
 <div class="modal fade" id="Mod_Elim_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Elim_Facultad"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
 
         <div class="modal-content rounded ">
-
             <form id="Form_Eliminar_Facultad" name="Form_Eliminar_Facultad" method="POST" action="../../Registro?Peticion=Eliminar_Facultad">
                 <!--Header-->
                 <div class="modal-header bg-dark d-block flex-center">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h2 class="text-center text-white" style="font-family: cursive"><strong>Eliminar Facultad</strong></h2>
+                    <h4 class="text-center text-white"><strong>Eliminar Facultad</strong></h4>
                 </div>
                 <!--/Header-->
 
@@ -230,26 +311,7 @@
                 <!--/Footer-->
             </form>
         </div>
-
     </div>
-</div>
-<!--Sucess-->
-<div class="modal fade right" id="Mod_Sucess_Elim_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess_Elim_Facultad"
-  aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
-
-    <!--Content-->
-    <div class="modal-content">
-      <!--Header-->
-      <div class="modal-header d-block flex-center">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">&times;</span>
-        </button>
-        <p class="heading lead text-left">Decano eliminado con &#233xito <i class="fas fa-check animated rotateIn"></i></p>
-      </div>
-    </div>
-    <!--/.Content-->
-  </div>
 </div>
 <!--/Modal Eliminar Facultad-->
 

@@ -1,14 +1,3 @@
-<footer class="page-footer font-small unique-color-dark">
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3"><i class="fas fa-copyright"></i> 2018 Copyright:
-        <a href="http://www.politecnicojic.edu.co/"> Politecnico Colombiano Jaime Isaza Cadavid</a>
-    </div>
-    <!-- Copyright -->
-
-</footer>
-<!--/Bloque necesario para El efecto Sidebar-->
-
 <!--JQuery-->
 <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
 <!--JQuery Validation-->
