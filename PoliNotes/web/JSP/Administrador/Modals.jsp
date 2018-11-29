@@ -1,20 +1,21 @@
 <!--Modal Sucess-->
-<div class="modal fade right" id="Mod_Sucess" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess"
-  aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
+<div class="modal fade right" id="Mod_Sucess" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess" aria-hidden="true"
+    data-backdrop="false">
+    <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
 
-    <!--Content-->
-    <div class="modal-content">
-      <!--Header-->
-      <div class="modal-header d-block flex-center">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">&times;</span>
-        </button>
-        <p class="heading lead text-left" id="Text_Sucess"><i class="fas fa-check animated rotateIn"></i></p>
-      </div>
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header d-flex align-items-center">
+                <i class="fas fa-check animated rotateIn text-white"></i>
+                <p class="heading lead text-left " id="Text_Sucess"></p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>         
+                </button>
+            </div>
+        </div>
+        <!--/.Content-->
     </div>
-    <!--/.Content-->
-  </div>
 </div>
 
 <!--Modal de Registro de Usuario-->
@@ -42,7 +43,7 @@
                                 <div class="md-form">
                                     <div class="select">
                                         <select id="ID_PERFIL_USER" name="ID_PERFIL_USER" class="select-text" required>
-                                            
+                                            <option disabled selected></option>
                                         </select>
                                         <span class="select-highlight"></span>
                                         <span class="select-bar"></span>
@@ -58,57 +59,57 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-12 col-lg-4">
                                 <div class="md-form">
                                     <i class="fa fa-user-circle prefix grey-text"></i>
                                     <input type="text" id="NOMBRE_USER" name="NOMBRE_USER" class="form-control validate"
-                                           aria-describedby="NOMBRE_USER">
+                                        aria-describedby="NOMBRE_USER">
                                     <label data-success="" for="NOMBRE_USER">Nombres</label>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-12 col-lg-4">
                                 <div class="md-form">
                                     <input type="text" id="APELLIDOS_USER" name="APELLIDOS_USER" class="form-control validate"
-                                           aria-describedby="APELLIDOS_USER">
+                                        aria-describedby="APELLIDOS_USER">
                                     <label data-success="" for="APELLIDOS_USER">Apellidos</label>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-12 col-lg-4">
                                 <div class="md-form">
                                     <i class="fas fa-address-card prefix grey-text"></i>
                                     <input type="text" id="DOC_USER" name="DOC_USER" class="form-control validate"
-                                           aria-describedby="DOC_USER">
+                                        aria-describedby="DOC_USER">
                                     <label data-success="" for="DOC_USER">Documento</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12 col-lg-6">
                                 <div class="md-form">
                                     <i class="fas fa-envelope prefix grey-text"></i>
                                     <input type="email" id="CORREO_USER" name="CORREO_USER" class="form-control validate"
-                                           aria-describedby="CORREO_USER">
+                                        aria-describedby="CORREO_USER">
                                     <label data-success="" for="CORREO_USER">Correo Electron&#237co</label>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-lg-6">
                                 <div class="md-form">
                                     <i class="fa fa-user prefix grey-text"></i>
                                     <input type="text" id="R_NICK_USER" name="R_NICK_USER" class="form-control validate"
-                                           aria-describedby="R_NICK_USER">
+                                        aria-describedby="R_NICK_USER">
                                     <label data-success="" for="R_NICK_USER">Usuario</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12 col-lg-6">
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix grey-text"></i>
                                     <input type="password" id="R_PASSWORD_USER" name="R_PASSWORD_USER" class="form-control validate">
                                     <label data-success="" for="R_PASSWORD_USER">Contrase&#241a</label>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-lg-6">
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix grey-text"></i>
                                     <input type="password" id="pwd" name="pwd" class="form-control validate">
@@ -133,7 +134,6 @@
                 </div>
                 <!--/Footer-->
 
-
             </form>
 
         </div>
@@ -143,7 +143,7 @@
 
 <!--Modal Registro de Facultad-->
 <div class="modal fade" id="Mod_Reg_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Facultad"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded ">
 
@@ -211,7 +211,7 @@
 
 <!--Modal Moficiar Facultad-->
 <div class="modal fade" id="Mod_Modi_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Modi_Facultad"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded ">
 
@@ -232,26 +232,24 @@
                     <!--Simple Select with Search-->
                     <div class="form-group w-100">
                         <label>Decano de la Facultad</label>
-                        <select id="MOD_DECANO_FACULTAD" name="DECANO_FACULTAD">
+                        <select id="MOD_DECANO_FACULTAD" name="MOD_DECANO_FACULTAD">
                             <option></option>
                         </select>
                         <p class="text-success" id="Decano_Actual"></p>
                     </div>
-                  
+
                     <div class="md-form">
                         <input type="text" id="MOD_CODIGO_FACULTAD" name="MOD_CODIGO_FACULTAD" class="form-control validate">
-                        <label data-success="" for="MOD_CODIGO_FACULTAD">Codigo de la Facultad</label>  
+                        <label data-success="" for="MOD_CODIGO_FACULTAD">Codigo de la Facultad</label>
                     </div>
                     <p class="text-success" id="Codigo_Actual"></p>
-                    
+
                     <div class="md-form">
                         <input type="text" id="MOD_NOMBRE_FACULTAD" name="MOD_NOMBRE_FACULTAD" class="form-control validate">
                         <label data-success="" for="MOD_NOMBRE_FACULTAD">Nombre de la Facultad</label>
                     </div>
                     <p class="text-success" id="Facultad_Actual"></p>
 
-                    <p class="text-mute">*Nota: Solo se mostrar&#225n los decanos que aun no han sido asignados a
-                        alguna facultad</p>
                 </div>
                 <!--/Body-->
                 <!--Footer-->
@@ -275,7 +273,7 @@
 
 <!--Modal Eliminar Facultad-->
 <div class="modal fade" id="Mod_Elim_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Elim_Facultad"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
 
         <div class="modal-content rounded ">
@@ -302,7 +300,8 @@
                         <div class="row">
                             <div class="col d-flex flex-center mx-auto">
                                 <button id="btn_eliminar_facultad" class="btn btn-secondary" type="submit">Aceptar</button>
-                                <button id="btn_cancelarEliminar_facultad" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                                <button id="btn_cancelarEliminar_facultad" class="btn btn-secondary" data-dismiss="modal"
+                                    aria-label="Close">Cancelar</button>
                                 <i id="icon_loadEliminar_facultad" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
                             </div>
                         </div>
@@ -314,4 +313,3 @@
     </div>
 </div>
 <!--/Modal Eliminar Facultad-->
-

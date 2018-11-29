@@ -46,9 +46,15 @@ public class controller_Usuario {
     }
 
     //****************************************VISTAS****************************************************
-    public List<Usuario> getUserDecano() {
+    public List<Usuario> getUserDecano_reg() {
         IUsuario udao = new DAO_Usuario();
-        List<Usuario> listaDecanos = udao.getUserDecano();
+        List<Usuario> listaDecanos = udao.getUserDecano_reg();
+        return listaDecanos;
+    }
+    
+    public List<Usuario> getUserDecano_mod() {
+        IUsuario udao = new DAO_Usuario();
+        List<Usuario> listaDecanos = udao.getUserDecano_mod();
         return listaDecanos;
     }
 

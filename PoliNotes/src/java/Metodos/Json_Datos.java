@@ -16,7 +16,6 @@ import Modelos.Usuario;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.List;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -110,10 +109,28 @@ public class Json_Datos {
         return json.toString();
     }
 
-    public String Json_Decanos() {
+    public String Json_Decanos_reg() {
         JsonObject json = new JsonObject();
         controller_Usuario c_user = new controller_Usuario();
-        List<Usuario> listaDecanos = c_user.getUserDecano();
+        List<Usuario> listaDecanos = c_user.getUserDecano_reg();
+
+        JsonArray array = new JsonArray();
+        for (Usuario x : listaDecanos) {
+            JsonObject item = new JsonObject();
+
+            item.addProperty("DOC_USER", x.getDOC_USER());
+            item.addProperty("NOMBRE_USER", x.getNOMBRE_USER());
+            item.addProperty("APELLIDOS_USER", x.getAPELLIDOS_USER());
+            array.add(item);
+        }
+        json.add("Decanos", array);
+        return json.toString();
+    }
+
+    public String Json_Decanos_mod() {
+        JsonObject json = new JsonObject();
+        controller_Usuario c_user = new controller_Usuario();
+        List<Usuario> listaDecanos = c_user.getUserDecano_mod();
 
         JsonArray array = new JsonArray();
         for (Usuario x : listaDecanos) {
@@ -132,11 +149,11 @@ public class Json_Datos {
         JsonObject json = new JsonObject();
         controller_Tipo_Perfil cperfil = new controller_Tipo_Perfil();
         List<Tipo_Perfil> listaPerfil = cperfil.getPerfil();
-        
+
         JsonArray array = new JsonArray();
-        for(Tipo_Perfil x : listaPerfil) {
+        for (Tipo_Perfil x : listaPerfil) {
             JsonObject item = new JsonObject();
-            
+
             item.addProperty("ID_TIPO_PERFIL", x.getID_TIPO_PERFIL());
             item.addProperty("NOMBRE_TIPO_PERFIL", x.getNOMBRE_TIPO_PERFIL());
             array.add(item);

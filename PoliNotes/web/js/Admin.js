@@ -94,7 +94,7 @@ $(document).ready(function () {
 
         ajax: {
             type: "GET",
-            url: "../../Datos?Peticion=data_Decanos",
+            url: "../../Datos?Peticion=data_Decanos_reg",
             dataType: "json",
             processResults: function (data) {
                 return {
@@ -168,7 +168,7 @@ $(document).ready(function () {
 
         ajax: {
             type: "GET",
-            url: "../../Datos?Peticion=data_Decanos",
+            url: "../../Datos?Peticion=data_Decanos_mod",
             dataType: "json",
             processResults: function (data) {
                 return {
@@ -204,8 +204,8 @@ $(document).ready(function () {
     $('#Form_Registro_Usuario').validate({
         rules: {
             ID_PERFIL_USER: { required: true },
-            NOMBRE_USER: { required: true, minlength: 3, maxlength: 20 },
-            APELLIDOS_USER: { required: true, minlength: 5, maxlength: 20 },
+            NOMBRE_USER: { required: true, minlength: 3, maxlength: 20, letras: true },
+            APELLIDOS_USER: { required: true, minlength: 5, maxlength: 20, letras: true },
             DOC_USER: {
                 required: true,
                 minlength: 5,
@@ -255,12 +255,14 @@ $(document).ready(function () {
             NOMBRE_USER: {
                 required: 'El campo es requerido',
                 minlength: 'El campo debe contener un minimo de 3 caracteres',
-                maxlength: 'El campo solo puede contener un maximo de 20 caracteres'
+                maxlength: 'El campo solo puede contener un maximo de 20 caracteres',
+                letras: 'El campo no puede contener caracteres especiales ni números'
             },
             APELLIDOS_USER: {
                 required: 'El campo es requerido',
                 minlength: 'El campo debe contener un minimo de 3 caracteres',
-                maxlength: 'El campo solo puede contener un maximo de 20 caracteres'
+                maxlength: 'El campo solo puede contener un maximo de 20 caracteres',
+                letras: 'El campo no puede contener caracteres especiales ni números'
             },
             DOC_USER: {
                 required: 'El campo es requerido',
@@ -329,25 +331,13 @@ $(document).ready(function () {
     $('#Form_Registro_Facultad').validate({
         ignore: [],
         rules: {
-            DECANO_FACULTAD: {
-                required: true,
-                remote: {
-                    url: "../../Ingreso?Peticion=ValidarDecano",
-                    type: "GET",
-                    data: {
-                        DECANO_FACULTAD: function () {
-                            return $("#DECANO_FACULTAD").val()
-                        }
-                    }
-                }
-            },
+            DECANO_FACULTAD: { required: true },
             CODIGO_FACULTAD: { required: true, maxlength: 15, minlength: 5 },
             NOMBRE_FACULTAD: { required: true, minlength: 5, maxlength: 20, letras: true }
         },
         messages: {
             DECANO_FACULTAD: {
-                required: 'El campo es requerido',
-                remote: 'Este decano ya esta asignado a otra facultad'
+                required: 'El campo es requerido'
             },
             CODIGO_FACULTAD: {
                 required: 'El campo es requerido',
@@ -394,6 +384,67 @@ $(document).ready(function () {
             });
         }
     });
+
+    //Validacion del Formulario para la modificación de una Facultad
+    $('#Form_Modificar_Facultad').validate({
+        ignore: [],
+        rules: {
+            MOD_DECANO_FACULTAD: { required: true },
+            MOD_CODIGO_FACULTAD: { required: true, maxlength: 15, minlength: 5 },
+            MOD_NOMBRE_FACULTAD: { required: true, minlength: 5, maxlength: 20, letras: true }
+        },
+        messages: {
+            MOD_DECANO_FACULTAD: {
+                required: 'El campo es requerido'
+            },
+            MOD_CODIGO_FACULTAD: {
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 5 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 5 caracteres'
+            },
+            MOD_NOMBRE_FACULTAD: {
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 5 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 20 caracteres',
+                letras: 'El campo no puede contener caracteres especiales ni numeros'
+            }
+        },
+
+        submitHandler: function () {
+            $.ajax({
+                type: $('#Form_Modificar_Facultad').attr('method'),
+                url: $('#Form_Modificar_Facultad').attr('action'),
+                data: $("#Form_Modificar_Facultad").serialize(),
+                dataType: "text",
+
+                beforeSend: function () {
+                    $('#icon_modificar_load_facultad').removeClass('d-none').addClass('d-block');
+                    $('#btn_modificar_facultad').removeClass('d-block').addClass('d-none');
+                },
+                success: function (response) {
+                    if (response == 'true') {
+
+                        $("#Form_Modificar_Facultad")[0].reset();
+                        $('#Table_Facultad').DataTable().ajax.reload();
+                        $('#Mod_Sucess').modal('show');
+                        $('#Text_Sucess').text('Facultad modificada con éxito');
+                        function ShowSucess() {
+                            $('#Mod_Sucess').modal('hide');
+                        } setTimeout(ShowSucess, 4000);
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                    alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
+                },
+                complete: function () {
+                    $('#icon_modificar_load_facultad').removeClass('d-block').addClass('d-none');
+                    $('#btn_modificar_facultad').removeClass('d-none').addClass('d-block');
+                }
+            });
+        }
+    });
+
     //Validacion del Formulario para la eliminacion de una Facultad
     $("#Form_Eliminar_Facultad").submit(function (e) {
         e.preventDefault();
@@ -416,7 +467,7 @@ $(document).ready(function () {
                     $('#Text_Sucess').text('Facultad eliminada con éxito');
                     function ShowSucess() {
                         $('#Mod_Sucess').modal('hide');
-                    } setTimeout(ShowSucess, 3000);
+                    } setTimeout(ShowSucess, 4000);
                 }
             },
             error: function (response) {
@@ -608,7 +659,7 @@ $(document).ready(function () {
             '</table>';
     }
     //Fin del Script
-    
+
     //Script para ejecutar la eliminacion y modificacion de los registros en la Tabla Facultad
     $(document).on('click', '.danger-color', function () {
         var data = Table_Facultad.row($(this).parents('tr')).data();

@@ -22,7 +22,9 @@ public interface IUsuario {
     public boolean deleteUser(Usuario user);
     
     //Vistas
-    public List<Usuario> getUserDecano();
+    public List<Usuario> getUserDecano_reg();
+    
+    public List<Usuario> getUserDecano_mod();
     
     //Procedimientos Almacenados
     public boolean P_Login(Usuario user);

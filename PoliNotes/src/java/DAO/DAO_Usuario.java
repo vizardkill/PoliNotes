@@ -142,12 +142,42 @@ public class DAO_Usuario implements IUsuario {
 
     //**************************************************Vistas******************************************************
     @Override
-    public List<Usuario> getUserDecano() {
+    public List<Usuario> getUserDecano_reg() {
         Connection con;
         Statement stm;
         ResultSet rs;
 
-        String sql = "SELECT * FROM v_Decanos ORDER BY NOMBRE_USER";
+        String sql = "SELECT * FROM v_Decanos_Reg ORDER BY NOMBRE_USER";
+
+        List<Usuario> listaUsuario = new ArrayList<>();
+
+        try {
+            con = Conexion.getConexion();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setDOC_USER(rs.getString("DOC_USER"));
+                u.setNOMBRE_USER(rs.getString("NOMBRE_USER"));
+                u.setAPELLIDOS_USER(rs.getString("APELLIDOS_USER"));
+                listaUsuario.add(u);
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error: Clase DAO_USUARIO, método obtener");
+        }
+        return listaUsuario;
+    }
+
+    @Override
+    public List<Usuario> getUserDecano_mod() {
+        Connection con;
+        Statement stm;
+        ResultSet rs;
+
+        String sql = "SELECT * FROM v_Decanos_Mod ORDER BY NOMBRE_USER";
 
         List<Usuario> listaUsuario = new ArrayList<>();
 
@@ -298,7 +328,7 @@ public class DAO_Usuario implements IUsuario {
 
     @Override
     public boolean P_ValidDecano(Usuario user) {
-       Connection con;
+        Connection con;
         con = Conexion.getConexion();
         int valor;
         try (CallableStatement cst = con.prepareCall("{call ValidarDecano (?,?)}")) {
