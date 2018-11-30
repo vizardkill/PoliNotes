@@ -12,7 +12,6 @@
 <body>
     <!--Bloque necesario para El efecto Sidebar-->
     <div class="page-wrapper chiller-theme sidebar-bg bg3 toggled">
-        
         <!--Sidebar Menu-->
         <%@include file="Menu.jsp" %>
         <%@include file="Modals.jsp" %>
@@ -25,12 +24,12 @@
                 <section>
                     <div class="row">
                         <div class="col">
-                            <h1 class="h1"><i class="fas fa-graduation-cap"></i><strong> Facultades</strong> </h1>
+                            <h1 class="h1"><i class="fas fa-users-class"></i><strong> Materias</strong> </h1>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="Inicio.jsp">Inicio</a></li>
                                     <li class="breadcrumb-item ">Universidad</li>
-                                    <li class="breadcrumb-item active" aria-current="page">Facultades</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Materias</li>
                                 </ol>
                             </nav>
                         </div>
@@ -43,8 +42,8 @@
                     <div class="row">
                         <div class="col">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Mod_Reg_Facultad">Registrar
-                                    Facultad</button>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Mod_Reg_Materia">Registrar
+                                    Materia</button>
                                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#Mod_Reg_Usuario">Registrar
                                     Usuario</button>
                             </div>
@@ -89,7 +88,6 @@
     </div>
     <!--/Bloque necesario para El efecto Sidebar-->
 </body>
-
 <%@include file="Footer.jsp" %>
 
 </html>

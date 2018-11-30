@@ -389,6 +389,7 @@ $(document).ready(function () {
                             $('#msg_SucessRegistro_facultad').slideUp('slow');
                         } setTimeout(ShowSucess, 4000);
                         $("#Form_Registro_Facultad")[0].reset();
+                        $("#DECANO_FACULTAD").val('').trigger('change');
                         $('#Table_Facultad').DataTable().ajax.reload();
                     }
                 },
@@ -468,13 +469,14 @@ $(document).ready(function () {
                     if (response == 'true') {
 
                         $("#Form_Modificar_Facultad")[0].reset();
+                        $("#MOD_DECANO_FACULTAD").val('').trigger('change');
                         $('#Mod_Modi_Facultad').modal('hide');
                         $('#Table_Facultad').DataTable().ajax.reload();
                         $('#Mod_Sucess').modal('show');
                         $('#Text_Sucess').text('Facultad modificada con éxito');
                         function ShowSucess() {
                             $('#Mod_Sucess').modal('hide');
-                        } setTimeout(ShowSucess, 4000);
+                        } setTimeout(ShowSucess, 3000);
                     }
                 },
                 error: function (response) {
@@ -511,7 +513,7 @@ $(document).ready(function () {
                     $('#Text_Sucess').text('Facultad eliminada con éxito');
                     function ShowSucess() {
                         $('#Mod_Sucess').modal('hide');
-                    } setTimeout(ShowSucess, 4000);
+                    } setTimeout(ShowSucess, 2000);
                 }
             },
             error: function (response) {
@@ -720,6 +722,9 @@ $(document).ready(function () {
         $('#MOD_ID_FACULTAD').val(data.ID_FACULTAD);
     });
     //Fin del Script
+
+
+    
 });
 
 
