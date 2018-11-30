@@ -1,5 +1,5 @@
 --Procedimiento almacenado, para la validacion de usuario y contraseña--
-create or replace PROCEDURE LoginUsuario
+CREATE OR REPLACE PROCEDURE LoginUsuario
 (
     --VARIABLES DE ENTRADA--
     L_nick USUARIO.NICK_USER%TYPE,
@@ -49,57 +49,49 @@ END;
 /
 --/
 
-
---Procedimiento para validar si ya esta en uso un nick de usuario--
-create or replace PROCEDURE ValidarNick (
-    V_nick USUARIO.NICK_USER%TYPE,
+--/Procedimiento para verificar si se encuentra en uso un codigo o nombre en la tabla Facultad--
+CREATE OR REPLACE PROCEDURE Validaciones_Facultad (
+    V_tipo VARCHAR2,
+    V_variable VARCHAR2,
     V_aux OUT INTEGER
 ) AS
 BEGIN
-   SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE NICK_USER = V_nick;
+   IF (V_tipo = 'ValidarCodigo') THEN
+       SELECT COUNT(*) INTO V_aux FROM FACULTAD WHERE CODIGO_FACULTAD = V_variable;
+   END IF;
+
+   IF (V_tipo = 'ValidarNombre') THEN
+       SELECT COUNT(*) INTO V_aux FROM FACULTAD WHERE NOMBRE_FACULTAD = V_variable;
+   END IF;
+
    EXCEPTION WHEN NO_DATA_FOUND THEN
    V_aux := 0;
 END;
 /
 --/
 
-
---Procedimiento para validar si ya esta en uso un email de usuario--
-create or replace PROCEDURE ValidarEmail (
-    V_email USUARIO.CORREO_USER%TYPE,
+--/Procedimiento para verificar si se encuentra en uso (Nick, Email, Documento) en la tabla usuario
+CREATE OR REPLACE PROCEDURE Validaciones_Usuario(
+    V_tipo VARCHAR2,
+    V_variable VARCHAR2,
     V_aux OUT INTEGER
-) AS
+) AS 
 BEGIN
-   SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE CORREO_USER = V_email;
-   EXCEPTION WHEN NO_DATA_FOUND THEN
-   V_aux := 0;
-END;
-/
---/
 
+  IF (v_tipo = 'ValidarNick') THEN 
+      SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE NICK_USER = V_variable;
+  END  IF;
 
---Procedimiento para validar si ya esta en uso un email de usuario--
-create or replace PROCEDURE ValidarDoc (
-    V_doc USUARIO.DOC_USER%TYPE,
-    V_aux OUT INTEGER
-) AS
-BEGIN
-   SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE DOC_USER = V_doc;
-   EXCEPTION WHEN NO_DATA_FOUND THEN
-   V_aux := 0;
-END;
-/
---/
+  IF (v_tipo = 'ValidarEmail') THEN 
+      SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE CORREO_USER = V_variable;
+  END  IF;
 
---/Procedimiento para validar si ya existe un decano matriculado en alguna facultad--
-create or replace PROCEDURE ValidarDecano (
-    V_doc USUARIO.DOC_USER%TYPE,
-    V_aux OUT INTEGER
-) AS
-BEGIN
-   SELECT COUNT(*) INTO V_aux FROM FACULTAD WHERE DECANO_FACULTAD = V_doc;
-   EXCEPTION WHEN NO_DATA_FOUND THEN
-   V_aux := 0;
+  IF (v_tipo = 'ValidarDoc') THEN 
+      SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE DOC_USER = V_variable;
+  END  IF;
+  
+  EXCEPTION WHEN NO_DATA_FOUND THEN
+  V_aux := 0;  
 END;
 /
 --/

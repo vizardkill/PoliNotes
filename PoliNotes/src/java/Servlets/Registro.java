@@ -11,6 +11,7 @@ import Modelos.Facultad;
 import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -101,9 +102,9 @@ public class Registro extends HttpServlet {
             Facultad fac = new Facultad();
             controller_Facultad cfac = new controller_Facultad();
 
-            fac.setCODIGO_FACULTAD(request.getParameter("CODIGO_FACULTAD"));
+            fac.setCODIGO_FACULTAD(request.getParameter("CODIGO_FACULTAD").toUpperCase());
             fac.setDECANO_FACULTAD(request.getParameter("DECANO_FACULTAD"));
-            fac.setNOMBRE_FACULTAD(request.getParameter("NOMBRE_FACULTAD"));
+            fac.setNOMBRE_FACULTAD(request.getParameter("NOMBRE_FACULTAD").toUpperCase());
 
             boolean result = cfac.setFacultad(fac);
             if (result) {
@@ -132,8 +133,9 @@ public class Registro extends HttpServlet {
             controller_Facultad cfac = new controller_Facultad();
 
             fac.setID_FACULTAD(Integer.valueOf(request.getParameter("MOD_ID_FACULTAD")));
-            fac.setCODIGO_FACULTAD(request.getParameter("MOD_CODIGO_FACULTAD"));
-            fac.setNOMBRE_FACULTAD(request.getParameter("MOD_NOMBRE_FACULTAD"));
+            fac.setCODIGO_FACULTAD(request.getParameter("MOD_CODIGO_FACULTAD").toUpperCase());
+            fac.setNOMBRE_FACULTAD(request.getParameter("MOD_NOMBRE_FACULTAD").toUpperCase());
+            fac.setDECANO_FACULTAD(request.getParameter("MOD_DECANO_FACULTAD"));
             
             boolean result = cfac.updateFacultad(fac);
             if (result) {

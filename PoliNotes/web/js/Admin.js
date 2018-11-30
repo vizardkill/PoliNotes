@@ -207,9 +207,7 @@ $(document).ready(function () {
             NOMBRE_USER: { required: true, minlength: 3, maxlength: 20, letras: true },
             APELLIDOS_USER: { required: true, minlength: 5, maxlength: 20, letras: true },
             DOC_USER: {
-                required: true,
-                minlength: 5,
-                maxlength: 15,
+                required: true, minlength: 5, maxlength: 15,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarDoc",
                     type: "GET",
@@ -220,9 +218,8 @@ $(document).ready(function () {
                     }
                 }
             },
-            CORREO_USER: {
-                required: true,
-                email: true,
+            CORREO_USER: { 
+                required: true, email: true,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarEmail",
                     type: "GET",
@@ -234,9 +231,7 @@ $(document).ready(function () {
                 }
             },
             R_NICK_USER: {
-                required: true,
-                minlength: 4,
-                maxlength: 10,
+                required: true, minlength: 4, maxlength: 10,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarNick",
                     type: "GET",
@@ -332,8 +327,30 @@ $(document).ready(function () {
         ignore: [],
         rules: {
             DECANO_FACULTAD: { required: true },
-            CODIGO_FACULTAD: { required: true, maxlength: 15, minlength: 5 },
-            NOMBRE_FACULTAD: { required: true, minlength: 5, maxlength: 20, letras: true }
+            CODIGO_FACULTAD: {
+                required: true, maxlength: 15, minlength: 5,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarCodigo",
+                    type: "GET",
+                    data: {
+                        DOC_USER: function () {
+                            return $("#CODIGO_FACULTAD").val()
+                        }
+                    }
+                }
+            },
+            NOMBRE_FACULTAD: { 
+                required: true, minlength: 5, maxlength: 20, letras: true,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarNombre",
+                    type: "GET",
+                    data: {
+                        DOC_USER: function () {
+                            return $("#NOMBRE_FACULTAD").val()
+                        }
+                    }
+                }
+            }
         },
         messages: {
             DECANO_FACULTAD: {
@@ -342,13 +359,15 @@ $(document).ready(function () {
             CODIGO_FACULTAD: {
                 required: 'El campo es requerido',
                 minlength: 'El campo debe contener un minimo de 5 caracteres',
-                maxlength: 'El campo solo puede contener un maximo de 5 caracteres'
+                maxlength: 'El campo solo puede contener un maximo de 5 caracteres',
+                remote: 'Este código ya se encuentra en uso por favor usa uno diferente'
             },
             NOMBRE_FACULTAD: {
                 required: 'El campo es requerido',
                 minlength: 'El campo debe contener un minimo de 5 caracteres',
                 maxlength: 'El campo solo puede contener un maximo de 20 caracteres',
-                letras: 'El campo no puede contener caracteres especiales ni numeros'
+                letras: 'El campo no puede contener caracteres especiales ni numeros',
+                remote: 'Este nombre ya se encuentra en uso por favor usa uno diferente'
             }
         },
 
@@ -390,8 +409,30 @@ $(document).ready(function () {
         ignore: [],
         rules: {
             MOD_DECANO_FACULTAD: { required: true },
-            MOD_CODIGO_FACULTAD: { required: true, maxlength: 15, minlength: 5 },
-            MOD_NOMBRE_FACULTAD: { required: true, minlength: 5, maxlength: 20, letras: true }
+            MOD_CODIGO_FACULTAD: { 
+                required: true, maxlength: 15, minlength: 5,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarCodigo",
+                    type: "GET",
+                    data: {
+                        DOC_USER: function () {
+                            return $("#MOD_CODIGO_FACULTAD").val()
+                        }
+                    }
+                }
+            },
+            MOD_NOMBRE_FACULTAD: { 
+                required: true, minlength: 5, maxlength: 20, letras: true,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarNombre",
+                    type: "GET",
+                    data: {
+                        DOC_USER: function () {
+                            return $("#MOD_NOMBRE_FACULTAD").val()
+                        }
+                    }
+                }
+            }
         },
         messages: {
             MOD_DECANO_FACULTAD: {
@@ -400,13 +441,15 @@ $(document).ready(function () {
             MOD_CODIGO_FACULTAD: {
                 required: 'El campo es requerido',
                 minlength: 'El campo debe contener un minimo de 5 caracteres',
-                maxlength: 'El campo solo puede contener un maximo de 5 caracteres'
+                maxlength: 'El campo solo puede contener un maximo de 5 caracteres',
+                remote: 'Este código ya se encuentra en uso por favor usa uno diferente'
             },
             MOD_NOMBRE_FACULTAD: {
                 required: 'El campo es requerido',
                 minlength: 'El campo debe contener un minimo de 5 caracteres',
                 maxlength: 'El campo solo puede contener un maximo de 20 caracteres',
-                letras: 'El campo no puede contener caracteres especiales ni numeros'
+                letras: 'El campo no puede contener caracteres especiales ni numeros',
+                remote: 'Este nombre ya se encuentra en uso por favor usa uno diferente'
             }
         },
 
@@ -425,6 +468,7 @@ $(document).ready(function () {
                     if (response == 'true') {
 
                         $("#Form_Modificar_Facultad")[0].reset();
+                        $('#Mod_Modi_Facultad').modal('hide');
                         $('#Table_Facultad').DataTable().ajax.reload();
                         $('#Mod_Sucess').modal('show');
                         $('#Text_Sucess').text('Facultad modificada con éxito');

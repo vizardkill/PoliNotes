@@ -77,7 +77,4 @@ public class Logs {
     public void setFECHA_LOGS(String FECHA_LOGS) {
         this.FECHA_LOGS = FECHA_LOGS;
     }
-   
-   
-    
 }

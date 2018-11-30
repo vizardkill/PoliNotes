@@ -29,11 +29,5 @@ public interface IUsuario {
     //Procedimientos Almacenados
     public boolean P_Login(Usuario user);
     
-    public boolean P_ValidUser(Usuario user);
-    
-    public boolean P_ValidEmail(Usuario user);
-    
-    public boolean P_ValidDoc(Usuario user);
-    
-    public boolean P_ValidDecano(Usuario user);   
+    public boolean P_ValidUser(String tipo, Usuario user);
 }

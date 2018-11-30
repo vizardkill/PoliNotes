@@ -69,28 +69,9 @@ public class controller_Usuario {
         return result;
     }
 
-    public boolean P_ValidUser(Usuario user) {
+    public boolean P_ValidUser(String tipo, Usuario user) {
         IUsuario udao = new DAO_Usuario();
-        boolean result = udao.P_ValidUser(user);
+        boolean result = udao.P_ValidUser(tipo, user);
         return result;
     }
-
-    public boolean P_ValidEmail(Usuario user) {
-        IUsuario udao = new DAO_Usuario();
-        boolean result = udao.P_ValidEmail(user);
-        return result;
-    }
-
-    public boolean P_ValidDoc(Usuario user) {
-        IUsuario udao = new DAO_Usuario();
-        boolean result = udao.P_ValidDoc(user);
-        return result;
-    }
-    
-    public boolean P_ValidDecano(Usuario user) {
-        IUsuario udao = new DAO_Usuario();
-        boolean result = udao.P_ValidDecano(user);
-        return result;
-    }
-
 }

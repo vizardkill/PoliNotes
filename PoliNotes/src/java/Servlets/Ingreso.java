@@ -5,9 +5,11 @@
  */
 package Servlets;
 
+import Controlador.controller_Facultad;
 import Controlador.controller_Tipo_Perfil;
 import Controlador.controller_Usuario;
 import Metodos.Json_Datos;
+import Modelos.Facultad;
 import Modelos.Tipo_Perfil;
 import Modelos.Usuario;
 import java.io.IOException;
@@ -65,11 +67,12 @@ public class Ingreso extends HttpServlet {
             throws ServletException, IOException {
         String Peticion = request.getParameter("Peticion");
 
+        //************************************** Validaciones de la Tabla Usuario *********************************
         if (Peticion.equals("ValidarNick")) {
             Usuario user = new Usuario();
             user.setNICK_USER(request.getParameter("R_NICK_USER"));
             controller_Usuario cuser = new controller_Usuario();
-            boolean result = cuser.P_ValidUser(user);
+            boolean result = cuser.P_ValidUser(Peticion, user);
             if (result) {
                 response.getWriter().write("false");
             } else {
@@ -81,7 +84,7 @@ public class Ingreso extends HttpServlet {
             Usuario user = new Usuario();
             user.setCORREO_USER(request.getParameter("CORREO_USER"));
             controller_Usuario cuser = new controller_Usuario();
-            boolean result = cuser.P_ValidEmail(user);
+            boolean result = cuser.P_ValidUser(Peticion, user);
             if (result) {
                 response.getWriter().write("false");
             } else {
@@ -93,19 +96,46 @@ public class Ingreso extends HttpServlet {
             Usuario user = new Usuario();
             user.setDOC_USER(request.getParameter("DOC_USER"));
             controller_Usuario cuser = new controller_Usuario();
-            boolean result = cuser.P_ValidDoc(user);
+            boolean result = cuser.P_ValidUser(Peticion, user);
             if (result) {
                 response.getWriter().write("false");
             } else {
                 response.getWriter().write("true");
             }
         }
-        
-        if (Peticion.equals("ValidarDecano")) {
-            Usuario user = new Usuario();
-            user.setDOC_USER(request.getParameter("DOC_USER"));
-            controller_Usuario cuser = new controller_Usuario();
-            boolean result = cuser.P_ValidDecano(user);
+
+        //************************************** Validaciones de la Tabla Facultad *********************************
+        if (Peticion.equals("ValidarCodigo")) {
+            Facultad fac = new Facultad();
+            if (request.getParameter("CODIGO_FACULTAD") != null && !request.getParameter("CODIGO_FACULTAD").isEmpty()) {
+                fac.setCODIGO_FACULTAD(request.getParameter("CODIGO_FACULTAD").toUpperCase());
+            }
+
+            if (request.getParameter("MOD_CODIGO_FACULTAD") != null && !request.getParameter("MOD_CODIGO_FACULTAD").isEmpty()) {
+                fac.setCODIGO_FACULTAD(request.getParameter("MOD_CODIGO_FACULTAD").toUpperCase());
+            }
+
+            controller_Facultad cfac = new controller_Facultad();
+            boolean result = cfac.P_ValidFacultad(Peticion, fac);
+            if (result) {
+                response.getWriter().write("false");
+            } else {
+                response.getWriter().write("true");
+            }
+        }
+
+        if (Peticion.equals("ValidarNombre")) {
+            Facultad fac = new Facultad();
+            if (request.getParameter("NOMBRE_FACULTAD") != null && !request.getParameter("NOMBRE_FACULTAD").isEmpty()) {
+                fac.setCODIGO_FACULTAD(request.getParameter("NOMBRE_FACULTAD").toUpperCase());
+            }
+
+            if (request.getParameter("MOD_NOMBRE_FACULTAD") != null && !request.getParameter("MOD_NOMBRE_FACULTAD").isEmpty()) {
+                fac.setCODIGO_FACULTAD(request.getParameter("MOD_NOMBRE_FACULTAD").toUpperCase());
+            }
+
+            controller_Facultad cfac = new controller_Facultad();
+            boolean result = cfac.P_ValidFacultad(Peticion, fac);
             if (result) {
                 response.getWriter().write("false");
             } else {
@@ -144,7 +174,6 @@ public class Ingreso extends HttpServlet {
         }
 
     }
-
 
     /**
      * Returns a short description of the servlet.

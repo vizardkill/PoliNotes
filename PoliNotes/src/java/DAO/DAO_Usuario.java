@@ -246,104 +246,35 @@ public class DAO_Usuario implements IUsuario {
     }
 
     @Override
-    public boolean P_ValidUser(Usuario user) {
+    public boolean P_ValidUser(String tipo, Usuario user) {
         Connection con;
         con = Conexion.getConexion();
         int valor;
-        try (CallableStatement cst = con.prepareCall("{call ValidarNick (?,?)}")) {
+        try (CallableStatement cst = con.prepareCall("{call Validaciones_Usuario (?,?,?)}")) {
 
-            cst.setString(1, user.getNICK_USER());
-            cst.registerOutParameter(2, java.sql.Types.INTEGER);
+            cst.setString(1, tipo);
+            
+            if (tipo.equals("ValidarNick")) {
+                cst.setString(2, user.getNICK_USER());
+            }
+            
+            if (tipo.equals("ValidarEmail")) {
+                cst.setString(2, user.getCORREO_USER());
+            }
+            
+            if (tipo.equals("ValidarDoc")) {
+                cst.setString(2, user.getDOC_USER());
+            }   
+            cst.registerOutParameter(3, java.sql.Types.INTEGER);
 
             cst.execute();
 
-            valor = cst.getInt(2);
+            valor = cst.getInt(3);
 
             cst.close();
 
         } catch (SQLException ex) {
             System.out.println("Error: Procedimiento Almacenado, método P_ValidUser: " + ex);
-            return false;
-        }
-
-        if (valor == 1) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean P_ValidEmail(Usuario user) {
-        Connection con;
-        con = Conexion.getConexion();
-        int valor;
-        try (CallableStatement cst = con.prepareCall("{call ValidarEmail (?,?)}")) {
-
-            cst.setString(1, user.getCORREO_USER());
-            cst.registerOutParameter(2, java.sql.Types.INTEGER);
-
-            cst.execute();
-
-            valor = cst.getInt(2);
-
-            cst.close();
-
-        } catch (SQLException ex) {
-            System.out.println("Error: Procedimiento Almacenado, método P_ValidarEmail: " + ex);
-            return false;
-        }
-
-        if (valor == 1) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean P_ValidDoc(Usuario user) {
-        Connection con;
-        con = Conexion.getConexion();
-        int valor;
-        try (CallableStatement cst = con.prepareCall("{call ValidarDoc (?,?)}")) {
-
-            cst.setString(1, user.getDOC_USER());
-            cst.registerOutParameter(2, java.sql.Types.INTEGER);
-
-            cst.execute();
-
-            valor = cst.getInt(2);
-
-            cst.close();
-
-        } catch (SQLException ex) {
-            System.out.println("Error: Procedimiento Almacenado, método P_ValidDoc: " + ex);
-            return false;
-        }
-
-        if (valor == 1) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean P_ValidDecano(Usuario user) {
-        Connection con;
-        con = Conexion.getConexion();
-        int valor;
-        try (CallableStatement cst = con.prepareCall("{call ValidarDecano (?,?)}")) {
-
-            cst.setString(1, user.getDOC_USER());
-            cst.registerOutParameter(2, java.sql.Types.INTEGER);
-
-            cst.execute();
-
-            valor = cst.getInt(2);
-
-            cst.close();
-
-        } catch (SQLException ex) {
-            System.out.println("Error: Procedimiento Almacenado, método P_ValidDecano: " + ex);
             return false;
         }
 

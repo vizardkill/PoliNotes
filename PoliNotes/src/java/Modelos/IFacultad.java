@@ -20,4 +20,7 @@ public interface IFacultad {
     public boolean updateFacultad(Facultad fac);
     
     public boolean deleteFacultad(Facultad fac);
+    
+    //Procedimientos Almacenados
+    public boolean P_ValidFacultad(String tipo, Facultad fac);
 }

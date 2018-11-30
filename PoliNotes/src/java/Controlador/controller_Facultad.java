@@ -43,4 +43,12 @@ public class controller_Facultad {
         return result; 
     }
     
+    //**********************************PROCEDIMIENTOS ALMACENADOS**************************************
+    
+    public boolean P_ValidFacultad(String tipo, Facultad fac) {
+        IFacultad fdao = new DAO_Facultad();
+        boolean result = fdao.P_ValidFacultad(tipo, fac);
+        return result; 
+    }
+    
 }
