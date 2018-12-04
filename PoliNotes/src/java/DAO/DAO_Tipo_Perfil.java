@@ -29,7 +29,7 @@ public class DAO_Tipo_Perfil implements ITipo_Perfil {
         try {
             con = Conexion.getConexion();
             try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setInt(1, 0);
+                ps.setInt(1, perfil.getID_TIPO_PERFIL());
                 ps.setString(2, perfil.getNOMBRE_TIPO_PERFIL());
                 ps.executeUpdate();
                 ps.close();
