@@ -7,66 +7,26 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>PoliNotes</title>
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/font-awesome-4.css">
 	<!-- Bootstrap core CSS -->
-	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<!-- Material Design Bootstrap -->
 	<link href="css/mdb.min.css" rel="stylesheet">
 	<!-- Your custom styles (optional) -->
-	<link href="css/style.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
+	<link href="css/select.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/hover-min.css">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body data-spy="scroll" data-target=".navbar">
 	<header id="Inicio">
-		<!--Menu de navegacion-->
-		<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-			<div class="container">
-				<img class="navbar-brand animated bounceIn img-fluid" src="img/web/logo-white.png" alt="" width="350px" height="350px">
-
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu"
-				 aria-expanded="false" aria-label="Menu">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="menu">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<a class="nav-link " data-scroll href="#Inicio"><strong>Inicio</strong></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link " data-scroll href="#Herramientas"><strong>Herramientas</strong></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" data-scroll href="#AcercaDe"><strong>Acerca de</strong></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#Desarrollo"><strong>Desarrollo</strong></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#Programadores"><strong>Programadores</strong></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#"><strong>Contactenos</strong></a>
-						</li>
-					</ul>
-					<ul class="navbar-nav nav-flex-icons">
-						<li class="nav-item">
-							<a id="" class="btn btn-info btn-sm waves-effect waves-light" data-toggle="modal" data-target="#Ingresar">Ingresar
-								<i class="fa fa-sign-in ml-2"></i>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<!--/Menu de navegacion-->
-
 		<!--Modal de Ingreso-->
 		<div class="modal fade" id="Ingresar" tabindex="-1" role="dialog" aria-labelledby="Ingresar" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content rounded ">
 
-					<form id="Login" name="Login" method="GET" action="Ingreso">
+					<form id="Login" name="Login" method="POST" action="Ingreso">
 						<div class="form-group">
 
 							<!--Header-->
@@ -74,7 +34,7 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
-								<img class="img-fluid mx-auto d-block" src="img/web/Logo.png" alt="">
+								<img class="img-fluid mx-auto d-block" src="img/web/Index/Logo.png" alt="">
 							</div>
 							<!--/Header-->
 
@@ -87,7 +47,7 @@
 								<div class="md-form mb-5">
 									<i class="fa fa-user prefix grey-text"></i>
 									<input type="text" id="NICK_USER" name="NICK_USER" class="form-control validate" aria-describedby="NICK_USER">
-									<label  data-success="" for="NICK_USER">Usuario</label>
+									<label data-success="" for="NICK_USER">Usuario</label>
 								</div>
 
 								<div class="md-form mb-4">
@@ -132,118 +92,54 @@
 		</div>
 		<!--/Modal de Ingreso-->
 
-		<!--Modal de Registro-->
-		<div class="modal fade" id="Registro" tabindex="-1" role="dialog" aria-labelledby="Registro" aria-hidden="true">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content rounded ">
+		<!--Menu de navegacion-->
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+			<div class="container">
+				<img class="navbar-brand animated bounceIn img-fluid" src="img/web/Index/logo-white.png" alt="" width="350px"
+				 height="350px">
 
-					<form id="Form_Registro" name="Form_Registro" method="POST" action="Ingreso">
-						<div class="form-group">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu"
+				 aria-expanded="false" aria-label="Menu">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-							<!--Header-->
-							<div class="modal-header bg-info d-block flex-center">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<img class="img-fluid mx-auto d-block" src="img/web/Logo.png" alt="">
-							</div>
-							<!--/Header-->
+				<div class="collapse navbar-collapse" id="menu">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link " data-scroll href="#Inicio"><strong>Inicio</strong></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " data-scroll href="#Herramientas"><strong>Herramientas</strong></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-scroll href="#AcercaDe"><strong>Acerca de</strong></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#Desarrollo"><strong>Desarrollo</strong></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#Programadores"><strong>Programadores</strong></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#"><strong>Contactenos</strong></a>
+						</li>
+					</ul>
 
-							<!--Body-->
-							<div class="modal-body mx-3">
-								<div class="container">
-									<div class="row">
-										<div class="col-4">
-											<div class="md-form">
-												<i class="fa fa-user-circle prefix grey-text"></i>
-												<input type="text" id="NOMBRE_USER" name="NOMBRE_USER" class="form-control validate" aria-describedby="NOMBRE_USER">
-												<label class="error" data-success="" for="NOMBRE_USER">Nombres</label>
-											</div>
-										</div>
-										<div class="col-4">
-											<div class="md-form">
-												<input type="text" id="APELLIDOS_USER" name="APELLIDOS_USER" class="form-control validate" aria-describedby="APELLIDOS_USER">
-												<label data-success="" for="APELLIDOS_USER">Apellidos</label>
-											</div>
-										</div>
-										<div class="col-4">
-											<div class="md-form">
-												<i class="fa fa-drivers-license prefix grey-text"></i>
-												<input type="text" id="DOC_USER" name="DOC_USER" class="form-control validate" aria-describedby="DOC_USER">
-												<label data-error="" data-success="" for="DOC_USER">Documento</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-6">
-											<div class="md-form form-group">
-												<i class="fa fa-envelope-o prefix grey-text"></i>
-												<input type="text" id="CORREO_USER" name="CORREO_USER" class="form-control validate" aria-describedby="CORREO_USER">
-												<label data-error="wrong" data-success="exito" for="CORREO_USER" class="mt-2">Correo Electronico</label>
-
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="md-form mb-5">
-												<i class="fa fa-user prefix grey-text"></i>
-												<input type="text" id="R_NICK_USER" name="R_NICK_USER" class="form-control validate" aria-describedby="R_NICK_USER">
-												<label data-error="" data-success="" for="R_NICK_USER">Usuario</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-6">
-											<div class="md-form mb-4">
-												<i class="fa fa-lock prefix grey-text"></i>
-												<input type="password" id="R_PASSWORD_USER" name="R_PASSWORD_USER" class="form-control validate">
-												<label data-error="" data-success="" for="R_PASSWORD_USER">Contraseña</label>
-
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="md-form mb-4">
-												<i class="fa fa-lock prefix grey-text"></i>
-												<input type="password" id="pwd" name="pwd" class="form-control validate">
-												<label data-error="" data-success="" for="pwd">Confirmar Contraseña</label>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-								<div class="justify-content-center align-items-center">
-									<button id="R_ingreso" class="btn btn-blue d-block mx-auto" type="submit">Registrarse</button>
-									<i id="R_load" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
-								</div>
-
-
-							</div>
-							<!--/Body-->
-
-							<!--Footer-->
-							<div class="modal-footer">
-								<div class="container">
-									<div class="row">
-										<div class="col-12 text-center">
-											<p class="p">¿Ya tienes un usuario?
-												<a href="" data-toggle="modal" data-target="#Ingresar" data-dismiss="modal">Ingresar</a>
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--/Footer-->
-
-						</div>
-					</form>
-
+					<ul class="navbar-nav nav-flex-icons">
+						<li class="nav-item">
+							<a id="" class="btn btn-info btn-sm waves-effect waves-light hvr-icon-wobble-horizontal" data-toggle="modal"
+							 data-target="#Ingresar">Ingresar
+								<i class="fa fa-sign-in ml-2 hvr-icon"></i>
+							</a>
+						</li>
+					</ul>
 				</div>
 			</div>
-		</div>
-		<!--/Modal de Registro-->
+		</nav>
+		<!--/Menu de navegacion-->
 
 		<!--Banner-->
-		<div class="view bg-index full-bg-img" style="background-image: url('img/web/bg-3.jpg'); background-repeat: no-repeat; background-size: cover;">
+		<div class="view bg-index full-bg-img" style="background-image: url('img/web/Index/bg-3.jpg'); background-repeat: no-repeat; background-size: cover;">
 
 
 
@@ -266,7 +162,7 @@
 							el trabajo a la hora <br>de realizar el seguimiento de tus clases.</strong>
 					</p>
 
-					<a target="_blank" href="" class="btn btn-outline-white btn-lg" data-toggle="modal" data-target="#Registro">Registrate
+					<a target="_blank" href="" class="btn btn-outline-white btn-lg" data-toggle="modal" data-target="#Info">Saber Más
 						<i class="fa fa-graduation-cap ml-2"></i>
 					</a>
 				</div>
@@ -294,19 +190,16 @@
 						<div class="card-deck ">
 
 							<div class="card">
-								<div class="card-body">
-									<img class="card-img-top mb-4 d-block mx-auto" src="img/web/card-1.png" alt="" style="width: 96px; height: 96px">
+								<div class="card-body hvr-float">
+									<img class="card-img-top mb-4 d-block mx-auto" src="img/web/Index/card-1.png" alt="" style="width: 96px; height: 96px">
 									<h4 class="card-title text-center blue-text"><strong>Herramientas Intuitivas</strong> </h4>
 									<p class="card-text">Organiza a tus alumnos de manera rapida y sencilla</p>
 								</div>
 							</div>
-							<div class="div"></div>
-
-
 
 							<div class="card">
 								<div class="card-body">
-									<img class="card-img-top mb-4 d-block mx-auto" src="img/web/card-2.png" alt="" style="width: 96px; height: 96px">
+									<img class="card-img-top mb-4 d-block mx-auto" src="img/web/Index/card-2.png" alt="" style="width: 96px; height: 96px">
 									<h4 class="card-title text-center blue-text"><strong>Gestor de Correo Electronico</strong></h4>
 									<p class="card-text">Envias trabajos, y mensajes a todos tus grupos</p>
 								</div>
@@ -314,7 +207,7 @@
 
 							<div class="card">
 								<div class="card-body">
-									<img class="card-img-top mb-4 d-block mx-auto" src="img/web/card-3.png" alt="" style="width: 96px; height: 96px">
+									<img class="card-img-top mb-4 d-block mx-auto" src="img/web/Index/card-3.png" alt="" style="width: 96px; height: 96px">
 									<h4 class="card-title text-center blue-text"><strong>Historigramas</strong></h4>
 									<p class="card-text">Podrás ver graficamente el rendimiento de tus alumnos segun sus calificaciones.</p>
 								</div>
@@ -322,7 +215,7 @@
 
 							<div class="card">
 								<div class="card-body">
-									<img class="card-img-top mb-4 d-block mx-auto" src="img/web/card-4.png" alt="" style="width: 96px; height: 96px">
+									<img class="card-img-top mb-4 d-block mx-auto" src="img/web/Index/card-4.png" alt="" style="width: 96px; height: 96px">
 									<h4 class="card-title text-center blue-text"><strong>Alumnos</strong> </h4>
 									<p class="card-text">Si eres alumno, podras ver tu rendimiento en las diferentes asignaturas.</p>
 								</div>
@@ -426,7 +319,7 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-6">
-						<img src="img/web/logo-desa.png" alt="" class="img-fluid" width="500px" height="500px">
+						<img src="img/web/Index/logo-desa.png" alt="" class="img-fluid" width="500px" height="500px">
 					</div>
 					<div class="col-6 justify-content-center align-content-center">
 						<div id="Desarrollo">
@@ -487,7 +380,7 @@
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<div class="view">
-							<img src="img/web/bg-1.jpg" alt="">
+							<img src="img/web/Index/bg-1.jpg" alt="">
 							<div class="mask rgba-black-light d-flex justify-content-center align-items-center">
 								<div class="container">
 									<div class="row wow slideInLeft">
@@ -503,7 +396,7 @@
 
 									<div class="row align-items-center wow slideInRight">
 										<div class="col-6 ">
-											<img src="img/web/santi.jpg" alt="" class="img-fluid rounded-circle mx-auto" width="150px" height="150px">
+											<img src="img/web/Index/santi.jpg" alt="" class="img-fluid rounded-circle mx-auto" width="150px" height="150px">
 											<h6 class="h6 white-text text-center" style="font-family:cursive">Santiago Cardona <br>Saldarriaga</h1>
 										</div>
 										<div class="col-6">
@@ -661,15 +554,11 @@
 	<!-- Bootstrap tooltips -->
 	<script type="text/javascript" src="js/popper.min.js"></script>
 	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="js/mdb.min.js"></script>
-	<!--Axios HTTP-->
-	<script type="text/javascript" src="js/axios.min.js"></script>
 	<!--SmoothScroll-->
 	<script type="text/javascript" src="js/modules/smooth-scroll.polyfills.js"></script>
-        <!--Vuej JS-->
-        <script type="text/javascript" src="js/vue.min.js"></script>
 	<!--Script del index-->
 	<script type="text/javascript" src="js/index.js"></script>
 </body>

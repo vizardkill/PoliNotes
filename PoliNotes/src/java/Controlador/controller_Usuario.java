@@ -27,9 +27,10 @@ public class controller_Usuario {
         return result;
     }
 
-    public void updateUser(Usuario user) {
+    public boolean updateUser(Usuario user) {
         IUsuario udao = new DAO_Usuario();
-        udao.updateUser(user);
+        boolean result = udao.updateUser(user);
+        return result;
     }
 
     public boolean deleteUser(Usuario user) {
@@ -40,15 +41,37 @@ public class controller_Usuario {
 
     public List<Usuario> getUsers() {
         IUsuario udao = new DAO_Usuario();
-        List<Usuario> users = udao.getUser();
-        return users;
+        List<Usuario> listaUsers = udao.getUser();
+        return listaUsers;
+    }
+
+    //****************************************VISTAS****************************************************
+    public List<Usuario> getUserDecano_reg() {
+        IUsuario udao = new DAO_Usuario();
+        List<Usuario> listaDecanos = udao.getUserDecano_reg();
+        return listaDecanos;
     }
     
-    
+    public List<Usuario> getUserDecano_mod() {
+        IUsuario udao = new DAO_Usuario();
+        List<Usuario> listaDecanos = udao.getUserDecano_mod();
+        return listaDecanos;
+    }
+
     //**********************************PROCEDIMIENTOS ALMACENADOS**************************************
     public boolean P_Login(Usuario user) {
+        SecurityPass md5 = new SecurityPass();
+        String hash = md5.getMD5(user.getPASSWORD_USER());
+        user.setPASSWORD_USER(hash);
+
         IUsuario udao = new DAO_Usuario();
-        boolean aux = udao.Login(user);
-        return aux;
+        boolean result = udao.P_Login(user);
+        return result;
+    }
+
+    public boolean P_ValidUser(String tipo, Usuario user) {
+        IUsuario udao = new DAO_Usuario();
+        boolean result = udao.P_ValidUser(tipo, user);
+        return result;
     }
 }

@@ -18,17 +18,30 @@ jQuery.validator.setDefaults({
     }
 });
 
+$.validator.addMethod("especial", function (value) {
+    return /[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(value)
+});
+$.validator.addMethod("minuscula", function (value) {
+    return /[a-z]/.test(value)
+});
+$.validator.addMethod("mayuscula", function (value) {
+    return /[A-Z]/.test(value)
+});
+$.validator.addMethod("digito", function (value) {
+    return /[0-9]/.test(value)
+});
+
 $(document).ready(function () {
+
     /** Se configura el Ajax para que permita redirigir las solicitudes a travez del servlet */
     $('#Login').validate({
         rules: {
             NICK_USER: { required: true },
             PASSWORD_USER: { required: true }
-
         },
         messages: {
             NICK_USER: {
-                required: 'Por favor coloca tu usuario'
+                required: 'Por favor ingresa tu usuario'
             },
             PASSWORD_USER: { required: 'Por favor suministra tu contraseña' }
         },
@@ -40,6 +53,7 @@ $(document).ready(function () {
                 url: $("#Login").attr('action'),
                 data: $("#Login").serialize(),
                 dataType: "text",
+
                 beforeSend: function () {
                     $('#load').removeClass('d-none').addClass('d-block');
                     $('#ingreso').removeClass('d-block').addClass('d-none');
@@ -51,8 +65,8 @@ $(document).ready(function () {
                             $('#errorLogin').slideUp('slow');
                         } setTimeout(error, 4000);
                     } else {
-                        window.location.href = "JSP/Inicio.jsp";
-                    }    
+                        window.location.href = "JSP/Administrador/Inicio.jsp";
+                    }
                 },
                 error: function (response) {
                     console.log(response);
@@ -65,86 +79,8 @@ $(document).ready(function () {
             });
         }
     });
-
-
-    $('#Form_Registro').validate({
-        rules: {
-            NOMBRE_USER: { required: true, minlength: 3, maxlength: 20 },
-            APELLIDOS_USER: { required: true, minlength: 5, maxlength: 20 }
-        },
-        messages: {
-            NOMBRE_USER: {
-                required: 'El campo es requerido',
-                minlength: 'El campo debe contener un minimo de 3 caracteres',
-                maxlength: 'El campo solo puede contener un maximo de 20 caracteres'
-            },
-            APELLIDOS_USER: {
-                required: 'El campo es requerido',
-                minlength: 'El campo debe contener un minimo de 3 caracteres',
-                maxlength: 'El campo solo puede contener un maximo de 20 caracteres'
-            }
-        },
-
-        submitHandler: function (form) {
-            $.ajax({
-                url: $("#Form_Registro").action,
-                type: $("#Form_Registro").method,
-                data: $("#Form_Registro").serialize(),
-                beforeSend: function () {
-                    $('#R_load').removeClass('d-none').addClass('d-block');
-                    $('#R_ingreso').removeClass('d-block').addClass('d-none');
-                },
-                complete: function (response) {
-                    $('#R_load').removeClass('d-block').addClass('d-none');
-                    $('#R_ingreso').removeClass('d-none').addClass('d-block');
-                }
-            });
-        }
-    });
 });
 
-/** Function de Login */
-/*Login = new Vue({
-    el: "#Inicio",
-    methods: {
-        sendForm: function () {
-            $('#load').removeClass('d-none').addClass('d-block');
-            $('#ingreso').removeClass('d-block').addClass('d-none');
-
-            axios({
-                method: 'post',
-                url: $('#Login').attr('action'),
-                data: $('#Login').serialize(),
-                config: { headers: { 'Content-Type': 'multipart/form-data' } }
-            })
-                .then(function (response) {
-                    $('#load').removeClass('d-block').addClass('d-none');
-                    $('#ingreso').removeClass('d-none').addClass('d-block');
-
-                    //handle success
-                    console.log(response);
-                    if (!response.data.HTTP[0].response) {
-                        $('#errorLogin').slideDown('slow').removeClass('d-none');
-                        function error() {
-                            $('#errorLogin').slideUp('slow');
-                        } setTimeout(error, 4000);
-
-                    }
-
-                    else {
-                        alert('usuario correcto');
-                    };
-                })
-                .catch(function (response) {
-                    $('#load').removeClass('d-block').addClass('d-none');
-                    $('#ingreso').removeClass('d-none').addClass('d-block');
-
-                    alert('Existen problemas con el servidor');
-                    console.log(response);
-                });
-        }
-    }
-});*/
 
 
 

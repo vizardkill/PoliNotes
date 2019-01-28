@@ -26,18 +26,7 @@ public class DAO_Usuario implements IUsuario {
     @Override
     public boolean setUser(Usuario user) {
         Connection con;
-        String sql = "INSERT INTO USUARIO"
-                + "("
-                + "DOC_USER,"
-                + "NICK_USER,"
-                + "PASSWORD_USER,"
-                + "NOMBRE_USER,"
-                + "APELLIDOS_USER,"
-                + "CELULAR_USER,"
-                + "CORREO_USER,"
-                + "ID_PERFIL_USER,"
-                + "ESTADO_USER"
-                + ") VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO USUARIO VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             con = Conexion.getConexion();
             try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -142,38 +131,98 @@ public class DAO_Usuario implements IUsuario {
             try (PreparedStatement ps = con.prepareStatement(sql)) {
                 ps.setString(1, user.getDOC_USER());
                 ps.executeUpdate();
+                ps.close();
             }
         } catch (SQLException e) {
-            System.out.println("Error: Clase ClienteDaoImple, método eliminar: " + e);
+            System.out.println("Error: Clase DAO_Usuario, método eliminar: " + e);
             return false;
         }
         return true;
     }
 
+    //**************************************************Vistas******************************************************
+    @Override
+    public List<Usuario> getUserDecano_reg() {
+        Connection con;
+        Statement stm;
+        ResultSet rs;
+
+        String sql = "SELECT * FROM v_Decanos_Reg ORDER BY NOMBRE_USER";
+
+        List<Usuario> listaUsuario = new ArrayList<>();
+
+        try {
+            con = Conexion.getConexion();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setDOC_USER(rs.getString("DOC_USER"));
+                u.setNOMBRE_USER(rs.getString("NOMBRE_USER"));
+                u.setAPELLIDOS_USER(rs.getString("APELLIDOS_USER"));
+                listaUsuario.add(u);
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error: Clase DAO_USUARIO, método obtener");
+        }
+        return listaUsuario;
+    }
+
+    @Override
+    public List<Usuario> getUserDecano_mod() {
+        Connection con;
+        Statement stm;
+        ResultSet rs;
+
+        String sql = "SELECT * FROM v_Decanos_Mod ORDER BY NOMBRE_USER";
+
+        List<Usuario> listaUsuario = new ArrayList<>();
+
+        try {
+            con = Conexion.getConexion();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setDOC_USER(rs.getString("DOC_USER"));
+                u.setNOMBRE_USER(rs.getString("NOMBRE_USER"));
+                u.setAPELLIDOS_USER(rs.getString("APELLIDOS_USER"));
+                listaUsuario.add(u);
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error: Clase DAO_USUARIO, método obtener");
+        }
+        return listaUsuario;
+    }
+
     //**************************************************Procedimientos Almacenados******************************************************
     @Override
-    public boolean Login(Usuario user) {
+    public boolean P_Login(Usuario user) {
         Connection con;
-        boolean Aux;
         con = Conexion.getConexion();
         int valor;
         try (CallableStatement cst = con.prepareCall("{call LoginUsuario (?,?,?,?,?,?,?,?,?,?)}")) {
-            
+
             cst.setString(1, user.getNICK_USER());
             cst.setString(2, user.getPASSWORD_USER());
 
-            cst.registerOutParameter(3, java.sql.Types.INTEGER); 
-            cst.registerOutParameter(4, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(5, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(6, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(7, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(8, java.sql.Types.VARCHAR); 
-            cst.registerOutParameter(9, java.sql.Types.INTEGER); 
-            cst.registerOutParameter(10, java.sql.Types.INTEGER); 
-            
-            
+            cst.registerOutParameter(3, java.sql.Types.INTEGER);
+            cst.registerOutParameter(4, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(5, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(6, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(7, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(8, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(9, java.sql.Types.INTEGER);
+            cst.registerOutParameter(10, java.sql.Types.INTEGER);
+
             cst.execute();
-            
+
             valor = cst.getInt(3);
             user.setDOC_USER(cst.getString(4));
             user.setNOMBRE_USER(cst.getString(5));
@@ -181,17 +230,57 @@ public class DAO_Usuario implements IUsuario {
             user.setCORREO_USER(cst.getString(7));
             user.setCELULAR_USER(cst.getString(8));
             user.setID_PERFIL_USER(cst.getInt(9));
-            user.setESTADO_USER(cst.getInt(10));   
-            
-            
+            user.setESTADO_USER(cst.getInt(10));
+
             cst.close();
-            
+
         } catch (SQLException ex) {
             System.out.println("Error: Procedimiento Almacenado, método Login: " + ex);
             return false;
         }
 
-        Aux = valor == 1;
-        return Aux;
-    }  
+        if (valor == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean P_ValidUser(String tipo, Usuario user) {
+        Connection con;
+        con = Conexion.getConexion();
+        int valor;
+        try (CallableStatement cst = con.prepareCall("{call Validaciones_Usuario (?,?,?)}")) {
+
+            cst.setString(1, tipo);
+            
+            if (tipo.equals("ValidarNick")) {
+                cst.setString(2, user.getNICK_USER());
+            }
+            
+            if (tipo.equals("ValidarEmail")) {
+                cst.setString(2, user.getCORREO_USER());
+            }
+            
+            if (tipo.equals("ValidarDoc")) {
+                cst.setString(2, user.getDOC_USER());
+            }   
+            cst.registerOutParameter(3, java.sql.Types.INTEGER);
+
+            cst.execute();
+
+            valor = cst.getInt(3);
+
+            cst.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Error: Procedimiento Almacenado, método P_ValidUser: " + ex);
+            return false;
+        }
+
+        if (valor == 1) {
+            return true;
+        }
+        return false;
+    }
 }
