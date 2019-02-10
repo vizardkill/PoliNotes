@@ -66,7 +66,7 @@ public class DAO_Tipo_Perfil implements ITipo_Perfil {
             rs.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_Tipo_Perfil, método obtener");
+            System.out.println("Error: Clase DAO_Tipo_Perfil, método obtener: " + e);
         }
         return listaPerfil;
      }
@@ -88,7 +88,7 @@ public class DAO_Tipo_Perfil implements ITipo_Perfil {
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_Tipo_Perfil, método actualizar");
+            System.out.println("Error: Clase DAO_Tipo_Perfil, método actualizar: " + e);
             return false;
         }
         return true;
