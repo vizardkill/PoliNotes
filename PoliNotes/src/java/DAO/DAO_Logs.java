@@ -73,7 +73,7 @@ public class DAO_Logs implements ILogs{
             rs.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_Logs, método obtener");
+            System.out.println("Error: Clase DAO_Logs, método obtener: " + e);
         }
         return listaLogs;
     }

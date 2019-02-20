@@ -183,6 +183,81 @@ $(document).ready(function () {
         }
     });
 
+    //################################## Select del Formulario de Registro de Materias (Busca las Facultades existentes dentro de la universidad)
+    $('#FACULTAD_MATERIA').select2({
+        language: {
+            errorLoading: function () {
+                return 'No se pudieron cargar los resultados';
+            },
+            inputTooLong: function (args) {
+                var remainingChars = args.input.length - args.maximum;
+
+                var message = 'Por favor, elimine ' + remainingChars + ' car';
+
+                if (remainingChars == 1) {
+                    message += 'ácter';
+                } else {
+                    message += 'acteres';
+                }
+
+                return message;
+            },
+            inputTooShort: function (args) {
+                var remainingChars = args.minimum - args.input.length;
+
+                var message = 'Por favor, introduzca ' + remainingChars + ' car';
+
+                if (remainingChars == 1) {
+                    message += 'ácter';
+                } else {
+                    message += 'acteres';
+                }
+
+                return message;
+            },
+            loadingMore: function () {
+                return 'Cargando más resultados…';
+            },
+            maximumSelected: function (args) {
+                var message = 'Sólo puede seleccionar ' + args.maximum + ' elemento';
+
+                if (args.maximum != 1) {
+                    message += 's';
+                }
+
+                return message;
+            },
+            noResults: function () {
+                return 'No se encontraron resultados';
+            },
+            searching: function () {
+                return 'Buscando…';
+            },
+            removeAllItems: function () {
+                return 'Eliminar todos los elementos';
+            }
+        },
+        dropdownParent: $('#Mod_Reg_Materia'),
+        theme: "bootstrap",
+
+        ajax: {
+            type: "GET",
+            url: "../../Datos?Peticion=data_Decanos_mod",
+            dataType: "json",
+            processResults: function (data) {
+                return {
+                    results: $.map(data.Decanos, function (Decanos) {
+                        return {
+                            text: Decanos.NOMBRE_USER + ' ' + Decanos.APELLIDOS_USER,
+                            id: Decanos.DOC_USER
+                        }
+                    })
+                };
+            }
+        }
+    });
+
+
     //################################## Esta Seccion establece la validacion de los diferentes Formularios del Sistema a travez de JQuery Validator
 
     //Carga los perfiles en el elemento Select del Formulario de Creación de Usuario
@@ -218,7 +293,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            CORREO_USER: { 
+            CORREO_USER: {
                 required: true, email: true,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarEmail",
@@ -339,7 +414,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            NOMBRE_FACULTAD: { 
+            NOMBRE_FACULTAD: {
                 required: true, minlength: 5, maxlength: 20, letras: true,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarNombre",
@@ -410,7 +485,7 @@ $(document).ready(function () {
         ignore: [],
         rules: {
             MOD_DECANO_FACULTAD: { required: true },
-            MOD_CODIGO_FACULTAD: { 
+            MOD_CODIGO_FACULTAD: {
                 required: true, maxlength: 15, minlength: 5,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarCodigo",
@@ -422,7 +497,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            MOD_NOMBRE_FACULTAD: { 
+            MOD_NOMBRE_FACULTAD: {
                 required: true, minlength: 5, maxlength: 20, letras: true,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarNombre",
@@ -724,7 +799,7 @@ $(document).ready(function () {
     //Fin del Script
 
 
-    
+
 });
 
 

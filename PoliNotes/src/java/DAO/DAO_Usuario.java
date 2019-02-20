@@ -79,7 +79,7 @@ public class DAO_Usuario implements IUsuario {
             rs.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_USUARIO, método obtener");
+            System.out.println("Error: Clase DAO_USUARIO, método obtener: " + e);
         }
         return listaUsuario;
     }
@@ -114,7 +114,7 @@ public class DAO_Usuario implements IUsuario {
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_USUARIO, método actualizar");
+            System.out.println("Error: Clase DAO_USUARIO, método actualizar: " + e);
             return false;
         }
         return true;
@@ -166,7 +166,7 @@ public class DAO_Usuario implements IUsuario {
             rs.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_USUARIO, método obtener");
+            System.out.println("Error: Clase DAO_USUARIO, método obtener Decanos para el registro: " + e);
         }
         return listaUsuario;
     }
@@ -196,7 +196,7 @@ public class DAO_Usuario implements IUsuario {
             rs.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_USUARIO, método obtener");
+            System.out.println("Error: Clase DAO_USUARIO, método obtener Decanos para modificar: " + e);
         }
         return listaUsuario;
     }

@@ -82,7 +82,7 @@ public class DAO_Facultad implements IFacultad {
             rs.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_Facultad, método obtener");
+            System.out.println("Error: Clase DAO_FACULTAD, método obtener: " + e);
         }
         return result;
     }
@@ -109,7 +109,7 @@ public class DAO_Facultad implements IFacultad {
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_FACULTAD, método actualizar");
+            System.out.println("Error: Clase DAO_FACULTAD, método actualizar: " + e);
             return false;
         }
         return true;
