@@ -24,7 +24,7 @@
                 <section>
                     <div class="row">
                         <div class="col">
-                            <h1 class="h1"><i class="fas fa-users-class"></i><strong> Materias</strong> </h1>
+                            <h1 class="h1"><i class="fas fa-chalkboard-teacher"></i><strong> Materias</strong> </h1>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="Inicio.jsp">Inicio</a></li>
@@ -55,21 +55,19 @@
                 <section>
                     <div class="row">
                         <div class="col">
-                            <table id="Table_Facultad" class="table table-striped table-hover table-responsive-sm">
+                            <table id="Table_Materias" class="table table-striped table-hover table-responsive-sm">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th></th>
-                                        <th><i class="fas fa-user"></i> Decano</th>
                                         <th>Código</th>
+                                        <th>Nombre</th>
                                         <th>Facultad</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tfoot class="thead-dark">
                                     <tr>
-                                        <th></th>
-                                        <th><i class="fas fa-user"></i> Decano</th>
                                         <th>Código</th>
+                                        <th>Nombre</th>
                                         <th>Facultad</th>
                                         <th>Acciones</th>
                                     </tr>

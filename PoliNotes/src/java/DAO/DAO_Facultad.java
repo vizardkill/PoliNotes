@@ -27,7 +27,7 @@ public class DAO_Facultad implements IFacultad {
     @Override
     public boolean setFacultad(Facultad fac) {
         Connection con;
-        String sql = "INSERT INTO FACULTAD(ID_FACULTAD, CODIGO_FACULTAD, NOMBRE_FACULTAD, DECANO_FACULTAD) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO FACULTAD VALUES(?,?,?,?)";
         try {
             con = Conexion.getConexion();
             try (PreparedStatement ps = con.prepareStatement(sql)) {
