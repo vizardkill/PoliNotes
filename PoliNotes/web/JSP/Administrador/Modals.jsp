@@ -1,6 +1,6 @@
 <!--Modal Sucess-->
-<div class="modal fade right" id="Mod_Sucess" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess" aria-hidden="true"
-    data-backdrop="false">
+<div class="modal fade right" id="Mod_Sucess" tabindex="-1" role="dialog" aria-labelledby="Mod_Sucess"
+    aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
 
         <!--Content-->
@@ -10,19 +10,20 @@
                 <i class="fas fa-check animated rotateIn text-white"></i>
                 <p class="heading lead text-left " id="Text_Sucess"></p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">&times;</span>         
+                    <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
             </div>
         </div>
         <!--/.Content-->
     </div>
 </div>
-
 <!--Modal de Registro de Usuario-->
-<div class="modal fade" id="Mod_Reg_Usuario" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Usuario" aria-hidden="true">
+<div class="modal fade" id="Mod_Reg_Usuario" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Usuario"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content rounded ">
-            <form id="Form_Registro_Usuario" name="Form_Registro_Usuario" method="POST" action="../../Registro?Peticion=Registro_Usuario">
+            <form id="Form_Registro_Usuario" name="Form_Registro_Usuario" method="POST"
+                action="../../Registro?Peticion=Registro_Usuario">
                 <!--Header-->
                 <div class="modal-header bg-dark d-block flex-center">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
@@ -69,8 +70,8 @@
                             </div>
                             <div class="col-12 col-lg-4">
                                 <div class="md-form">
-                                    <input type="text" id="APELLIDOS_USER" name="APELLIDOS_USER" class="form-control validate"
-                                        aria-describedby="APELLIDOS_USER">
+                                    <input type="text" id="APELLIDOS_USER" name="APELLIDOS_USER"
+                                        class="form-control validate" aria-describedby="APELLIDOS_USER">
                                     <label data-success="" for="APELLIDOS_USER">Apellidos</label>
                                 </div>
                             </div>
@@ -87,8 +88,8 @@
                             <div class="col-12 col-lg-6">
                                 <div class="md-form">
                                     <i class="fas fa-envelope prefix grey-text"></i>
-                                    <input type="email" id="CORREO_USER" name="CORREO_USER" class="form-control validate"
-                                        aria-describedby="CORREO_USER">
+                                    <input type="email" id="CORREO_USER" name="CORREO_USER"
+                                        class="form-control validate" aria-describedby="CORREO_USER">
                                     <label data-success="" for="CORREO_USER">Correo Electron&#237co</label>
                                 </div>
                             </div>
@@ -105,7 +106,8 @@
                             <div class="col-12 col-lg-6">
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix grey-text"></i>
-                                    <input type="password" id="R_PASSWORD_USER" name="R_PASSWORD_USER" class="form-control validate">
+                                    <input type="password" id="R_PASSWORD_USER" name="R_PASSWORD_USER"
+                                        class="form-control validate">
                                     <label data-success="" for="R_PASSWORD_USER">Contrase&#241a</label>
                                 </div>
                             </div>
@@ -126,7 +128,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col d-flex flex-center mx-auto">
-                                <button id="btn_registro_usuario" class="btn btn-secondary" type="submit">Registrar</button>
+                                <button id="btn_registro_usuario" class="btn btn-secondary"
+                                    type="submit">Registrar</button>
                                 <i id="icon_load_usuario" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
                             </div>
                         </div>
@@ -141,13 +144,16 @@
 </div>
 <!--/Modal de Registro de Usuario-->
 
+<!--#################################################### CRUD de Facultad ###########################################################-->
+
 <!--Modal Registro de Facultad-->
 <div class="modal fade" id="Mod_Reg_Facultad" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Facultad"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded ">
 
-            <form id="Form_Registro_Facultad" name="Form_Registro_Facultad" method="POST" action="../../Registro?Peticion=Registro_Facultad">
+            <form id="Form_Registro_Facultad" name="Form_Registro_Facultad" method="POST"
+                action="../../Registro?Peticion=Registro_Facultad">
 
                 <!--Header-->
                 <div class="modal-header bg-dark d-block flex-center">
@@ -193,7 +199,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col d-flex flex-center mx-auto">
-                                <button id="btn_registro_facultad" class="btn btn-secondary" type="submit">Registrar</button>
+                                <button id="btn_registro_facultad" class="btn btn-secondary"
+                                    type="submit">Registrar</button>
                                 <i id="icon_load_facultad" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
                             </div>
                         </div>
@@ -215,7 +222,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded ">
 
-            <form id="Form_Modificar_Facultad" name="Form_Modificar_Facultad" method="POST" action="../../Registro?Peticion=Modificar_Facultad">
+            <form id="Form_Modificar_Facultad" name="Form_Modificar_Facultad" method="POST"
+                action="../../Registro?Peticion=Modificar_Facultad">
 
                 <!--Header-->
                 <div class="modal-header bg-dark d-block flex-center">
@@ -239,13 +247,15 @@
                     </div>
 
                     <div class="md-form">
-                        <input type="text" id="MOD_CODIGO_FACULTAD" name="MOD_CODIGO_FACULTAD" class="form-control validate">
+                        <input type="text" id="MOD_CODIGO_FACULTAD" name="MOD_CODIGO_FACULTAD"
+                            class="form-control validate">
                         <label data-success="" for="MOD_CODIGO_FACULTAD">Codigo de la Facultad</label>
                     </div>
                     <p class="text-success" id="Codigo_Actual"></p>
 
                     <div class="md-form">
-                        <input type="text" id="MOD_NOMBRE_FACULTAD" name="MOD_NOMBRE_FACULTAD" class="form-control validate">
+                        <input type="text" id="MOD_NOMBRE_FACULTAD" name="MOD_NOMBRE_FACULTAD"
+                            class="form-control validate">
                         <label data-success="" for="MOD_NOMBRE_FACULTAD">Nombre de la Facultad</label>
                     </div>
                     <p class="text-success" id="Facultad_Actual"></p>
@@ -257,8 +267,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col d-flex flex-center mx-auto">
-                                <button id="btn_modificar_facultad" class="btn btn-secondary" type="submit">Modificar</button>
-                                <i id="icon_modificar_load_facultad" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
+                                <button id="btn_modificar_facultad" class="btn btn-secondary"
+                                    type="submit">Modificar</button>
+                                <i id="icon_modificar_load_facultad"
+                                    class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
                                 <input id="MOD_ID_FACULTAD" name="MOD_ID_FACULTAD" type="hidden">
                             </div>
                         </div>
@@ -277,7 +289,8 @@
     <div class="modal-dialog" role="document">
 
         <div class="modal-content rounded ">
-            <form id="Form_Eliminar_Facultad" name="Form_Eliminar_Facultad" method="POST" action="../../Registro?Peticion=Eliminar_Facultad">
+            <form id="Form_Eliminar_Facultad" name="Form_Eliminar_Facultad" method="POST"
+                action="../../Registro?Peticion=Eliminar_Facultad">
                 <!--Header-->
                 <div class="modal-header bg-dark d-block flex-center">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
@@ -299,10 +312,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col d-flex flex-center mx-auto">
-                                <button id="btn_eliminar_facultad" class="btn btn-secondary" type="submit">Aceptar</button>
-                                <button id="btn_cancelarEliminar_facultad" class="btn btn-secondary" data-dismiss="modal"
-                                    aria-label="Close">Cancelar</button>
-                                <i id="icon_loadEliminar_facultad" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
+                                <button id="btn_eliminar_facultad" class="btn btn-secondary"
+                                    type="submit">Aceptar</button>
+                                <button id="btn_cancelarEliminar_facultad" class="btn btn-secondary"
+                                    data-dismiss="modal" aria-label="Close">Cancelar</button>
+                                <i id="icon_loadEliminar_facultad"
+                                    class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
                             </div>
                         </div>
                     </div>
@@ -313,3 +328,74 @@
     </div>
 </div>
 <!--/Modal Eliminar Facultad-->
+
+
+<!--#################################################### CRUD de Materias ##############################################################-->
+
+<div class="modal fade" id="Mod_Reg_Materia" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Materia"
+    aria-hidden="true">
+    <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <form action="">
+                <!--Header-->
+                <div class="modal-header bg-dark d-block flex-center">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="text-center text-white">
+                        <strong>Registro de Materias</strong>
+                    </h4>
+                </div>
+                <!--/Header-->
+
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group w-100">
+                                    <label>Facultad</label>
+                                    <select id="FACULTAD_MATERIA" name="FACULTAD_MATERIA">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="md-form">
+                                    <input type="text" id="CODIGO_MATERIA" name="CODIGO_MATERIA"
+                                        class="form-control validate">
+                                    <label data-success="" for="CODIGO_MATERIA">Codigo de la materia</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="md-form">
+                                    <input type="text" id="NOMBRE_MATERIA" name="NOMBRE_MATERIA"
+                                        class="form-control validate">
+                                    <label data-success="" for="NOMBRE_MATERIA">Nombre de la materia</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--/Body-->
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex flex-center mx-auto">
+                                <button id="btn_registro_materia" class="btn btn-secondary"
+                                    type="submit">Registrar</button>
+                                <i id="icon_load_materia" class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/Modal Footer-->
+            </form>
+        </div>
+    </div>
+</div>
