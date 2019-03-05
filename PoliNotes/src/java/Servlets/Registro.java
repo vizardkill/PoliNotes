@@ -144,6 +144,11 @@ public class Registro extends HttpServlet {
                 response.getWriter().write("false");
             }
         }
+        
+        if (Peticion.equals("Registro_Materia")) {
+            
+            
+        }
     }
 
     /**

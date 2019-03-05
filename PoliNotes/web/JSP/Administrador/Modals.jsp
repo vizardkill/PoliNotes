@@ -25,7 +25,7 @@
             <form id="Form_Registro_Usuario" name="Form_Registro_Usuario" method="POST"
                 action="../../Registro?Peticion=Registro_Usuario">
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -156,7 +156,7 @@
                 action="../../Registro?Peticion=Registro_Facultad">
 
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -226,7 +226,7 @@
                 action="../../Registro?Peticion=Modificar_Facultad">
 
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -292,7 +292,7 @@
             <form id="Form_Eliminar_Facultad" name="Form_Eliminar_Facultad" method="POST"
                 action="../../Registro?Peticion=Eliminar_Facultad">
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -336,9 +336,9 @@
     aria-hidden="true">
     <div class="modal-dialog" role="dialog">
         <div class="modal-content">
-            <form action="">
+            <form action="" id="Form_Registro_Materia">
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

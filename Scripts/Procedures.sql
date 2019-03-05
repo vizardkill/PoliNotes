@@ -56,11 +56,11 @@ CREATE OR REPLACE PROCEDURE Validaciones_Facultad (
     V_aux OUT INTEGER
 ) AS
 BEGIN
-   IF (V_tipo = 'ValidarCodigo') THEN
+   IF (V_tipo = 'ValidarCodigoFacultad') THEN
        SELECT COUNT(*) INTO V_aux FROM FACULTAD WHERE CODIGO_FACULTAD = V_variable;
    END IF;
 
-   IF (V_tipo = 'ValidarNombre') THEN
+   IF (V_tipo = 'ValidarNombreFacultad') THEN
        SELECT COUNT(*) INTO V_aux FROM FACULTAD WHERE NOMBRE_FACULTAD = V_variable;
    END IF;
 
@@ -78,20 +78,41 @@ CREATE OR REPLACE PROCEDURE Validaciones_Usuario(
 ) AS 
 BEGIN
 
-  IF (v_tipo = 'ValidarNick') THEN 
+  IF (v_tipo = 'ValidarNickUsuario') THEN 
       SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE NICK_USER = V_variable;
   END  IF;
 
-  IF (v_tipo = 'ValidarEmail') THEN 
+  IF (v_tipo = 'ValidarEmailUsuario') THEN 
       SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE CORREO_USER = V_variable;
   END  IF;
 
-  IF (v_tipo = 'ValidarDoc') THEN 
+  IF (v_tipo = 'ValidarDocUsuario') THEN 
       SELECT COUNT(*) INTO V_aux FROM USUARIO WHERE DOC_USER = V_variable;
   END  IF;
   
   EXCEPTION WHEN NO_DATA_FOUND THEN
   V_aux := 0;  
+END;
+/
+--/
+
+--/Procedimiento para verificar si se encuentra en uso un codigo o nombre en la tabla Facultad--
+CREATE OR REPLACE PROCEDURE Validaciones_Materia (
+    V_tipo VARCHAR2,
+    V_variable VARCHAR2,
+    V_aux OUT INTEGER
+) AS
+BEGIN
+   IF (V_tipo = 'ValidarCodigoMateria') THEN
+       SELECT COUNT(*) INTO V_aux FROM MATERIA WHERE CODIGO_MATERIA = V_variable;
+   END IF;
+
+   IF (V_tipo = 'ValidarNombreMateria') THEN
+       SELECT COUNT(*) INTO V_aux FROM MATERIA WHERE NOMBRE_MATERIA = V_variable;
+   END IF;
+
+   EXCEPTION WHEN NO_DATA_FOUND THEN
+   V_aux := 0;
 END;
 /
 --/

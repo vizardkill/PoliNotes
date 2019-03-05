@@ -9,7 +9,7 @@ start with 1
 increment by 1
 
 --DROP SEQUENCE SQ_ID_LOG;
-create sequence SQ_ID_LOG
+create sequence SQ_ID_LOGS
 start with 1
 increment by 1
 

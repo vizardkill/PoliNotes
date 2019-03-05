@@ -51,7 +51,7 @@ public class DAO_Materia implements IMateria {
         Statement stm;
         ResultSet rs;
 
-        String sql = "SELECT * FROM v_Facultad ORDER BY NOMBRE_FACULTAD";
+        String sql = "SELECT * FROM v_Materias ORDER BY NOMBRE_MATERIA";
 
         List<Object> result = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class DAO_Materia implements IMateria {
             rs.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error: Clase DAO_Materia, método obtener");
+            System.out.println("Error: Clase DAO_Materia, método obtener" + e);
         }
         return result;
     }

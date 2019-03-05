@@ -7,10 +7,12 @@ package Metodos;
 
 import Controlador.controller_Facultad;
 import Controlador.controller_Logs;
+import Controlador.controller_Materias;
 import Controlador.controller_Tipo_Perfil;
 import Controlador.controller_Usuario;
 import Modelos.Facultad;
 import Modelos.Logs;
+import Modelos.Materia;
 import Modelos.Tipo_Perfil;
 import Modelos.Usuario;
 import com.google.gson.JsonArray;
@@ -159,6 +161,46 @@ public class Json_Datos {
             array.add(item);
         }
         json.add("Perfiles", array);
+        return json.toString();
+    }
+
+    public String Json_Materias() {
+        JsonObject json = new JsonObject();
+        controller_Materias cmateria = new controller_Materias();
+        List<Object> listamaterias = cmateria.getMateria();
+
+        JsonArray array = new JsonArray();
+        JsonObject item = new JsonObject();
+
+        int aux = 0;
+        
+        for (final Object x : listamaterias) {
+
+            if (aux == 2) {
+                aux = 0;
+                array.add(item);
+                item = new JsonObject();
+            }
+
+            if (x.getClass().equals(Facultad.class)) {
+                aux = aux + 1;
+                Facultad f = (Facultad) x;
+                item.addProperty("CODIGO_FACULTAD", f.getCODIGO_FACULTAD());
+                item.addProperty("NOMBRE_FACULTAD", f.getNOMBRE_FACULTAD());
+            }
+
+            if (x.getClass().equals(Materia.class)) {
+                aux = aux + 1;
+                Materia m = (Materia) x;
+                item.addProperty("ID_MATERIA", m.getID_MATERIA());
+                item.addProperty("CODIGO_MATERIA", m.getCODIGO_MATERIA());
+                item.addProperty("NOMBRE_MATERIA", m.getNOMBRE_MATERIA());
+            }
+        }
+        if (aux == 2) {
+            array.add(item);
+        }
+        json.add("Materias", array);
         return json.toString();
     }
 }

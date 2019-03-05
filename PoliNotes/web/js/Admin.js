@@ -242,19 +242,20 @@ $(document).ready(function () {
 
         ajax: {
             type: "GET",
-            url: "../../Datos?Peticion=data_Decanos_mod",
+            url: "../../Datos?Peticion=data_facultad",
             dataType: "json",
             processResults: function (data) {
                 return {
-                    results: $.map(data.Decanos, function (Decanos) {
+                    results: $.map(data.Facultades, function (Facultades) {
                         return {
-                            text: Decanos.NOMBRE_USER + ' ' + Decanos.APELLIDOS_USER,
-                            id: Decanos.DOC_USER
+                            text: Facultades.CODIGO_FACULTAD + " " + Facultades.NOMBRE_FACULTAD,
+                            id: Facultades.ID_FACULTAD
                         }
                     })
                 };
             }
         }
+
     });
 
 
@@ -284,7 +285,7 @@ $(document).ready(function () {
             DOC_USER: {
                 required: true, minlength: 5, maxlength: 15,
                 remote: {
-                    url: "../../Ingreso?Peticion=ValidarDoc",
+                    url: "../../Ingreso?Peticion=ValidarDocUsuario",
                     type: "GET",
                     data: {
                         DOC_USER: function () {
@@ -296,7 +297,7 @@ $(document).ready(function () {
             CORREO_USER: {
                 required: true, email: true,
                 remote: {
-                    url: "../../Ingreso?Peticion=ValidarEmail",
+                    url: "../../Ingreso?Peticion=ValidarEmailUsuario",
                     type: "GET",
                     data: {
                         CORREO_USER: function () {
@@ -308,7 +309,7 @@ $(document).ready(function () {
             R_NICK_USER: {
                 required: true, minlength: 4, maxlength: 10,
                 remote: {
-                    url: "../../Ingreso?Peticion=ValidarNick",
+                    url: "../../Ingreso?Peticion=ValidarNickUsuario",
                     type: "GET",
                     data: {
                         R_NICK_USER: function () {
@@ -405,7 +406,7 @@ $(document).ready(function () {
             CODIGO_FACULTAD: {
                 required: true, maxlength: 15, minlength: 5,
                 remote: {
-                    url: "../../Ingreso?Peticion=ValidarCodigo",
+                    url: "../../Ingreso?Peticion=ValidarCodigoFacultad",
                     type: "GET",
                     data: {
                         DOC_USER: function () {
@@ -417,7 +418,7 @@ $(document).ready(function () {
             NOMBRE_FACULTAD: {
                 required: true, minlength: 5, maxlength: 20, letras: true,
                 remote: {
-                    url: "../../Ingreso?Peticion=ValidarNombre",
+                    url: "../../Ingreso?Peticion=ValidarNombreFacultad",
                     type: "GET",
                     data: {
                         DOC_USER: function () {
@@ -488,7 +489,7 @@ $(document).ready(function () {
             MOD_CODIGO_FACULTAD: {
                 required: true, maxlength: 15, minlength: 5,
                 remote: {
-                    url: "../../Ingreso?Peticion=ValidarCodigo",
+                    url: "../../Ingreso?Peticion=ValidarCodigoFacultad",
                     type: "GET",
                     data: {
                         DOC_USER: function () {
@@ -500,7 +501,7 @@ $(document).ready(function () {
             MOD_NOMBRE_FACULTAD: {
                 required: true, minlength: 5, maxlength: 20, letras: true,
                 remote: {
-                    url: "../../Ingreso?Peticion=ValidarNombre",
+                    url: "../../Ingreso?Peticion=ValidarNombreFacultad",
                     type: "GET",
                     data: {
                         DOC_USER: function () {
@@ -566,7 +567,7 @@ $(document).ready(function () {
         }
     });
 
-    //Validacion del Formulario para la eliminacion de una Facultad
+    //Confirmacion del Formulario para la eliminacion de una Facultad
     $("#Form_Eliminar_Facultad").submit(function (e) {
         e.preventDefault();
         $.ajax({
@@ -601,6 +602,80 @@ $(document).ready(function () {
                 $('#btn_cancelarEliminar_facultad').removeClass('d-none').addClass('d-block');
             }
         });
+    });
+
+    //Validacion del Formulario para el registro de una materia
+    $('#Form_Registro_Materia').validate({
+        ignore: [],
+        rules: {
+            CODIGO_MATERIA: {
+                required: true, maxlength: 15, minlength: 5,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarCodigoMateria",
+                    type: "GET",
+                    data: {
+                        DOC_USER: function () {
+                            return $("#MOD_CODIGO_FACULTAD").val()
+                        }
+                    }
+                }
+            },
+            MOD_NOMBRE_FACULTAD: {
+                required: true, minlength: 5, maxlength: 20, letras: true,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarNombreMateria",
+                    type: "GET",
+                    data: {
+                        DOC_USER: function () {
+                            return $("#MOD_NOMBRE_FACULTAD").val()
+                        }
+                    }
+                }
+            }
+        },
+        messages: {
+            CODIGO_MATERIA: {
+                required: 'El campo es requerido',
+                
+            }
+
+        },
+
+        submitHandler: function () {
+            $.ajax({
+                type: $('#Form_Modificar_Facultad').attr('method'),
+                url: $('#Form_Modificar_Facultad').attr('action'),
+                data: $("#Form_Modificar_Facultad").serialize(),
+                dataType: "text",
+
+                beforeSend: function () {
+                    $('#icon_modificar_load_facultad').removeClass('d-none').addClass('d-block');
+                    $('#btn_modificar_facultad').removeClass('d-block').addClass('d-none');
+                },
+                success: function (response) {
+                    if (response == 'true') {
+
+                        $("#Form_Modificar_Facultad")[0].reset();
+                        $("#MOD_DECANO_FACULTAD").val('').trigger('change');
+                        $('#Mod_Modi_Facultad').modal('hide');
+                        $('#Table_Facultad').DataTable().ajax.reload();
+                        $('#Mod_Sucess').modal('show');
+                        $('#Text_Sucess').text('Facultad modificada con éxito');
+                        function ShowSucess() {
+                            $('#Mod_Sucess').modal('hide');
+                        } setTimeout(ShowSucess, 3000);
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                    alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
+                },
+                complete: function () {
+                    $('#icon_modificar_load_facultad').removeClass('d-block').addClass('d-none');
+                    $('#btn_modificar_facultad').removeClass('d-none').addClass('d-block');
+                }
+            });
+        }
     });
 
     //################################## Esta seccion establece las configuraciones para los diferentes Tables del sisterma a travez del Framework DataTable de JQuery
