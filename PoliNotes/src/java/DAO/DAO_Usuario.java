@@ -254,15 +254,15 @@ public class DAO_Usuario implements IUsuario {
 
             cst.setString(1, tipo);
             
-            if (tipo.equals("ValidarNick")) {
+            if (tipo.equals("ValidarNickUsuario")) {
                 cst.setString(2, user.getNICK_USER());
             }
             
-            if (tipo.equals("ValidarEmail")) {
+            if (tipo.equals("ValidarEmailUsuario")) {
                 cst.setString(2, user.getCORREO_USER());
             }
             
-            if (tipo.equals("ValidarDoc")) {
+            if (tipo.equals("ValidarDocUsuario")) {
                 cst.setString(2, user.getDOC_USER());
             }   
             cst.registerOutParameter(3, java.sql.Types.INTEGER);

@@ -25,7 +25,7 @@
             <form id="Form_Registro_Usuario" name="Form_Registro_Usuario" method="POST"
                 action="../../Registro?Peticion=Registro_Usuario">
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -156,7 +156,7 @@
                 action="../../Registro?Peticion=Registro_Facultad">
 
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -226,7 +226,7 @@
                 action="../../Registro?Peticion=Modificar_Facultad">
 
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -243,7 +243,7 @@
                         <select id="MOD_DECANO_FACULTAD" name="MOD_DECANO_FACULTAD">
                             <option></option>
                         </select>
-                        <p class="text-success" id="Decano_Actual"></p>
+                        <p class="text-success" id="FAC_Decano_Actual"></p>
                     </div>
 
                     <div class="md-form">
@@ -251,14 +251,14 @@
                             class="form-control validate">
                         <label data-success="" for="MOD_CODIGO_FACULTAD">Codigo de la Facultad</label>
                     </div>
-                    <p class="text-success" id="Codigo_Actual"></p>
+                    <p class="text-success" id="FAC_Codigo_Actual"></p>
 
                     <div class="md-form">
                         <input type="text" id="MOD_NOMBRE_FACULTAD" name="MOD_NOMBRE_FACULTAD"
                             class="form-control validate">
                         <label data-success="" for="MOD_NOMBRE_FACULTAD">Nombre de la Facultad</label>
                     </div>
-                    <p class="text-success" id="Facultad_Actual"></p>
+                    <p class="text-success" id="FAC_Facultad_Actual"></p>
 
                 </div>
                 <!--/Body-->
@@ -292,7 +292,7 @@
             <form id="Form_Eliminar_Facultad" name="Form_Eliminar_Facultad" method="POST"
                 action="../../Registro?Peticion=Eliminar_Facultad">
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -332,13 +332,14 @@
 
 <!--#################################################### CRUD de Materias ##############################################################-->
 
+<!--Modal Registro de Materias-->
 <div class="modal fade" id="Mod_Reg_Materia" tabindex="-1" role="dialog" aria-labelledby="Mod_Reg_Materia"
     aria-hidden="true">
     <div class="modal-dialog" role="dialog">
         <div class="modal-content">
-            <form action="">
+            <form action="../../Registro?Peticion=Registro_Materia" id="Form_Registro_Materia" method="POST">
                 <!--Header-->
-                <div class="modal-header bg-dark d-block flex-center">
+                <div class="modal-header bg-dark d-block">
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -353,6 +354,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
+                                <div id="msg_SucessRegistro_Materia" class="alert alert-success d-none" role="alert">
+                                    <h6 class="h6 text-center">Materia registrada con ex&#237to</h6>
+                                </div>
                                 <div class="form-group w-100">
                                     <label>Facultad</label>
                                     <select id="FACULTAD_MATERIA" name="FACULTAD_MATERIA">
@@ -399,3 +403,117 @@
         </div>
     </div>
 </div>
+<!--/Modal Registro de Materias-->
+
+<!--Modal Eliminar Materia-->
+<div class="modal fade" id="Mod_Elim_Materia" tabindex="-1" role="dialog" aria-labelledby="Mod_Elim_Materia"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content rounded ">
+            <form id="Form_Eliminar_Materia" name="Form_Eliminar_Materia" method="POST"
+                action="../../Registro?Peticion=Eliminar_Materia">
+                <!--Header-->
+                <div class="modal-header bg-dark d-block">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="text-center text-white"><strong>Eliminar Materia</strong></h4>
+                </div>
+                <!--/Header-->
+
+                <!--Body-->
+                <div class="modal-body mx-3 text-center">
+                    <p id="Materia_Eliminar"></p>
+                    <input id="ID_MATERIA" name="ID_MATERIA" type="hidden">
+                </div>
+                <!--/Body-->
+
+                <!--Footer-->
+                <div class="modal-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex flex-center mx-auto">
+                                <button id="btn_eliminar_Materia" class="btn btn-secondary"
+                                    type="submit">Aceptar</button>
+                                <button id="btn_cancelarEliminar_Materia" class="btn btn-secondary" data-dismiss="modal"
+                                    aria-label="Close">Cancelar</button>
+                                <i id="icon_loadEliminar_Materia"
+                                    class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/Footer-->
+            </form>
+        </div>
+    </div>
+</div>
+<!--/Modal Eliminar Materia-->
+
+<!--Modal Moficiar Materia-->
+<div class="modal fade" id="Mod_Modi_Materia" tabindex="-1" role="dialog" aria-labelledby="Mod_Modi_Materia"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded ">
+
+            <form id="Form_Modificar_Materia" name="Form_Modificar_Materia" method="POST"
+                action="../../Registro?Peticion=Modificar_Materia">
+
+                <!--Header-->
+                <div class="modal-header bg-dark d-block">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="text-center text-white"><strong>Modificar
+                            Materia</strong></h4>
+                </div>
+                <!--/Header-->
+
+                <!--Body-->
+                <div class="modal-body mx-3">
+                    <!--Simple Select with Search-->
+                    <div class="form-group w-100">
+                        <label>Facultad</label>
+                        <select id="MOD_FACULTAD_MATERIA" name="MOD_FACULTAD_MATERIA">
+                            <option></option>
+                        </select>
+                        <p class="text-success" id="MA_Facultad_Actual"></p>
+                    </div>
+
+                    <div class="md-form">
+                        <input type="text" id="MOD_CODIGO_MATERIA" name="MOD_CODIGO_MATERIA"
+                            class="form-control validate">
+                        <label data-success="" for="MOD_CODIGO_MATERIA">Codigo de la Materia</label>
+                    </div>
+                    <p class="text-success" id="MA_Codigo_Actual"></p>
+
+                    <div class="md-form">
+                        <input type="text" id="MOD_NOMBRE_MATERIA" name="MOD_NOMBRE_MATERIA"
+                            class="form-control validate">
+                        <label data-success="" for="MOD_NOMBRE_MATERIA">Nombre de la Materia</label>
+                    </div>
+                    <p class="text-success" id="MA_Nombre_Actual"></p>
+
+                </div>
+                <!--/Body-->
+                <!--Footer-->
+                <div class="modal-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex flex-center mx-auto">
+                                <button id="btn_modificar_materia" class="btn btn-secondary"
+                                    type="submit">Modificar</button>
+                                <i id="icon_modificar_load_materia"
+                                    class="fa fa-spinner fa-spin d-none text-center mx-auto"></i>
+                                <input id="MOD_ID_MATERIA" name="MOD_ID_MATERIA" type="hidden">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/Footer-->
+            </form>
+        </div>
+    </div>
+</div>
+<!--/Modal Moficiar Materia-->

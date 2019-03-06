@@ -20,4 +20,7 @@ public interface IMateria {
     public boolean updateMateria(Materia ma);
     
     public boolean deleteMateria(Materia ma);
+    
+    //Procedimientos Almacenados
+    public boolean P_ValidarMateria(String tipo, Materia ma);
 }

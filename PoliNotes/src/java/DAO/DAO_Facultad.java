@@ -144,11 +144,11 @@ public class DAO_Facultad implements IFacultad {
 
             cst.setString(1, tipo);
             
-            if (tipo.equals("ValidarCodigo")) {
+            if (tipo.equals("ValidarCodigoFacultad")) {
                 cst.setString(2, fac.getCODIGO_FACULTAD());
             }
             
-            if (tipo.equals("ValidarNombre")) {
+            if (tipo.equals("ValidarNombreFacultad")) {
                 cst.setString(2, fac.getNOMBRE_FACULTAD());  
             }
             
