@@ -258,6 +258,80 @@ $(document).ready(function () {
 
     });
 
+    //################################## Select del Formulario de Registro de Materias (Busca las Facultades existentes dentro de la universidad)
+    $('#MOD_FACULTAD_MATERIA').select2({
+        language: {
+            errorLoading: function () {
+                return 'No se pudieron cargar los resultados';
+            },
+            inputTooLong: function (args) {
+                var remainingChars = args.input.length - args.maximum;
+
+                var message = 'Por favor, elimine ' + remainingChars + ' car';
+
+                if (remainingChars == 1) {
+                    message += 'ácter';
+                } else {
+                    message += 'acteres';
+                }
+
+                return message;
+            },
+            inputTooShort: function (args) {
+                var remainingChars = args.minimum - args.input.length;
+
+                var message = 'Por favor, introduzca ' + remainingChars + ' car';
+
+                if (remainingChars == 1) {
+                    message += 'ácter';
+                } else {
+                    message += 'acteres';
+                }
+
+                return message;
+            },
+            loadingMore: function () {
+                return 'Cargando más resultados…';
+            },
+            maximumSelected: function (args) {
+                var message = 'Sólo puede seleccionar ' + args.maximum + ' elemento';
+
+                if (args.maximum != 1) {
+                    message += 's';
+                }
+
+                return message;
+            },
+            noResults: function () {
+                return 'No se encontraron resultados';
+            },
+            searching: function () {
+                return 'Buscando…';
+            },
+            removeAllItems: function () {
+                return 'Eliminar todos los elementos';
+            }
+        },
+        dropdownParent: $('#Mod_Modi_Materia'),
+        theme: "bootstrap",
+
+        ajax: {
+            type: "GET",
+            url: "../../Datos?Peticion=data_facultad",
+            dataType: "json",
+            processResults: function (data) {
+                return {
+                    results: $.map(data.Facultades, function (Facultades) {
+                        return {
+                            text: Facultades.CODIGO_FACULTAD + " " + Facultades.NOMBRE_FACULTAD,
+                            id: Facultades.ID_FACULTAD
+                        }
+                    })
+                };
+            }
+        }
+
+    });
 
     //################################## Esta Seccion establece la validacion de los diferentes Formularios del Sistema a travez de JQuery Validator
 
@@ -604,30 +678,30 @@ $(document).ready(function () {
         });
     });
 
-    //Validacion del Formulario para el registro de una materia
+    //Validacion del Formulario para el registro de una Materia
     $('#Form_Registro_Materia').validate({
         ignore: [],
         rules: {
             CODIGO_MATERIA: {
-                required: true, maxlength: 15, minlength: 5,
+                required: true, maxlength: 10, minlength: 3,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarCodigoMateria",
                     type: "GET",
                     data: {
                         DOC_USER: function () {
-                            return $("#MOD_CODIGO_FACULTAD").val()
+                            return $("#CODIGO_MATERIA").val()
                         }
                     }
                 }
             },
-            MOD_NOMBRE_FACULTAD: {
-                required: true, minlength: 5, maxlength: 20, letras: true,
+            NOMBRE_MATERIA: {
+                required: true, minlength: 5, maxlength: 20,
                 remote: {
                     url: "../../Ingreso?Peticion=ValidarNombreMateria",
                     type: "GET",
                     data: {
                         DOC_USER: function () {
-                            return $("#MOD_NOMBRE_FACULTAD").val()
+                            return $("#NOMBRE_MATERIA").val()
                         }
                     }
                 }
@@ -636,31 +710,157 @@ $(document).ready(function () {
         messages: {
             CODIGO_MATERIA: {
                 required: 'El campo es requerido',
-                
+                minlength: 'El campo debe contener un minimo de 3 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 10 caracteres',
+                remote: 'Este código ya se encuentra en uso por favor usa uno diferente'
+            },
+
+            NOMBRE_MATERIA: {
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 5 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 20 caracteres',
+                remote: 'Este nombre ya se encuentra en uso por favor usa uno diferente'
             }
 
         },
 
         submitHandler: function () {
             $.ajax({
-                type: $('#Form_Modificar_Facultad').attr('method'),
-                url: $('#Form_Modificar_Facultad').attr('action'),
-                data: $("#Form_Modificar_Facultad").serialize(),
+                type: $('#Form_Registro_Materia').attr('method'),
+                url: $('#Form_Registro_Materia').attr('action'),
+                data: $("#Form_Registro_Materia").serialize(),
                 dataType: "text",
 
                 beforeSend: function () {
-                    $('#icon_modificar_load_facultad').removeClass('d-none').addClass('d-block');
-                    $('#btn_modificar_facultad').removeClass('d-block').addClass('d-none');
+                    $('#icon_load_materia').removeClass('d-none').addClass('d-block');
+                    $('#btn_registro_materia').removeClass('d-block').addClass('d-none');
+                },
+                success: function (response) {
+                    if (response == 'true') {
+                        $('#msg_SucessRegistro_Materia').slideDown('slow').removeClass('d-none');
+                        function ShowSucess() {
+                            $('#msg_SucessRegistro_Materia').slideUp('slow');
+                        } setTimeout(ShowSucess, 4000);
+                        $("#Form_Registro_Materia")[0].reset();
+                        $("#FACULTAD_MATERIA").val('').trigger('change');
+                        $('#Table_Materias').DataTable().ajax.reload();
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                    alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
+                },
+                complete: function () {
+                    $('#icon_load_materia').removeClass('d-block').addClass('d-none');
+                    $('#btn_registro_materia').removeClass('d-none').addClass('d-block');
+                }
+            });
+        }
+    });
+
+    //Confirmacion del Formulario para la eliminacion de una Materia
+    $("#Form_Eliminar_Materia").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: $('#Form_Eliminar_Materia').attr('method'),
+            url: $('#Form_Eliminar_Materia').attr('action'),
+            data: $('#Form_Eliminar_Materia').serialize(),
+            dataType: "text",
+
+            beforeSend: function () {
+                $('#icon_loadEliminar_Materia').removeClass('d-none').addClass('d-block');
+                $('#btn_eliminar_Materia').removeClass('d-block').addClass('d-none');
+                $('#btn_cancelarEliminar_Materia').removeClass('d-block').addClass('d-none');
+            },
+            success: function (response) {
+                if (response == 'true') {
+                    $('#Mod_Elim_Materia').modal('hide');
+                    $('#Table_Materias').DataTable().ajax.reload();
+                    $('#Mod_Sucess').modal('show');
+                    $('#Text_Sucess').text('Materia eliminada con éxito');
+                    function ShowSucess() {
+                        $('#Mod_Sucess').modal('hide');
+                    } setTimeout(ShowSucess, 2000);
+                }
+            },
+            error: function (response) {
+                console.log(response);
+                alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
+            },
+            complete: function () {
+                $('#icon_loadEliminar_Materia').removeClass('d-block').addClass('d-none');
+                $('#btn_eliminar_Materia').removeClass('d-none').addClass('d-block');
+                $('#btn_cancelarEliminar_Materia').removeClass('d-none').addClass('d-block');
+            }
+        });
+    });
+
+    //Validacion del Formulario para la modificación de una Materia
+    $('#Form_Modificar_Materia').validate({
+        ignore: [],
+        rules: {
+            MOD_CODIGO_MATERIA: {
+                required: true, maxlength: 10, minlength: 3,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarCodigoMateria",
+                    type: "GET",
+                    data: {
+                        DOC_USER: function () {
+                            return $("#MOD_CODIGO_MATERIA").val()
+                        }
+                    }
+                }
+            },
+            MOD_NOMBRE_MATERIA: {
+                required: true, minlength: 5, maxlength: 20,
+                remote: {
+                    url: "../../Ingreso?Peticion=ValidarNombreMateria",
+                    type: "GET",
+                    data: {
+                        DOC_USER: function () {
+                            return $("#MOD_NOMBRE_MATERIA").val()
+                        }
+                    }
+                }
+            }
+        },
+        messages: {
+            MOD_CODIGO_MATERIA: {
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 3 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 10 caracteres',
+                remote: 'Este código ya se encuentra en uso por favor usa uno diferente'
+            },
+
+            MOD_NOMBRE_MATERIA: {
+                required: 'El campo es requerido',
+                minlength: 'El campo debe contener un minimo de 5 caracteres',
+                maxlength: 'El campo solo puede contener un maximo de 20 caracteres',
+                remote: 'Este nombre ya se encuentra en uso por favor usa uno diferente'
+            }
+
+        },
+
+        submitHandler: function () {
+            $.ajax({
+                type: $('#Form_Modificar_Materia').attr('method'),
+                url: $('#Form_Modificar_Materia').attr('action'),
+                data: $("#Form_Modificar_Materia").serialize(),
+                dataType: "text",
+
+                beforeSend: function () {
+                    $('#icon_modificar_load_materia').removeClass('d-none').addClass('d-block');
+                    $('#btn_modificar_materia').removeClass('d-block').addClass('d-none');
                 },
                 success: function (response) {
                     if (response == 'true') {
 
-                        $("#Form_Modificar_Facultad")[0].reset();
-                        $("#MOD_DECANO_FACULTAD").val('').trigger('change');
-                        $('#Mod_Modi_Facultad').modal('hide');
-                        $('#Table_Facultad').DataTable().ajax.reload();
+                        $("#Form_Modificar_Materia")[0].reset();
+                        $("#MOD_FACULTAD_MATERIA").val('').trigger('change');
+                        $('#Mod_Modi_Materia').modal('hide');
+                        $('#Table_Materias').DataTable().ajax.reload();
                         $('#Mod_Sucess').modal('show');
-                        $('#Text_Sucess').text('Facultad modificada con éxito');
+                        $('#Text_Sucess').text('Materia modificada con éxito');
                         function ShowSucess() {
                             $('#Mod_Sucess').modal('hide');
                         } setTimeout(ShowSucess, 3000);
@@ -671,12 +871,13 @@ $(document).ready(function () {
                     alert('Error con el servidor, por favor intentalo de nuevo mas tarde');
                 },
                 complete: function () {
-                    $('#icon_modificar_load_facultad').removeClass('d-block').addClass('d-none');
-                    $('#btn_modificar_facultad').removeClass('d-none').addClass('d-block');
+                    $('#icon_modificar_load_materia').removeClass('d-block').addClass('d-none');
+                    $('#btn_modificar_materia').removeClass('d-none').addClass('d-block');
                 }
             });
         }
     });
+
 
     //################################## Esta seccion establece las configuraciones para los diferentes Tables del sisterma a travez del Framework DataTable de JQuery
 
@@ -790,8 +991,8 @@ $(document).ready(function () {
                 defaultContent: '',
                 render: function () {
                     return '<div class="btn-group btn-group-sm" role="group" aria-label="Botones de Accion"> ' +
-                        '<button type="button" class="btn btn-sm danger-color" title="Eliminar"><i class="fas fa-trash"></i></button>' +
-                        '<button type="button" class="btn btn-sm success-color" title="Modificar"><i class="fas fa-marker"></i></button>' +
+                        '<button id="btn_elim_facultad" type="button" class="btn btn-sm danger-color" title="Eliminar"><i class="fas fa-trash"></i></button>' +
+                        '<button id="btn_mod_facultad" type="button" class="btn btn-sm success-color" title="Modificar"><i class="fas fa-marker"></i></button>' +
                         '</div>';
                 }
             }
@@ -857,22 +1058,171 @@ $(document).ready(function () {
     //Fin del Script
 
     //Script para ejecutar la eliminacion y modificacion de los registros en la Tabla Facultad
-    $(document).on('click', '.danger-color', function () {
+    $(document).on('click', "#btn_elim_facultad", function () {
         var data = Table_Facultad.row($(this).parents('tr')).data();
         $('#Mod_Elim_Facultad').modal('show');
         $('#Facultad_Eliminar').text('¿Estas seguro de eliminar la facultad de ' + data.NOMBRE_FACULTAD + '?');
         $('#ID_FACULTAD').val(data.ID_FACULTAD);
     });
-    $(document).on('click', '.success-color', function () {
+    $(document).on('click', "#btn_mod_facultad", function () {
         var data = Table_Facultad.row($(this).parents('tr')).data();
         $('#Mod_Modi_Facultad').modal('show');
-        $('#Decano_Actual').text('Decano Actual: ' + data.NOMBRE_APELLIDOS_USER);
-        $('#Codigo_Actual').text('Código Actual: ' + data.CODIGO_FACULTAD);
-        $('#Facultad_Actual').text('Nombre Actual: ' + data.NOMBRE_FACULTAD);
+        $('#FAC_Decano_Actual').text('Decano Actual: ' + data.NOMBRE_APELLIDOS_USER);
+        $('#FAC_Codigo_Actual').text('Código Actual: ' + data.CODIGO_FACULTAD);
+        $('#FAC_Facultad_Actual').text('Nombre Actual: ' + data.NOMBRE_FACULTAD);
         $('#MOD_ID_FACULTAD').val(data.ID_FACULTAD);
     });
     //Fin del Script
 
+    //Tabla de Materia
+    var Table_Materias = $('#Table_Materias').DataTable({
+        language: {
+            sProcessing: "Procesando...",
+            sLengthMenu: "Mostrar _MENU_  Registros",
+            sZeroRecords: "No se encontraron resultados",
+            sEmptyTable: "Ningún dato disponible en esta tabla",
+            sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+            sInfoPostFix: "",
+            sSearch: "Buscar:",
+            sUrl: "",
+            sInfoThousands: ",",
+            sLoadingRecords: "Cargando...",
+            oPaginate: {
+                sFirst: "Primero",
+                sLast: "Último",
+                sNext: "Siguiente",
+                sPrevious: "Anterior"
+            },
+            oAria: {
+                sSortAscending: ": Activar para ordenar la columna de manera ascendente",
+                sSortDescending: ": Activar para ordenar la columna de manera descendente"
+            }
+        },
+        ajax: {
+            method: "GET",
+            url: "../../Datos?Peticion=data_Materias",
+            dataSrc: "Materias"
+        },
+        select: "single",
+        columns: [
+            { data: "CODIGO_MATERIA" },
+            { data: "NOMBRE_MATERIA" },
+            { data: "NOMBRE_FACULTAD" },
+
+            {
+                orderable: false,
+                data: null,
+                defaultContent: '',
+                render: function () {
+                    return '<div class="btn-group btn-group-sm" role="group" aria-label="Botones de Accion"> ' +
+                        '<button id="btn_elim_materia" type="button" class="btn btn-sm danger-color" title="Eliminar"><i class="fas fa-trash"></i></button>' +
+                        '<button id="btn_mod_materia"  type="button" class="btn btn-sm success-color" title="Modificar"><i class="fas fa-marker"></i></button>' +
+                        '</div>';
+                }
+            }
+        ],
+        order: [[1, 'asc']],
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fa fa-file-excel"></i><span> Generar Informe</span>',
+                titleAttr: 'Excel',
+                className: 'btn-sm',
+                action: function (e, dt, node, config) {
+                    $('#Table_Materias').DataTable().ajax.reload();
+
+                    $.fn.DataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+                }
+            }
+        ]
+    });
+
+    //Script para ejecutar la eliminacion y modificacion de los registros en la Tabla Materia
+    $(document).on('click', '#btn_elim_materia', function () {
+        var data = Table_Materias.row($(this).parents('tr')).data();
+        $('#Mod_Elim_Materia').modal('show');
+        $('#Materia_Eliminar').text('¿Estas seguro de eliminar la materia de ' + data.NOMBRE_MATERIA + '?');
+        $('#ID_MATERIA').val(data.ID_MATERIA);
+    });
+    $(document).on('click', "#btn_mod_materia", function () {
+        var data = Table_Materias.row($(this).parents('tr')).data();
+        $('#Mod_Modi_Materia').modal('show');
+        $('#MA_Facultad_Actual').text('Facultad Actual: ' + data.NOMBRE_FACULTAD);
+        $('#MA_Codigo_Actual').text('Código Actual: ' + data.CODIGO_MATERIA);
+        $('#MA_Nombre_Actual').text('Nombre Actual: ' + data.NOMBRE_MATERIA);
+        $('#MOD_ID_MATERIA').val(data.ID_MATERIA);
+    });
+    //Fin del Script
+
+    //Tabla de Usuarios
+    var Table_Usuarios = $('#Table_Usuarios').DataTable({
+        language: {
+            sProcessing: "Procesando...",
+            sLengthMenu: "Mostrar _MENU_  Registros",
+            sZeroRecords: "No se encontraron resultados",
+            sEmptyTable: "Ningún dato disponible en esta tabla",
+            sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+            sInfoPostFix: "",
+            sSearch: "Buscar:",
+            sUrl: "",
+            sInfoThousands: ",",
+            sLoadingRecords: "Cargando...",
+            oPaginate: {
+                sFirst: "Primero",
+                sLast: "Último",
+                sNext: "Siguiente",
+                sPrevious: "Anterior"
+            },
+            oAria: {
+                sSortAscending: ": Activar para ordenar la columna de manera ascendente",
+                sSortDescending: ": Activar para ordenar la columna de manera descendente"
+            }
+        },
+        ajax: {
+            method: "GET",
+            url: "../../Datos?Peticion=data_Usuarios",
+            dataSrc: "Usuarios"
+        },
+        select: "single",
+        columns: [
+            { data: "DOC_USER" },
+            { data: "NICK_USER" },
+            { data: "NOMBRE_USER" },
+            { data: "APELLIDOS_USER" },
+            { data: "CORREO_USER" },
+            {
+                orderable: false,
+                data: null,
+                defaultContent: '',
+                render: function () {
+                    return '<div class="btn-group btn-group-sm" role="group" aria-label="Botones de Accion"> ' +
+                        '<button id="btn_elim_materia" type="button" class="btn btn-sm danger-color" title="Eliminar" disabled><i class="fas fa-trash"></i></button>' +
+                        '<button id="btn_mod_materia"  type="button" class="btn btn-sm success-color" title="Modificar" disabled><i class="fas fa-marker"></i></button>' +
+                        '</div>';
+                }
+            }
+        ],
+        order: [[1, 'asc']],
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fa fa-file-excel"></i><span> Generar Informe</span>',
+                titleAttr: 'Excel',
+                className: 'btn-sm',
+                action: function (e, dt, node, config) {
+                    $('#Table_Usuarios').DataTable().ajax.reload();
+
+                    $.fn.DataTable.ext.buttons.excelHtml5.action.call(this, e, dt, node, config);
+                }
+            }
+        ]
+    });
 
 
 });

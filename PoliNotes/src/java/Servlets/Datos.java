@@ -85,6 +85,11 @@ public class Datos extends HttpServlet {
         if (Peticion.equals("data_Materias")) {
             response.getWriter().write(data.Json_Materias());
         }
+        
+        if (Peticion.equals("data_Usuarios")) {
+            response.getWriter().write(data.Json_Usuarios());   
+        }
+        
     }
 
     /**

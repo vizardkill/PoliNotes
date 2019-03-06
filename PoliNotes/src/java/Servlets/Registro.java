@@ -6,8 +6,10 @@
 package Servlets;
 
 import Controlador.controller_Facultad;
+import Controlador.controller_Materias;
 import Controlador.controller_Usuario;
 import Modelos.Facultad;
+import Modelos.Materia;
 import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -102,9 +104,9 @@ public class Registro extends HttpServlet {
             Facultad fac = new Facultad();
             controller_Facultad cfac = new controller_Facultad();
 
-            fac.setCODIGO_FACULTAD(request.getParameter("CODIGO_FACULTAD").toUpperCase());
+            fac.setCODIGO_FACULTAD(request.getParameter("CODIGO_FACULTAD"));
             fac.setDECANO_FACULTAD(request.getParameter("DECANO_FACULTAD"));
-            fac.setNOMBRE_FACULTAD(request.getParameter("NOMBRE_FACULTAD").toUpperCase());
+            fac.setNOMBRE_FACULTAD(request.getParameter("NOMBRE_FACULTAD"));
 
             boolean result = cfac.setFacultad(fac);
             if (result) {
@@ -133,8 +135,8 @@ public class Registro extends HttpServlet {
             controller_Facultad cfac = new controller_Facultad();
 
             fac.setID_FACULTAD(Integer.valueOf(request.getParameter("MOD_ID_FACULTAD")));
-            fac.setCODIGO_FACULTAD(request.getParameter("MOD_CODIGO_FACULTAD").toUpperCase());
-            fac.setNOMBRE_FACULTAD(request.getParameter("MOD_NOMBRE_FACULTAD").toUpperCase());
+            fac.setCODIGO_FACULTAD(request.getParameter("MOD_CODIGO_FACULTAD"));
+            fac.setNOMBRE_FACULTAD(request.getParameter("MOD_NOMBRE_FACULTAD"));
             fac.setDECANO_FACULTAD(request.getParameter("MOD_DECANO_FACULTAD"));
             
             boolean result = cfac.updateFacultad(fac);
@@ -146,7 +148,51 @@ public class Registro extends HttpServlet {
         }
         
         if (Peticion.equals("Registro_Materia")) {
+            Materia ma = new Materia();
+            controller_Materias cma = new controller_Materias();
             
+            ma.setFACULTAD_MATERIA(Integer.valueOf(request.getParameter("FACULTAD_MATERIA").toUpperCase()));
+            ma.setCODIGO_MATERIA(request.getParameter("CODIGO_MATERIA"));
+            ma.setNOMBRE_MATERIA(request.getParameter("NOMBRE_MATERIA"));
+            
+            boolean result = cma.setMateria(ma);
+            if (result) {
+                response.getWriter().write("true");
+            } else {
+                response.getWriter().write("false");
+            } 
+        }
+        
+        if (Peticion.equals("Eliminar_Materia")) {
+            Materia ma = new Materia();
+            controller_Materias cma = new controller_Materias();
+            
+            ma.setID_MATERIA(Integer.valueOf(request.getParameter("ID_MATERIA").toUpperCase()));
+            
+            boolean result = cma.deleteMateria(ma);
+             if (result) {
+                response.getWriter().write("true");
+            } else {
+                response.getWriter().write("false");
+            }   
+        }
+        
+        if (Peticion.equals("Modificar_Materia")) {
+            Materia ma = new Materia();
+            controller_Materias cma = new controller_Materias();
+            
+            ma.setID_MATERIA(Integer.valueOf(request.getParameter("MOD_ID_MATERIA").toUpperCase()));
+            ma.setFACULTAD_MATERIA(Integer.valueOf(request.getParameter("MOD_FACULTAD_MATERIA").toUpperCase()));
+            ma.setCODIGO_MATERIA(request.getParameter("MOD_CODIGO_MATERIA"));
+            ma.setNOMBRE_MATERIA(request.getParameter("MOD_NOMBRE_MATERIA"));
+            
+            
+            boolean result = cma.updateMateria(ma);
+             if (result) {
+                response.getWriter().write("true");
+            } else {
+                response.getWriter().write("false");
+            }   
             
         }
     }

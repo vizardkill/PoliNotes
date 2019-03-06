@@ -39,5 +39,12 @@ public class controller_Materias {
         boolean result = dmateria.deleteMateria(ma);
         return result;
     }
+    
+    //**********************************PROCEDIMIENTOS ALMACENADOS**************************************
+    public boolean P_ValidarMateria(String tipo, Materia ma) {
+        IMateria dmateria = new DAO_Materia();
+        boolean result = dmateria.P_ValidarMateria(tipo, ma);
+        return result;
+    }
 
 }

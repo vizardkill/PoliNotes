@@ -78,10 +78,7 @@
                                     <a href="Materias.jsp">Materias</a>
                                 </li>
                                 <li>
-                                    <a href="#">Profesores</a>
-                                </li>
-                                <li>
-                                    <a href="#">Estudiantes</a>
+                                    <a href="Usuarios.jsp">Usuarios</a>
                                 </li>
                                 <li>
                                     <a href="AcercaDe.jsp">Acerca de</a>

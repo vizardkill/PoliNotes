@@ -9,6 +9,7 @@ import Conexion.Conexion;
 import Modelos.Facultad;
 import Modelos.IMateria;
 import Modelos.Materia;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -84,12 +85,88 @@ public class DAO_Materia implements IMateria {
 
     @Override
     public boolean updateMateria(Materia ma) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection con;
+
+        String sql = "UPDATE MATERIA SET "
+                + "CODIGO_MATERIA   = ?, "
+                + "NOMBRE_MATERIA   = ?,"
+                + "FACULTAD_MATERIA   = ? "
+                + "WHERE ID_MATERIA = ?";
+        try {
+            con = Conexion.getConexion();
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, ma.getCODIGO_MATERIA());
+                ps.setString(2, ma.getNOMBRE_MATERIA());
+                ps.setInt(3, ma.getFACULTAD_MATERIA());
+                ps.setInt(4, ma.getID_MATERIA());
+
+                ps.executeUpdate();
+                ps.close();
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error: Clase DAO_Materia, método actualizar: " + e);
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean deleteMateria(Materia ma) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection con;
+
+        String sql = "DELETE FROM MATERIA WHERE ID_MATERIA = ?";
+
+        try {
+            con = Conexion.getConexion();
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, ma.getID_MATERIA());
+                ps.executeUpdate();
+                ps.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: Clase DAO_Materia, método eliminar: " + e);
+            return false;
+        }
+        return true;
     }
+
+    //**************************************************Procedimientos Almacenados******************************************************
+    @Override
+    public boolean P_ValidarMateria(String tipo, Materia ma) {
+        Connection con;
+        con = Conexion.getConexion();
+        int valor;
+        try (CallableStatement cst = con.prepareCall("{call Validaciones_Materia (?,?,?)}")) {
+
+            cst.setString(1, tipo);
+            
+            if (tipo.equals("ValidarCodigoMateria")) {
+                cst.setString(2, ma.getCODIGO_MATERIA());
+            }
+
+            if (tipo.equals("ValidarNombreMateria")) {
+                cst.setString(2, ma.getNOMBRE_MATERIA());
+            }   
+            cst.registerOutParameter(3, java.sql.Types.INTEGER);
+
+            cst.execute();
+
+            valor = cst.getInt(3);
+
+            cst.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Error: Procedimiento Almacenado, método P_ValidarMateria: " + ex);
+            return false;
+        }
+
+        if (valor == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    
     
 }

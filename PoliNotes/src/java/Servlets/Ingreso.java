@@ -6,6 +6,7 @@
 package Servlets;
 
 import Controlador.controller_Facultad;
+import Controlador.controller_Materias;
 import Controlador.controller_Tipo_Perfil;
 import Controlador.controller_Usuario;
 import Metodos.Json_Datos;
@@ -143,22 +144,36 @@ public class Ingreso extends HttpServlet {
                 response.getWriter().write("true");
             }
         }
-        
+
         //************************************** Validaciones de la Tabla Materia *********************************
         if (Peticion.equals("ValidarCodigoMateria")) {
             Materia ma = new Materia();
-            if (request.getParameter("CODIGO_MATERIA") != null && !request.getParameter("NOMBRE_MATERIA").isEmpty()) {
+            if (request.getParameter("CODIGO_MATERIA") != null && !request.getParameter("CODIGO_MATERIA").isEmpty()) {
                 ma.setCODIGO_MATERIA(request.getParameter("CODIGO_MATERIA").toUpperCase());
             }
-            
-            if (request.getParameter("NOMBRE_MATERIA") != null && !request.getParameter("NOMBRE_MATERIA").isEmpty()) {
-                ma.setNOMBRE_MATERIA(request.getParameter("NOMBRE_MATERIA").toUpperCase()); 
+
+            controller_Materias cma = new controller_Materias();
+            boolean result = cma.P_ValidarMateria(Peticion, ma);
+            if (result) {
+                response.getWriter().write("false");
+            } else {
+                response.getWriter().write("true");
             }
-            
-            
-            
-            
-            
+        }
+
+        if (Peticion.equals("ValidarNombreMateria")) {
+            Materia ma = new Materia();
+            if (request.getParameter("NOMBRE_MATERIA") != null && !request.getParameter("NOMBRE_MATERIA").isEmpty()) {
+                ma.setCODIGO_MATERIA(request.getParameter("NOMBRE_MATERIA").toUpperCase());
+            }
+
+            controller_Materias cma = new controller_Materias();
+            boolean result = cma.P_ValidarMateria(Peticion, ma);
+            if (result) {
+                response.getWriter().write("false");
+            } else {
+                response.getWriter().write("true");
+            }
         }
     }
 
