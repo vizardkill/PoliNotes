@@ -1,9 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% if(session.getAttribute("DOC_USER") == null) 
-   {
-     response.sendRedirect("../index.html");
-   }
-%>
+
 <!DOCTYPE html>
 <html>
 

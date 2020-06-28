@@ -10,7 +10,6 @@
     <!-- Material Design Bootstrap -->
     <link href="../../css/mdb.min.css" rel="stylesheet">
     <!-- Estilos personalizados -->
-    <link href="../../css/select.css" rel="stylesheet">
     <link href="../../css/jqueryScrollBar.min.css" rel="stylesheet">
     <!-- Sidebar -->
     <link href="../../css/sidebar.css" rel="stylesheet">
@@ -21,6 +20,5 @@
     <link rel="stylesheet" href="../../css/select2.min.css">
     <link rel="stylesheet" href="../../css/select2-bootstrap.min.css">
     <!--Estilos Personalizados-->
-    <link rel="stylesheet" href="../../css/Admin.css">
     <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
 </head>
